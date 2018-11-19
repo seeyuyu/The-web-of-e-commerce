@@ -11,6 +11,20 @@
     <div class="fl topTitle">多点头条</div>
     <a href="###" class="fl topCon text_ovh">推荐！快来围观啊优惠好多啊来围观啊优惠好多啊来围观啊优惠好多啊啊啊啊啊啊啊！</a>
   </div>
+  <div class="describeDiv">
+    <div class="describeTitle">舌尖美味</div>
+    <div class="describeList fl" v-for="item in describeList">
+      <div class="imgDiv">
+        <img :src="item.image">
+      </div>
+      <div class="describetxt text_ovh2">{{item.name}}</div>
+      <div class="yuanprice">¥{{item.originPrice}}</div>
+      <div class="describeBottom">
+        <span class="redColor txtPrice fl">￥{{item.newPrice}}</span>
+        <div class="fr addCart">+</div>
+      </div>
+    </div>
+  </div>
 </div>
 </template>
 <style>
@@ -70,6 +84,63 @@ html{
 .topCon{
   width: 74%;
 }
+.describeList{
+  width:33.3%;
+  padding: 10px 8px;
+  border-right: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+}
+.imgDiv{
+  width: 100%;
+  padding: 10px;
+}
+.imgDiv img{
+  width:100%;
+}
+.describetxt{
+  font-size:12px;
+}
+.yuanprice{
+  color:#999;
+  text-decoration:line-through;
+  font-size:10px;
+  margin-top:8px;
+  text-align: left;
+}
+.describeBottom{
+  /* padding: 0 5px; */
+}
+.redColor{
+  color:#f65;
+}
+.describeDiv{
+  background: #fff;
+  overflow: hidden;
+}
+.addCart{
+    width: 24px;
+    height: 24px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    color: #f65;
+    line-height: 24px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 30px;
+    padding: 0px;
+    margin: 0px;
+    margin-top: -5px;
+}
+.txtPrice{
+  margin-top: 3px;
+}
+.describeTitle{
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  background: #689;
+  color:#fff;
+}
 </style>
 <script>
 export default {
@@ -123,6 +194,38 @@ export default {
           id:'1',
           tips:'',
           image:'http://static1.xlzhao.com/frontend/images/navgroup1.png'
+        },
+      ],
+      describeList:[
+        {
+          name:"原价原价原价原价原价原价原价原价原价原价原价原价原价原价原价",
+          image:"https://gw.alicdn.com/bao/uploaded/i3/3644584684/TB21EZ2I21TBuNjy0FjXXajyXXa_!!3644584684.png_290x10000.jpg_.webp",
+          originPrice:"100.00",
+          newPrice:"80.00",
+        },
+        {
+          name:"原价原价srjryskdut原价原价原价原价原价原价原价原价原价原价原价原价原价",
+          image:"https://gw.alicdn.com/bao/uploaded/i3/3644584684/TB21EZ2I21TBuNjy0FjXXajyXXa_!!3644584684.png_290x10000.jpg_.webp",
+          originPrice:"200.00",
+          newPrice:"30.00",
+        },
+        {
+          name:"原价原价srjryskdut原价原价原价原价原价原价原价原价原价原价原价原价原价",
+          image:"https://gw.alicdn.com/bao/uploaded/i3/3644584684/TB21EZ2I21TBuNjy0FjXXajyXXa_!!3644584684.png_290x10000.jpg_.webp",
+          originPrice:"200.00",
+          newPrice:"30.00",
+        },
+        {
+          name:"原价原价srjryskdut原价原价原价原价原价原价原价原价原价原价原价原价原价",
+          image:"https://gw.alicdn.com/bao/uploaded/i3/3644584684/TB21EZ2I21TBuNjy0FjXXajyXXa_!!3644584684.png_290x10000.jpg_.webp",
+          originPrice:"200.00",
+          newPrice:"30.00",
+        },
+        {
+          name:"原价原价srjryskdut原价原价原价原价原价原价原价原价原价原价原价原价原价",
+          image:"https://gw.alicdn.com/bao/uploaded/i3/3644584684/TB21EZ2I21TBuNjy0FjXXajyXXa_!!3644584684.png_290x10000.jpg_.webp",
+          originPrice:"200.00",
+          newPrice:"30.00",
         },
       ]
     };
