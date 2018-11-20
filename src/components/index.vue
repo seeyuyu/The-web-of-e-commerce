@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="navDiv">
-    <div class="navLi" v-for="item in navli">
+    <div class="navLi" v-for="(item,i) in navli">
       <img :src="item.image">
       <span class="saleTips" v-if="item.tips">{{item.tips}}</span>
       <p>{{item.name}}</p>
@@ -28,7 +28,7 @@
 </div>
 </template>
 <style>
-html{
+html {
   background: #f6f6f6;
 }
 .navDiv {
@@ -41,8 +41,8 @@ html{
   margin-bottom: 5px;
   overflow: hidden;
 }
-.navLi img{
-  width:50px;
+.navLi img {
+  width: 50px;
   height: 50px;
 }
 .navLi {
@@ -54,13 +54,13 @@ html{
   padding-top: 15px;
   position: relative;
 }
-.saleTips{
+.saleTips {
   padding: 0px 5px;
   border-radius: 10px;
   background: #f65;
-  color:#fff;
-  font-size:10px;
-  position:absolute;
+  color: #fff;
+  font-size: 10px;
+  position: absolute;
   top: 12px;
   left: 36%;
   height: 14px;
@@ -68,169 +68,141 @@ html{
   overflow: hidden;
 }
 /* 头条 */
-.topNews{
+.topNews {
   padding: 10px;
   background: #fff;
   overflow: hidden;
   margin-bottom: 5px;
 }
-.topTitle{
-  color:#f65;
+.topTitle {
+  color: #f65;
   font-size: 16px;
-  padding-right:15px;
-  margin-right:15px;
-  border-right:1px solid #e5e5e5;
+  padding-right: 15px;
+  margin-right: 15px;
+  border-right: 1px solid #e5e5e5;
 }
-.topCon{
+.topCon {
   width: 74%;
 }
-.describeList{
-  width:33.3%;
+.describeList {
+  width: 33.3%;
   padding: 10px 8px;
   border-right: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
 }
-.imgDiv{
+.imgDiv {
   width: 100%;
   padding: 10px;
 }
-.imgDiv img{
-  width:100%;
+.imgDiv img {
+  width: 100%;
 }
-.describetxt{
-  font-size:12px;
+.describetxt {
+  font-size: 12px;
 }
-.yuanprice{
-  color:#999;
-  text-decoration:line-through;
-  font-size:10px;
-  margin-top:8px;
+.yuanprice {
+  color: #999;
+  text-decoration: line-through;
+  font-size: 10px;
+  margin-top: 8px;
   text-align: left;
 }
-.describeBottom{
+.describeBottom {
   /* padding: 0 5px; */
 }
-.redColor{
-  color:#f65;
+.redColor {
+  color: #f65;
 }
-.describeDiv{
+.describeDiv {
   background: #fff;
   overflow: hidden;
 }
-.addCart{
-    width: 24px;
-    height: 24px;
-    border: 1px solid #e5e5e5;
-    border-radius: 4px;
-    color: #f65;
-    line-height: 24px;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 30px;
-    padding: 0px;
-    margin: 0px;
-    margin-top: -5px;
+.addCart {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  color: #f65;
+  line-height: 24px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 30px;
+  padding: 0px;
+  margin: 0px;
+  margin-top: -5px;
 }
-.txtPrice{
+.txtPrice {
   margin-top: 3px;
 }
-.describeTitle{
+.describeTitle {
   width: 100%;
   height: 40px;
   line-height: 40px;
   background: #689;
-  color:#fff;
+  color: #fff;
 }
 </style>
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
-      navli:[
+      navUrl:'http://h5.globalmxb.com/test/categoryLabel',
+      navli: [],
+      describeList: [
         {
-          name:'测试',
-          id:'1',
-          tips:'8折特卖',
-          image:'http://static1.xlzhao.com/frontend/images/navgroup1.png'
+          name: "原价原价原价原价原价原价原价原价原价原价原价原价原价原价原价",
+          image:
+            "https://gw.alicdn.com/bao/uploaded/i3/3644584684/TB21EZ2I21TBuNjy0FjXXajyXXa_!!3644584684.png_290x10000.jpg_.webp",
+          originPrice: "100.00",
+          newPrice: "80.00"
         },
         {
-          name:'测试',
-          id:'1',
-          tips:'5折特卖',
-          image:'http://static1.xlzhao.com/frontend/images/navgroup1.png'
+          name:
+            "原价原价srjryskdut原价原价原价原价原价原价原价原价原价原价原价原价原价",
+          image:
+            "https://gw.alicdn.com/bao/uploaded/i3/3644584684/TB21EZ2I21TBuNjy0FjXXajyXXa_!!3644584684.png_290x10000.jpg_.webp",
+          originPrice: "200.00",
+          newPrice: "30.00"
         },
         {
-          name:'测试',
-          id:'1',
-          tips:'',
-          image:'http://static1.xlzhao.com/frontend/images/navgroup1.png'
+          name:
+            "原价原价srjryskdut原价原价原价原价原价原价原价原价原价原价原价原价原价",
+          image:
+            "https://gw.alicdn.com/bao/uploaded/i3/3644584684/TB21EZ2I21TBuNjy0FjXXajyXXa_!!3644584684.png_290x10000.jpg_.webp",
+          originPrice: "200.00",
+          newPrice: "30.00"
         },
         {
-          name:'测试',
-          id:'1',
-          tips:'',
-          image:'http://static1.xlzhao.com/frontend/images/navgroup1.png'
+          name:
+            "原价原价srjryskdut原价原价原价原价原价原价原价原价原价原价原价原价原价",
+          image:
+            "https://gw.alicdn.com/bao/uploaded/i3/3644584684/TB21EZ2I21TBuNjy0FjXXajyXXa_!!3644584684.png_290x10000.jpg_.webp",
+          originPrice: "200.00",
+          newPrice: "30.00"
         },
         {
-          name:'测试',
-          id:'1',
-          tips:'',
-          image:'http://static1.xlzhao.com/frontend/images/navgroup1.png'
-        },
-        {
-          name:'测试',
-          id:'1',
-          tips:'',
-          image:'http://static1.xlzhao.com/frontend/images/navgroup1.png'
-        },
-        {
-          name:'测试',
-          id:'1',
-          tips:'',
-          image:'http://static1.xlzhao.com/frontend/images/navgroup1.png'
-        },
-        {
-          name:'测试',
-          id:'1',
-          tips:'',
-          image:'http://static1.xlzhao.com/frontend/images/navgroup1.png'
-        },
-      ],
-      describeList:[
-        {
-          name:"原价原价原价原价原价原价原价原价原价原价原价原价原价原价原价",
-          image:"https://gw.alicdn.com/bao/uploaded/i3/3644584684/TB21EZ2I21TBuNjy0FjXXajyXXa_!!3644584684.png_290x10000.jpg_.webp",
-          originPrice:"100.00",
-          newPrice:"80.00",
-        },
-        {
-          name:"原价原价srjryskdut原价原价原价原价原价原价原价原价原价原价原价原价原价",
-          image:"https://gw.alicdn.com/bao/uploaded/i3/3644584684/TB21EZ2I21TBuNjy0FjXXajyXXa_!!3644584684.png_290x10000.jpg_.webp",
-          originPrice:"200.00",
-          newPrice:"30.00",
-        },
-        {
-          name:"原价原价srjryskdut原价原价原价原价原价原价原价原价原价原价原价原价原价",
-          image:"https://gw.alicdn.com/bao/uploaded/i3/3644584684/TB21EZ2I21TBuNjy0FjXXajyXXa_!!3644584684.png_290x10000.jpg_.webp",
-          originPrice:"200.00",
-          newPrice:"30.00",
-        },
-        {
-          name:"原价原价srjryskdut原价原价原价原价原价原价原价原价原价原价原价原价原价",
-          image:"https://gw.alicdn.com/bao/uploaded/i3/3644584684/TB21EZ2I21TBuNjy0FjXXajyXXa_!!3644584684.png_290x10000.jpg_.webp",
-          originPrice:"200.00",
-          newPrice:"30.00",
-        },
-        {
-          name:"原价原价srjryskdut原价原价原价原价原价原价原价原价原价原价原价原价原价",
-          image:"https://gw.alicdn.com/bao/uploaded/i3/3644584684/TB21EZ2I21TBuNjy0FjXXajyXXa_!!3644584684.png_290x10000.jpg_.webp",
-          originPrice:"200.00",
-          newPrice:"30.00",
-        },
+          name:
+            "原价原价srjryskdut原价原价原价原价原价原价原价原价原价原价原价原价原价",
+          image:
+            "https://gw.alicdn.com/bao/uploaded/i3/3644584684/TB21EZ2I21TBuNjy0FjXXajyXXa_!!3644584684.png_290x10000.jpg_.webp",
+          originPrice: "200.00",
+          newPrice: "30.00"
+        }
       ]
     };
   },
-  created: function() {},
-  methods: {}
+  created: function() {
+    this.navData();
+  },
+  methods: {
+    navData: function() {
+      let that = this;
+      axios.get(that.navUrl).then(function(res){
+        console.log(res.data)
+        that.navli=res.data
+      })
+    }
+  }
 };
 </script>
