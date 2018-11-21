@@ -148,6 +148,7 @@ export default {
   data() {
     return {
       navUrl:'http://h5.globalmxb.com/test/categoryLabel',
+      describeUrl:'',
       navli: [],
       describeList: [
         {
