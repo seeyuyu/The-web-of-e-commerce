@@ -11,6 +11,14 @@
     <div class="fl topTitle">多点头条</div>
     <a href="###" class="fl topCon text_ovh">推荐！快来围观啊优惠好多啊来围观啊优惠好多啊来围观啊优惠好多啊啊啊啊啊啊啊！</a>
   </div>
+  <div class="recommend">
+    <div class="recommend">超市优选</div>
+    <div class="recommendLi" v-for="(item,i) in recommendli">
+      <p>{{item.title}}</p>
+      <p>{{item.text}}</p>
+      <img :src="item.image">
+    </div>
+  </div>
   <div class="describeDiv">
     <div class="describeTitle">舌尖美味</div>
     <div class="describeList fl" v-for="item in describeList">
@@ -141,6 +149,17 @@ html {
   background: #689;
   color: #fff;
 }
+/* 超市优选 */
+.recommendLi {
+  height: 150px;
+  width: 33.3%;
+  padding: 15px 10px;
+  background: #dde;
+  border:1px solid #fff;
+  float: left;
+  border-radius: 4px;
+  text-align: left;
+}
 </style>
 <script>
 import axios from "axios";
@@ -148,8 +167,10 @@ export default {
   data() {
     return {
       navUrl:'http://h5.globalmxb.com/test/categoryLabel',
+      recommendUrl:'http://h5.globalmxb.com/test/firstList',
       describeUrl:'',
       navli: [],
+      recommendli:[],
       describeList: [
         {
           name: "原价原价原价原价原价原价原价原价原价原价原价原价原价原价原价",
@@ -200,8 +221,15 @@ export default {
     navData: function() {
       let that = this;
       axios.get(that.navUrl).then(function(res){
-        console.log(res.data)
-        that.navli=res.data
+        console.log(res.data);
+        that.navli=res.data;
+      })
+    },
+    recommendData:function(){
+      let that=this;
+      axios.get(that.recommendUrl).then(function(res){
+        console.log(res.data);
+        that.recommendli=res.data;
       })
     }
   }
