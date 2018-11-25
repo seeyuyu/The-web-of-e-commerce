@@ -231,6 +231,7 @@ export default {
         console.log(res.data);
         that.recommendli=res.data;
       })
+
     }
   }
 };
