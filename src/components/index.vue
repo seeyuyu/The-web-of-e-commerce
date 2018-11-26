@@ -28,11 +28,12 @@
       <div class="describetxt text_ovh2">{{item.name}}</div>
       <div class="yuanprice">¥{{item.originPrice}}</div>
       <div class="describeBottom">
-        <span class="redColor txtPrice fl">￥{{item.newPrice}}</span>
+        <span class="redColor txtPrice fl">¥{{item.newPrice}}</span>
         <div class="fr addCart">+</div>
       </div>
     </div>
   </div>
+  <footnav idx='0'></footnav>
 </div>
 </template>
 <style>
@@ -163,6 +164,7 @@ html {
 </style>
 <script>
 import axios from "axios";
+import footnav from "components/footnav/footnav"
 export default {
   data() {
     return {
@@ -213,6 +215,9 @@ export default {
         }
       ]
     };
+  },
+  components:{
+    footnav
   },
   created: function() {
     this.navData();
