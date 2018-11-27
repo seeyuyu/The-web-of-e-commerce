@@ -33,7 +33,7 @@
       </div>
     </div>
   </div>
-  <footnav idx='0'></footnav>
+  <footnav :idx='0'></footnav>
 </div>
 </template>
 <style>
