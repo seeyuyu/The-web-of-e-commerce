@@ -225,6 +225,7 @@ export default {
   methods: {
     navData: function() {
       let that = this;
+      // console.log(this.GLOBAL.apiUrl)
       axios.get(that.navUrl).then(function(res){
         console.log(res.data);
         that.navli=res.data;
