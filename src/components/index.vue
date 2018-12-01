@@ -226,14 +226,14 @@ export default {
     navData: function() {
       let that = this;
       // console.log(this.GLOBAL.apiUrl)
-      axios.get(that.navUrl).then(function(res){
+      axios.get(this.GLOBAL.apiUrl+'categoryLabel').then(function(res){
         console.log(res.data);
         that.navli=res.data;
       })
     },
     recommendData:function(){
       let that=this;
-      axios.get(that.recommendUrl).then(function(res){
+      axios.get(this.GLOBAL.apiUrl+'firstList').then(function(res){
         console.log(res.data);
         that.recommendli=res.data;
       })

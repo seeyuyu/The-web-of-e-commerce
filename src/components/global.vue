@@ -1,5 +1,5 @@
 <script>
-const apiUrl='1111111'
+const apiUrl='http://39.107.68.213/test/'
 export default {
   apiUrl
 }

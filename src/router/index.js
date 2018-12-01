@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/components/index'
 import classify from '@/components/classify'
+import mine from '@/components/mine'
 
 Vue.use(Router)
 
@@ -16,6 +17,11 @@ export default new Router({
       path:'/classify',
       name:'classify',
       component:classify
+    },
+    {
+      path:'/mine',
+      name:'mine',
+      component:mine
     }
   ]
 })
