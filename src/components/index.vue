@@ -151,6 +151,9 @@ html {
   color: #fff;
 }
 /* 超市优选 */
+.recommend{
+  overflow: hidden;
+}
 .recommendLi {
   height: 150px;
   width: 33.3%;
@@ -221,6 +224,7 @@ export default {
   },
   created: function() {
     this.navData();
+    this.recommendData();
   },
   methods: {
     navData: function() {
