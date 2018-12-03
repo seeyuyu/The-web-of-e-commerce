@@ -30,6 +30,7 @@
         </div>
       </div>
     </div>
+      <footnav :idx='3'></footnav>
   </div>
 </template>
 <style>
