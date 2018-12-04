@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div>
+      <div class="fl"></div>
+      <div class="fr"></div>
+    </div>
     <div class="mineHead">
       <div>Hello,你好</div>
       <div class="loginBtn">登录/注册</div>
@@ -29,6 +33,24 @@
           </div>
         </div>
       </div>
+      <div class="moneyDiv">
+          <div class="moneyLi">
+            <img src="" />>
+            <p>余额</p>
+          </div>
+          <div class="moneyLi">
+            <img src="" />
+            <p>积分</p>
+          </div>
+          <div class="moneyLi">
+            <img src="" />
+            <p>卡包</p>
+          </div>
+          <div class="moneyLi">
+            <img src="" />
+            <p>优惠券</p>
+          </div>
+        </div>
     </div>
       <footnav :idx='3'></footnav>
   </div>
