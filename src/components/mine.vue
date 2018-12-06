@@ -5,14 +5,16 @@
       <div class="fr"></div>
     </div>
     <div class="mineHead">
-      <div>Hello,你好</div>
-      <div class="loginBtn">登录/注册</div>
-      <div class="ovh mineNavMine">
-        <div class="fl mineNav">我的订单</div>
-        <div class="fl mineNav">自由购</div>
-        <div class="fl mineNav">会员专属码</div>
+      <div class="mineHeadDiv">
+        <div>Hello,你好</div>
+        <div class="loginBtn">登录/注册</div>
+        <div class="ovh mineNavMine">
+          <div class="fl mineNav">我的订单</div>
+          <div class="fl mineNav">自由购</div>
+          <div class="fl mineNav">会员专属码</div>
+        </div>
       </div>
-      <div class="marbot">
+      <div class="marbot bgfff">
         <div class="textleft moneyTitle">我的资产</div>
         <div class="moneyDiv">
           <div class="moneyLi">
@@ -33,9 +35,9 @@
           </div>
         </div>
       </div>
-      <div class="moneyDiv">
+      <div class="moneyDiv bgfff">
           <div class="moneyLi">
-            <img src="" />>
+            <img src="" />
             <p>余额</p>
           </div>
           <div class="moneyLi">
@@ -50,14 +52,33 @@
             <img src="" />
             <p>优惠券</p>
           </div>
+          <div class="moneyLi">
+            <img src="" />
+            <p>优惠券</p>
+          </div>
+          <div class="moneyLi">
+            <img src="" />
+            <p>优惠券</p>
+          </div>
+          <div class="moneyLi">
+            <img src="" />
+            <p>优惠券</p>
+          </div>
         </div>
     </div>
-      <footnav :idx='3'></footnav>
+      <footnav :idx='4'></footnav>
   </div>
 </template>
 <style>
+html{
+  background: #f6f6f6;
+}
 .mineHead{
-  padding: 40px 0;
+  /* padding: 40px 0; */
+}
+.mineHeadDiv{
+  padding: 40px 0 0 0;
+  background: #fff;
 }
 .loginBtn{
   color:#fff;
@@ -88,7 +109,8 @@
 }
 .moneyLi{
   flex:1;
-  padding:10px 0;
+  padding: 10px 0;
+  line-height: 25px;
 }
 .textleft{
   text-align: left;
@@ -105,12 +127,19 @@
 .marbot{
   margin-bottom:10px;
 }
+.bgfff{
+  background: #fff;
+}
 </style>
 <script>
+import footnav from "components/footnav/footnav"
 export default {
   data() {
     return {};
-  }
+  },
+  components:{
+    footnav
+  },
 };
 </script>
 
