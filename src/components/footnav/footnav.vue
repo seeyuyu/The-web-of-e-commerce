@@ -51,13 +51,6 @@ export default {
           iconSelect:'https://static1.xlzhao.com/frontend/images/icon_index2_active.png',
         },
         {
-          cls:'life',
-          name:'会员生活',
-          path:'/life',
-          icon:'https://static1.xlzhao.com/frontend/images/icon_index3.png',
-          iconSelect:'https://static1.xlzhao.com/frontend/images/icon_index3_active.png',
-        },
-        {
           cls:'car',
           name:'购物车',
           path:'/car',
