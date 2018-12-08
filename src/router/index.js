@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import index from '@/components/index'
 import classify from '@/components/classify'
 import mine from '@/components/mine'
-import commodity from '@/components/mine'
+import commodity from '@/components/detail/commodity'
 
 
 Vue.use(Router)
