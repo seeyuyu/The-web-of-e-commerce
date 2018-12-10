@@ -1,5 +1,6 @@
 <template>
 <div>
+  <search></search>
   <div class="navDiv">
     <div class="navLi" v-for="(item,i) in navli">
       <img :src="item.image">
@@ -168,6 +169,7 @@ html {
 <script>
 import axios from "axios";
 import footnav from "components/footnav/footnav"
+import search from "components/search/search"
 export default {
   data() {
     return {
@@ -220,7 +222,8 @@ export default {
     };
   },
   components:{
-    footnav
+    footnav,
+    search
   },
   created: function() {
     this.navData();
@@ -231,14 +234,14 @@ export default {
       let that = this;
       // console.log(this.GLOBAL.apiUrl)
       axios.get(this.GLOBAL.apiUrl+'categoryLabel').then(function(res){
-        console.log(res.data);
+        // console.log(res.data);
         that.navli=res.data;
       })
     },
     recommendData:function(){
       let that=this;
       axios.get(this.GLOBAL.apiUrl+'firstList').then(function(res){
-        console.log(res.data);
+        // console.log(res.data);
         that.recommendli=res.data;
       })
 
