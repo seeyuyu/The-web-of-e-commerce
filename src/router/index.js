@@ -4,6 +4,7 @@ import index from '@/components/index'
 import classify from '@/components/classify'
 import mine from '@/components/mine'
 import commodity from '@/components/detail/commodity'
+import searchpage from '@/components/search/searchpage'
 
 
 Vue.use(Router)
@@ -29,6 +30,11 @@ export default new Router({
       path:'/detail',
       name:'detail',
       component:commodity
+    },
+    {
+      path:'/searchpage',
+      name:'searchpage',
+      component:searchpage
     }
   ]
 })

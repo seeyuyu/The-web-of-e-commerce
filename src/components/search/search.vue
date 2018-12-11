@@ -1,5 +1,5 @@
 <template>
-<div class="searchDiv">
+<div class="searchDiv" @click="jump">
   <span class="searchIcon"></span>搜索宝贝
 </div>
 </template>
@@ -17,4 +17,16 @@
 }
 </style>
 <script>
+export default{
+  data(){
+    return{
+
+    }
+  },
+  methods:{
+    jump(){
+      this.$router.push({path:'/searchpage'})
+    }
+  }
+}
 </script>
