@@ -9,6 +9,7 @@
 .searchDiv {
   width: 100%;
   padding: 10px;
+  overflow: hidden;
 }
 .fl{
   float:left;
@@ -30,6 +31,9 @@
   background: #f6f6f6;
   border-radius: 100px;
   padding: 0 30px;
+  border-bottom: 1px solid #333;
+  border-radius: 0px;
+  /* background: #fff; */
 }
 .gosearch{
   background: pink;
@@ -49,6 +53,7 @@ export default {
   },
   methods: {
     gosearch(){
+      // 通过v-model获取input的值
       console.log(this.searchValue)
     }
   }

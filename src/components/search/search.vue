@@ -5,6 +5,7 @@
 </template>
 <style>
 .searchIcon{
+  margin-right: 5px;
   width:10px;
   height: 10px;
   background:url("../../../static/images/search.png") no-repeat;
@@ -14,6 +15,7 @@
 .searchDiv{
   height: 40px;
   line-height: 40px;
+  padding:0px;
 }
 </style>
 <script>
