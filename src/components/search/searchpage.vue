@@ -5,7 +5,9 @@
   </div>
 </template>
 <style>
-
+html{
+  background: #fff;
+}
 </style>
 <script>
 import searchinput from "components/search/searchinput"

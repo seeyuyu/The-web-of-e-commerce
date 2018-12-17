@@ -33,14 +33,14 @@
   padding: 0 30px;
   border-bottom: 1px solid #333;
   border-radius: 0px;
-  /* background: #fff; */
+  background: #fff;
 }
 .gosearch{
   background: pink;
   width: 16%;
   border-radius: 100px;
-  height: 40px;
-  line-height: 40px;
+  height: 35px;
+  line-height: 35px;
   margin-left: 3%;
 }
 </style>
@@ -55,6 +55,8 @@ export default {
     gosearch(){
       // 通过v-model获取input的值
       console.log(this.searchValue)
+      axios
+
     }
   }
 };
