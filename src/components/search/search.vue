@@ -13,7 +13,7 @@
   display: inline-block;
 }
 .searchDiv{
-  height: 40px;
+  /* height: 40px; */
   line-height: 40px;
   padding:0px;
 }

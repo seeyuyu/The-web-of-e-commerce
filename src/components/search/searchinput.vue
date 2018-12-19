@@ -1,7 +1,7 @@
 <template>
   <div class="searchDiv">
     <span class="searchIcon"></span>
-    <input class="searchInput fl" v-model='searchValue' placeholder="搜索宝贝">
+    <input class="searchInput fl" v-model="searchValue" placeholder="搜索宝贝">
     <div class="fl gosearch" @click="gosearch">搜索</div>
   </div>
 </template>
@@ -11,8 +11,8 @@
   padding: 10px;
   overflow: hidden;
 }
-.fl{
-  float:left;
+.fl {
+  float: left;
 }
 .searchIcon {
   width: 40px;
@@ -35,7 +35,7 @@
   border-radius: 0px;
   background: #fff;
 }
-.gosearch{
+.gosearch {
   background: pink;
   width: 16%;
   border-radius: 100px;
@@ -48,15 +48,41 @@
 export default {
   data() {
     return {
-      searchValue:''
+      searchValue: ""
     };
   },
+  created:function(){
+    var hu=this.getCookie("historySearch");
+    console.log(hu)
+  },
   methods: {
-    gosearch(){
+    gosearch() {
       // 通过v-model获取input的值
-      console.log(this.searchValue)
-      axios
-
+      console.log(this.searchValue);
+      // axios.get("../../api/search.json").then(function(res) {
+      // console.log(res);
+      this.setCookie("historySearch", this.searchValue, 3);
+      // });
+    },
+    // 设置cookie
+    setCookie: function(cname, cvalue, exdays) {
+      var d = new Date();
+      d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+      var expires = "expires=" + d.toUTCString();
+      console.info(cname + "=" + cvalue + "; " + expires);
+      document.cookie = cname + "=" + cvalue + "; " + expires;
+      console.info(document.cookie);
+    },
+    //获取cookie
+    getCookie: function(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == " ") c = c.substring(1);
+        if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+      }
+      return "";
     }
   }
 };
