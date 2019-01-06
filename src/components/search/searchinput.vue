@@ -48,20 +48,27 @@
 export default {
   data() {
     return {
-      searchValue: ""
+      searchValue: "",
+      cookiesArr:[]
     };
   },
   created:function(){
     var hu=this.getCookie("historySearch");
-    console.log(hu)
+    if(this.getCookie("historySearch")){
+      this.cookiesArr=JSON.parse(this.getCookie("historySearch"));
+    }else{
+      this.cookiesArr=[]
+    }
+    console.log(this.cookiesArr)
   },
   methods: {
     gosearch() {
       // 通过v-model获取input的值
-      console.log(this.searchValue);
-      // axios.get("../../api/search.json").then(function(res) {
-      // console.log(res);
-      this.setCookie("historySearch", this.searchValue, 3);
+      console.log(this.cookiesArr)
+      this.cookiesArr.push(this.searchValue);
+      console.log(this.cookiesArr)
+      var objString=JSON.stringify(this.cookiesArr)
+      this.setCookie("historySearch", objString, 3);
       // });
     },
     // 设置cookie

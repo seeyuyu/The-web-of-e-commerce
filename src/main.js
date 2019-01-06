@@ -5,6 +5,11 @@ import App from './App'
 import router from './router'
 import 'static/css/main.css'
 import global_ from 'components/global'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
+
+Vue.use(ElementUI)
+
 
 Vue.config.productionTip = false
 Vue.prototype.GLOBAL= global_//挂载到Vue实例上面

@@ -12,7 +12,7 @@ function resolve (dir) {
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
-  entry: {
+  entry: {//入口配置
     app: './src/main.js'
   },
   output: {
