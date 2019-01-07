@@ -1,11 +1,8 @@
 <template>
   <div>
-    <p class="title">搜索历史</p>
+    <p class="title">搜索历史<span class="delete fr"></span></p>
     <ul class="historyList">
-      <li class="fl">这里是历史啊</li>
-      <li class="fl">这里</li>
-      <li class="fl">历史啊</li>
-      <li class="fl">啊</li>
+      <li class="fl" v-for="item in historyArr">{{item}}</li>
     </ul>
   </div>
 </template>
@@ -24,28 +21,43 @@
 .historyList li {
   border-radius: 100px;
   border: 1px solid #e5e5e5;
-  padding: 2px 10px;
-  margin-right: 10px;
+  padding: 5px 15px;
+  margin: 0 20px 15px 0;
 }
 .fl {
   float: left;
 }
+.fr{
+  float:right;
+}
+.delete{
+  width:50px;
+  height:50px;
+  display:inline-block;
+  background: pink;
+}
 </style>
 <script>
+import search from './search'
 export default {
   data() {
     return{
-      cookiesArr:[]
+      cookiesArr:[],
+      historyArr:[]
     }
   },
   created: function() {
     var hu = this.getCookie("historySearch");
     if (this.getCookie("historySearch")) {
-      this.cookiesArr = JSON.parse(this.getCookie("historySearch"));
+      this.historyArr = JSON.parse(this.getCookie("historySearch"));
     } else {
-      this.cookiesArr = [];
+      this.historyArr = [];
     }
-    console.log("22222"+this.cookiesArr)
+    console.log("22222"+this.cookiesArr);
+    search.$on('send', data => {
+      this.historyArr = data
+    })
+
   },
   methods:{
     getCookie: function(cname) {

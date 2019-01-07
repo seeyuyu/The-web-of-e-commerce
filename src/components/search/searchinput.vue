@@ -45,6 +45,7 @@
 }
 </style>
 <script>
+import search from './search'
 export default {
   data() {
     return {
@@ -67,8 +68,9 @@ export default {
       console.log(this.cookiesArr)
       this.cookiesArr.push(this.searchValue);
       console.log(this.cookiesArr)
-      var objString=JSON.stringify(this.cookiesArr)
-      this.setCookie("historySearch", objString, 3);
+      var objArr=JSON.stringify(this.cookiesArr)
+      this.setCookie("historySearch", objArr, 3);
+      search.$emit('send',this.cookiesArr);
       // });
     },
     // 设置cookie
