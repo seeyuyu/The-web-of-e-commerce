@@ -69,8 +69,9 @@ export default {
       this.cookiesArr.push(this.searchValue);
       console.log(this.cookiesArr)
       var objArr=JSON.stringify(this.cookiesArr)
-      this.setCookie("historySearch", objArr, 3);
+      this.setCookie("historySearch", objArr, 1);
       search.$emit('send',this.cookiesArr);
+      this.searchValue=''
       // });
     },
     // 设置cookie

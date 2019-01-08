@@ -5,7 +5,7 @@ import classify from '@/components/classify'
 import mine from '@/components/mine'
 import commodity from '@/components/detail/commodity'
 import searchpage from '@/components/search/searchpage'
-
+import shopcar from '@/components/car/shopcar'
 
 Vue.use(Router)
 
@@ -35,6 +35,11 @@ export default new Router({
       path:'/searchpage',
       name:'searchpage',
       component:searchpage
+    },
+    {
+      path:'/car',
+      name:'shopcar',
+      component:shopcar
     }
   ]
 })

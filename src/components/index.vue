@@ -169,7 +169,7 @@ html {
 <script>
 import axios from "axios";
 import footnav from "components/footnav/footnav"
-import search from "components/search/search"
+import search from "components/search/searchdiv"
 export default {
   data() {
     return {

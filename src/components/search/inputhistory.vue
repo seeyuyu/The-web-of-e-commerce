@@ -31,10 +31,12 @@
   float:right;
 }
 .delete{
-  width:50px;
-  height:50px;
-  display:inline-block;
-  background: pink;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    background: url("../../../static/images/delete.png");
+    background-size: 30px 30px;
+    margin-right: 20px;
 }
 </style>
 <script>
