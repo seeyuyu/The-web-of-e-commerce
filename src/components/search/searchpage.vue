@@ -4,7 +4,7 @@
     <inputhistory></inputhistory>
   </div>
 </template>
-<style>
+<style scoped>
 html{
   background: #fff;
 }

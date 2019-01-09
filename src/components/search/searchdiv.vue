@@ -3,7 +3,7 @@
   <span class="searchIcon"></span>搜索宝贝
 </div>
 </template>
-<style>
+<style scoped>
 .searchIcon{
   margin-right: 5px;
   width:10px;

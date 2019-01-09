@@ -37,7 +37,7 @@
   <footnav :idx='0'></footnav>
 </div>
 </template>
-<style>
+<style scoped>
 html {
   background: #f6f6f6;
 }

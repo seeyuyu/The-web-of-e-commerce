@@ -37,6 +37,7 @@
     background: url("../../../static/images/delete.png");
     background-size: 30px 30px;
     margin-right: 20px;
+    margin-top: 5px;
 }
 </style>
 <script>

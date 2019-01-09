@@ -1,20 +1,21 @@
 <template>
-  <div class="searchDiv">
-    <span class="searchIcon"></span>
+  <div class="searchDiv1">
+    <span class="searchIcon1"></span>
     <input class="searchInput fl" v-model="searchValue" placeholder="搜索宝贝">
     <div class="fl gosearch" @click="gosearch">搜索</div>
   </div>
 </template>
 <style>
-.searchDiv {
+.searchDiv1 {
   width: 100%;
   padding: 10px;
   overflow: hidden;
+  background: #fff;
 }
 .fl {
   float: left;
 }
-.searchIcon {
+.searchIcon1 {
   width: 40px;
   height: 40px;
   background: url("../../../static/images/search.png") no-repeat;
