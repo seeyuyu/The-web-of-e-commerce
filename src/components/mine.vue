@@ -7,7 +7,7 @@
     <div class="mineHead">
       <div class="mineHeadDiv">
         <div>Hello,你好</div>
-        <div class="loginBtn">登录/注册</div>
+        <router-link to="/login"><div class="loginBtn">登录/注册</div></router-link>
         <div class="ovh mineNavMine">
           <div class="fl mineNav">我的订单</div>
           <div class="fl mineNav">自由购</div>
@@ -135,7 +135,38 @@ html{
 import footnav from "components/footnav/footnav"
 export default {
   data() {
-    return {};
+    return {
+      gologin:[
+        {
+          cls:'home',
+          name:'首页',
+          path:'/',
+          icon:'https://static1.xlzhao.com/frontend/images/icon_index1.png',
+          iconSelect:'https://static1.xlzhao.com/frontend/images/icon_index1_active.png',
+        },
+        {
+          cls:'cle',
+          name:'分类',
+          path:'/classify',
+          icon:'https://static1.xlzhao.com/frontend/images/icon_index2.png',
+          iconSelect:'https://static1.xlzhao.com/frontend/images/icon_index2_active.png',
+        },
+        {
+          cls:'car',
+          name:'购物车',
+          path:'/car',
+          icon:'https://static1.xlzhao.com/frontend/images/icon_index4.png',
+          iconSelect:'https://static1.xlzhao.com/frontend/images/icon_index4_active.png',
+        },
+        {
+          cls:'mine',
+          name:'我的',
+          path:'/mine',
+          icon:'https://static1.xlzhao.com/frontend/images/icon_index4.png',
+          iconSelect:'https://static1.xlzhao.com/frontend/images/icon_index4_active.png',
+        },
+      ]
+    };
   },
   components:{
     footnav

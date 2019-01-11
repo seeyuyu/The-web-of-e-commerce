@@ -6,6 +6,7 @@ import mine from '@/components/mine'
 import commodity from '@/components/detail/commodity'
 import searchpage from '@/components/search/searchpage'
 import shopcar from '@/components/car/shopcar'
+import login from '@/components/login/login'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path:'/car',
       name:'shopcar',
       component:shopcar
+    },
+    {
+      path:'/login',
+      name:'login',
+      component:login
     }
   ]
 })
