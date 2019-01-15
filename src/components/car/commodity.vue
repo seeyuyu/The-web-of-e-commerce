@@ -7,7 +7,7 @@
             <p class="commodityTxt text_ovh2">这里是标题这里是标题这里是标题这里是标题</p>
             <div class="rightBottom">
               <div class="fl">¥9.00</div>
-              <div>
+              <div v-if="car>0">
                 <div class="fr countnum">-</div>
                 <div class="fr counttxt">0</div>
                 <div class="fr countnum">+</div>
@@ -84,7 +84,7 @@
 </style>
 <script>
 export default {
-
+  props:["car"]
 }
 </script>
 
