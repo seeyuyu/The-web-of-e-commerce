@@ -69,7 +69,7 @@
       <footnav :idx='3'></footnav>
   </div>
 </template>
-<style>
+<style >
 html{
   background: #f6f6f6;
 }

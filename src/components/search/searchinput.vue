@@ -47,6 +47,7 @@
 </style>
 <script>
 import search from './search'
+import axios from "axios";
 export default {
   data() {
     return {
@@ -72,7 +73,14 @@ export default {
       var objArr=JSON.stringify(this.cookiesArr)
       this.setCookie("historySearch", objArr, 1);
       search.$emit('send',this.cookiesArr);
-      this.searchValue=''
+      this.searchValue='';
+      let that = this;
+      axios.get('/static/json/search.json').then(function(res){
+        console.log(res.data);
+        if(res.data.code==200){
+            that.searchResule=res.data.data;
+        }
+      })
       // });
     },
     // 设置cookie
