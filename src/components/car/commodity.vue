@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="rightList">
+    <div class="rightList" v-for="item in dataList">
       <div class="rightLi">
-          <img src="https://gw.alicdn.com/bao/uploaded/i3/3644584684/TB21EZ2I21TBuNjy0FjXXajyXXa_!!3644584684.png_290x10000.jpg_.webp" class="fl">
+          <img src="{{item.image}}" class="fl">
           <div class="rightLiTxt fl">
-            <p class="commodityTxt text_ovh2">这里是标题这里是标题这里是标题这里是标题</p>
+            <p class="commodityTxt text_ovh2">{{item.name}}</p>
             <div class="rightBottom">
               <div class="fl">¥9.00</div>
               <div v-if="car>0">
@@ -84,7 +84,10 @@
 </style>
 <script>
 export default {
-  props:["car"]
+  props:{
+    "car":Number,
+    "dataList":Array
+  }
 }
 </script>
 
