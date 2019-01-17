@@ -2,7 +2,7 @@
   <div>
     <div class="rightList" v-for="item in dataList">
       <div class="rightLi">
-          <img src="{{item.image}}" class="fl">
+          <img src="item.image" class="fl">
           <div class="rightLiTxt fl">
             <p class="commodityTxt text_ovh2">{{item.name}}</p>
             <div class="rightBottom">

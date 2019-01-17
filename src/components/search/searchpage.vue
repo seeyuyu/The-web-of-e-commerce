@@ -17,7 +17,7 @@ html{
 import searchinput from "components/search/searchinput"
 import inputhistory from "components/search/inputhistory"
 import commoditylist from "components/car/commodity"
-export default{
+export default {
   data(){
     return{
       dataList:[]
