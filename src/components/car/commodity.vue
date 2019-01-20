@@ -2,14 +2,14 @@
   <div>
     <div class="rightList" v-for="item in dataList">
       <div class="rightLi">
-          <img src="item.image" class="fl">
+          <img :src="item.image" class="fl">
           <div class="rightLiTxt fl">
             <p class="commodityTxt text_ovh2">{{item.name}}</p>
             <div class="rightBottom">
-              <div class="fl">¥9.00</div>
+              <div class="fl">{{Number(item.price)>0?'¥'+item.price:''}}</div>
               <div v-if="car>0">
                 <div class="fr countnum">-</div>
-                <div class="fr counttxt">0</div>
+                <div class="fr counttxt">{{item.num}}</div>
                 <div class="fr countnum">+</div>
               </div>
             </div>
@@ -86,7 +86,7 @@
 export default {
   props:{
     "car":Number,
-    "dataList":Array
+    "data-list":Array
   }
 }
 </script>

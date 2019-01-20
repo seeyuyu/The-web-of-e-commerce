@@ -1,10 +1,11 @@
 <template>
   <div>
-    <searchinput></searchinput>
+    <searchinput v-on:searchResule="we"></searchinput>
     <inputhistory></inputhistory>
     <div>
-      <p>搜索结果</p>
-      <commoditylist car="0" dataList=""></commoditylist>
+      <p v-if="searchre" class="title">搜索结果</p>
+      <p v-else class="nosearch">暂无</p>
+      <commoditylist :car="0" :data-list="searchResule"></commoditylist>
     </div>
   </div>
 </template>
@@ -12,15 +13,27 @@
 html{
   background: #fff;
 }
+.title {
+    height: 40px;
+    line-height: 40px;
+    padding: 0px 0px 0px 20px;
+    margin: 15px 0 5px 0;
+    text-align: left;
+}
+.nosearch{
+  text-align: center;
+}
 </style>
 <script>
+import axios from "axios";
 import searchinput from "components/search/searchinput"
 import inputhistory from "components/search/inputhistory"
 import commoditylist from "components/car/commodity"
 export default {
   data(){
     return{
-      dataList:[]
+      searchResule:[],
+      searchre:false
     }
   },
   components:{
@@ -28,19 +41,18 @@ export default {
     inputhistory,
     commoditylist
   },
-  created:{
-
-  },
   methods: {
-    getData:function(){
-      let that = this;
-      axios.get('/static/json/search.json').then(function(res){
-        console.log(res.data);
-        if(res.data.code==200){
-            that.searchResule=res.data.data;
-        }
-      })
+    we:function(data){
+      console.log(data);
+      this.searchResule=data;
+      if(data.length>0){
+        this.searchre=true;
+      }else{
+        this.searchre=false;
+      }
     }
-  }
+  },
+  created:function(){
+  },
 }
 </script>

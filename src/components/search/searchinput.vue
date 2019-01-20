@@ -52,7 +52,8 @@ export default {
   data() {
     return {
       searchValue: "",
-      cookiesArr:[]
+      cookiesArr:[],
+      searchResule:[]
     };
   },
   created:function(){
@@ -67,21 +68,20 @@ export default {
   methods: {
     gosearch() {
       // 通过v-model获取input的值
-      console.log(this.cookiesArr)
-      this.cookiesArr.push(this.searchValue);
-      console.log(this.cookiesArr)
-      var objArr=JSON.stringify(this.cookiesArr)
-      this.setCookie("historySearch", objArr, 1);
-      search.$emit('send',this.cookiesArr);
-      this.searchValue='';
-      let that = this;
-      axios.get('/static/json/search.json').then(function(res){
-        console.log(res.data);
-        if(res.data.code==200){
-            that.searchResule=res.data.data;
-        }
-      })
-      // });
+      if(this.searchValue!=''){
+        this.cookiesArr.push(this.searchValue);
+        var objArr=JSON.stringify(this.cookiesArr)
+        this.setCookie("historySearch", objArr, 1);
+        search.$emit('send',this.cookiesArr);
+        this.searchValue='';
+        let that = this;
+        axios.get('/static/json/search.json').then(function(res){
+          if(res.data.code==200){
+              that.searchResule=res.data.data;
+              that.$emit("searchResule",that.searchResule)
+          }
+        })
+      }
     },
     // 设置cookie
     setCookie: function(cname, cvalue, exdays) {
