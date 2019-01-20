@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="searchout"><search></search></div>
-    <commoditylist car="1"></commoditylist>
+    <commoditylist :car="1" :data-list="searchResule"></commoditylist>
     <footnav :idx='2'></footnav>
   </div>
 </template>
@@ -20,13 +20,14 @@ html{
 }
 </style>
 <script>
+import axios from "axios";
 import footnav from "components/footnav/footnav"
 import commoditylist from "components/car/commodity"
 import search from "components/search/searchdiv"
 export default {
   data(){
     return{
-
+      searchResule:[]
     }
   },
   components:{
@@ -34,5 +35,18 @@ export default {
     search,
     commoditylist
   },
+  methods:{
+    carlist(){
+      var that=this;
+      axios.get('/static/json/search.json').then(function(res){
+        if(res.data.code==200){
+            that.searchResule=res.data.data;
+        }
+      })
+    }
+  },
+  created:function(){
+    this.carlist()
+  }
 }
 </script>

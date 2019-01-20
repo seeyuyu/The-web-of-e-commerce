@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="title">搜索历史<span class="delete fr"></span></p>
+    <p class="title">搜索历史<span @click="deletehistory" class="delete fr"></span></p>
     <ul class="historyList">
       <li class="fl" v-for="item in historyArr">{{item}}</li>
     </ul>
@@ -72,7 +72,21 @@ export default {
         if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
       }
       return "";
-    }
+    },
+    deletehistory:function(){
+      console.log("删除")
+      this.setCookie("historySearch", [], 1);
+      this.historyArr=[];
+    },
+    // 设置cookie
+    setCookie: function(cname, cvalue, exdays) {
+      var d = new Date();
+      d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+      var expires = "expires=" + d.toUTCString();
+      console.info(cname + "=" + cvalue + "; " + expires);
+      document.cookie = cname + "=" + cvalue + "; " + expires;
+      console.info(document.cookie);
+    },
   }
 };
 </script>

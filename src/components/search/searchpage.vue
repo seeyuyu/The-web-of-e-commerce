@@ -4,7 +4,7 @@
     <inputhistory></inputhistory>
     <div>
       <p v-if="searchre" class="title">搜索结果</p>
-      <p v-else class="nosearch">暂无</p>
+      <p v-else class="nosearch">{{searchtip}}</p>
       <commoditylist :car="0" :data-list="searchResule"></commoditylist>
     </div>
   </div>
@@ -33,7 +33,8 @@ export default {
   data(){
     return{
       searchResule:[],
-      searchre:false
+      searchre:false,
+      searchtip:''
     }
   },
   components:{
@@ -49,6 +50,7 @@ export default {
         this.searchre=true;
       }else{
         this.searchre=false;
+        this.searchtip='暂无'
       }
     }
   },
