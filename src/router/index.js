@@ -25,7 +25,10 @@ export default new Router({
     {
       path:'/mine',
       name:'mine',
-      component:mine
+      component:mine,
+      meta: {
+        requireAuth: true, // 判断是否需要登录
+      },
     },
     {
       path:'/detail',
