@@ -11,6 +11,7 @@
       </div>
     </div>
     <div class="login-btn">登陆</div>
+    <re>注册</re>
   </div>
 </template>
 <style>
