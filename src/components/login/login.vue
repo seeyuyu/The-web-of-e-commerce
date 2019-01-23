@@ -51,7 +51,7 @@ export default {
   },
   created: function() {
     let that = this;
-    console.log("1111")
+    console.log("1111");
     var  md5 = crypto.createHash("md5");
     md5.update('123') //需要加密的密码
     var password = md5.digest('hex');  //password 加密完的密码
