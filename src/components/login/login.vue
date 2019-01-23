@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="login-btn">登陆</div>
-    <re>注册</re>
+    <div>注册</div>
   </div>
 </template>
 <style>
@@ -41,10 +41,27 @@
   margin: 0 auto;
 }
 </style>
+<script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.min.js"></script>
 <script>
+import axios from "axios";
+import crypto from 'crypto'
 export default {
   data() {
     return {};
+  },
+  created: function() {
+    let that = this;
+    console.log("1111")
+    var  md5 = crypto.createHash("md5");
+    md5.update('123') //需要加密的密码
+    var password = md5.digest('hex');  //password 加密完的密码
+    console.log(password);
+    axios.post('/api',{
+      username:'yyt',
+      password:password
+    }).then(function(res) {
+      console.log(res);
+    });
   }
 };
 </script>
