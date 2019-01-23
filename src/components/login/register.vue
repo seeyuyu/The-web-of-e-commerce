@@ -2,16 +2,15 @@
   <div>
     <div class="ovh login-div">
       <div class="ovh login-Inputdiv">
-        <span class="fl">账号：</span>
-        <input class="fl" type="text" v-model="username" placeholder="请输入手机号">
+        <span class="fl">用户名：</span>
+        <input class="fl" type="text" placeholder="请输入手机号">
       </div>
       <div class="ovh login-Inputdiv">
-        <span class="fl">密码：</span>
-        <input class="fl" type="password" v-model="pasword" placeholder="请输入密码">
+        <span class="fl">邮箱：</span>
+        <input class="fl" type="text" placeholder="请输入密码">
       </div>
     </div>
-    <div class="login-btn" @click="gologin">登陆</div>
-    <div>注册</div>
+    <div class="login-btn" @click="gologin">注册</div>
   </div>
 </template>
 <style>
@@ -43,23 +42,35 @@
 </style>
 <script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.min.js"></script>
 <script>
-import axios from "axios";
-import crypto from "crypto";
 export default {
-  data: {
-    username: "",
-    pasword:""
+  data() {
+    return {};
   },
-  created: function() {},
+  created: function() {
+    let that = this;
+    let md5 = crypto.createHash("md5");
+    md5.update("123"); //需要加密的密码
+    let password = md5.digest("hex"); //password 加密完的密码
+    axios
+      .post("/api/employee/register", {
+        username: "生气！！",
+        email: "1916175569@qq.com",
+        password: password,
+        code: "4c4c"
+      })
+      .then(function(res) {
+        console.log(res);
+      });
+  },
   methods: {
     gologin: function() {
       let that = this;
       let md5 = crypto.createHash("md5");
-      md5.update(that.username); //需要加密的密码
+      md5.update("123"); //需要加密的密码
       let password = md5.digest("hex"); //password 加密完的密码
       axios
         .post("/api/employee/login", {
-          username: that.username,
+          username: "yyt",
           password: password
         })
         .then(function(res) {
