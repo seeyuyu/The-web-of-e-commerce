@@ -7,6 +7,7 @@ import commodity from '@/components/detail/commodity'
 import searchpage from '@/components/search/searchpage'
 import shopcar from '@/components/car/shopcar'
 import login from '@/components/login/login'
+import register from '@/components/login/register'
 
 Vue.use(Router)
 
@@ -49,6 +50,11 @@ export default new Router({
       path:'/login',
       name:'login',
       component:login
+    },
+    {
+      path:'/register',
+      name:'register',
+      component:register
     }
   ]
 })
