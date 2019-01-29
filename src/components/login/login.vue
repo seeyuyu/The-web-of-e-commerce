@@ -70,9 +70,10 @@ return {
         .then(function(res) {
           console.log(res);
           if(res.data.code==0){
-
+            sessionStorage.setItem('userId','123');
+            that.$router.go(-1);
           }else{
-            alert(res.data.msg)
+            alert(res.data.msg);
           }
         });
     }

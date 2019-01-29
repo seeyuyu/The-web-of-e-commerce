@@ -110,7 +110,7 @@ export default {
           .then(function(res) {
             console.log(res);
             if(res.code==200){
-              this.$router.push({path: '/login'});
+              that.$router.push({path: '/login'});
             }
           });
       }else{

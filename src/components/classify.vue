@@ -73,7 +73,7 @@ li{
   margin-left:20%;
 }
 .rightList img{
-  widows: 27%;;
+  width: 27%;;
   height: 80px;
   margin-right:3%;
 }
