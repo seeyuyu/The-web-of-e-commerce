@@ -102,16 +102,19 @@ export default {
         let password = md5.digest("hex"); //password 加密完的密码
         axios
           .post("/api/employee/register", {
-            username: window.encodeURIComponet(this.username),
+            username: this.username,
             password: password,
             email: this.email,
             code: this.verify
           })
           .then(function(res) {
             console.log(res);
+            if(res.code==200){
+              this.$router.push({path: '/login'});
+            }
           });
       }else{
-        console.log("密码输入不一致")
+        console.log("密码输入不一致");
       }
     }
   }
