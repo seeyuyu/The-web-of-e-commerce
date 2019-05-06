@@ -101,7 +101,7 @@ li{
     overflow: hidden;
 }
 .rightLiTxtc{
-      border-bottom: 1px solid #f6f6f6;
+    border-bottom: 1px solid #f6f6f6;
 }
 .borderBootom{
   width:100%;
@@ -110,7 +110,6 @@ li{
 }
 </style>
 <script>
-
 import footnav from "components/footnav/footnav"
 export default {
   data(){
