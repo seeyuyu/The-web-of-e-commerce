@@ -24,6 +24,7 @@ export default new Router({
     //   name: 'ce',
     //   component: ce
     // },
+
     {
       path:'/classify',
       name:'classify',
