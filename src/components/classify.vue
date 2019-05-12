@@ -41,7 +41,6 @@ html{
 }
 ul{
   width:20%;
-  /* margin-right:10px; */
   position: fixed;
     left: 0px;
     top: 0px;
