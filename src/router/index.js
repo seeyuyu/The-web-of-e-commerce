@@ -14,16 +14,16 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'index',
-    //   component: index
-    // },
     {
       path: '/',
-      name: 'ce',
-      component: ce
+      name: 'index',
+      component: index
     },
+    // {
+    //   path: '/',
+    //   name: 'ce',
+    //   component: ce
+    // },
     {
       path:'/classify',
       name:'classify',
