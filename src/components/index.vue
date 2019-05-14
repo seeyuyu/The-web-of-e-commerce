@@ -1,48 +1,58 @@
 <template>
-<div>
-  <search></search>
-  <div class="navDiv">
-    <div class="navLi" v-for="(item,i) in navli">
-      <img :src="item.image">
-      <span class="saleTips" v-if="item.tips">{{item.tips}}</span>
-      <p>{{item.name}}</p>
+  <div>
+    <search></search>
+    <div class="navDiv">
+      <div class="navLi" v-for="(item,i) in navli">
+        <img :src="item.image">
+        <span class="saleTips" v-if="item.tips">{{item.tips}}</span>
+        <p>{{item.name}}</p>
+      </div>
     </div>
-  </div>
-  <div class="topNews">
-    <div class="fl topTitle">多点头条</div>
-    <div>
-      <ul>
-        <li><a href="###" class="fl topCon text_ovh">推荐！快来围观啊优惠好多啊来围观啊优惠好多啊来围观啊优惠好多啊啊啊啊啊啊啊！</a></li>
-        <li><a href="###" class="fl topCon text_ovh">推荐！快来围观啊优惠好多啊来围观啊优惠好多啊来围观啊优惠好多啊啊啊啊啊啊啊！</a></li>
-        <li><a href="###" class="fl topCon text_ovh">推荐！快来围观啊优惠好多啊来围观啊优惠好多啊来围观啊优惠好多啊啊啊啊啊啊啊！</a></li>
-        <li><a href="###" class="fl topCon text_ovh">推荐！快来围观啊优惠好多啊来围观啊优惠好多啊来围观啊优惠好多啊啊啊啊啊啊啊！</a></li>
-      </ul>
+    <div class="topNews">
+      <div class="fl topTitle">多点头条</div>
+      <div>
+        <ul>
+          <li>
+            <a href="###" class="fl topCon text_ovh">推荐！快来围观啊优惠好多啊来围观啊优惠好多啊来围观啊优惠好多啊啊啊啊啊啊啊！</a>
+          </li>
+          <li>
+            <a href="###" class="fl topCon text_ovh">推荐！快来围观啊优惠好多啊来围观啊优惠好多啊来围观啊优惠好多啊啊啊啊啊啊啊！</a>
+          </li>
+          <li>
+            <a href="###" class="fl topCon text_ovh">推荐！快来围观啊优惠好多啊来围观啊优惠好多啊来围观啊优惠好多啊啊啊啊啊啊啊！</a>
+          </li>
+          <li>
+            <a href="###" class="fl topCon text_ovh">推荐！快来围观啊优惠好多啊来围观啊优惠好多啊来围观啊优惠好多啊啊啊啊啊啊啊！</a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-  <div class="recommend">
-    <div class="recommend">超市优选</div>
-    <div class="recommendLi" v-for="(item,i) in recommendli">
-      <p>{{item.title}}</p>
-      <p>{{item.text}}</p>
-      <img :src="item.image">
-    </div>
-  </div>
-  <div class="describeDiv">
-    <div class="describeTitle">舌尖美味</div>
-    <div class="describeList fl" v-for="item in describeList">
-      <div class="imgDiv">
+    <div class="recommend">
+      <div class="recommend">超市优选</div>
+      <div class="recommendLi" v-for="(item,i) in recommendli">
+        <p>{{item.title}}</p>
+        <p>{{item.text}}</p>
         <img :src="item.image">
       </div>
-      <div class="describetxt text_ovh2">{{item.name}}</div>
-      <div class="yuanprice">¥{{item.originPrice}}</div>
-      <div class="describeBottom">
-        <span class="redColor txtPrice fl">¥{{item.newPrice}}</span>
-        <div class="fr addCart">+</div>
-      </div>
     </div>
+    <div class="describeDiv">
+      <div class="describeTitle">舌尖美味</div>\
+
+      <div class="describeList fl" v-for="item in describeList">
+        <div class="imgDiv">
+          <img :src="item.image">
+        </div>
+        <div class="describetxt text_ovh2">{{item.name}}</div>
+        <div class="yuanprice">¥{{item.originPrice}}</div>
+        <div class="describeBottom">
+          <span class="redColor txtPrice fl">¥{{item.newPrice}}</span>
+          <div class="fr addCart">+</div>
+        </div>
+      </div>
+
+    </div>
+    <footnav :idx="0"></footnav>
   </div>
-  <footnav :idx='0'></footnav>
-</div>
 </template>
 <style scoped>
 html {
@@ -159,7 +169,7 @@ html {
   color: #fff;
 }
 /* 超市优选 */
-.recommend{
+.recommend {
   overflow: hidden;
 }
 .recommendLi {
@@ -167,7 +177,7 @@ html {
   width: 33.3%;
   padding: 15px 10px;
   background: #dde;
-  border:1px solid #fff;
+  border: 1px solid #fff;
   float: left;
   border-radius: 4px;
   text-align: left;
@@ -175,16 +185,16 @@ html {
 </style>
 <script>
 import axios from "axios";
-import footnav from "components/footnav/footnav"
-import search from "components/search/searchdiv"
+import footnav from "components/footnav/footnav";
+import search from "components/search/searchdiv";
 export default {
   data() {
     return {
-      navUrl:'http://h5.globalmxb.com/test/categoryLabel',
-      recommendUrl:'http://h5.globalmxb.com/test/firstList',
-      describeUrl:'',
+      navUrl: "http://h5.globalmxb.com/test/categoryLabel",
+      recommendUrl: "http://h5.globalmxb.com/test/firstList",
+      describeUrl: "",
       navli: [],
-      recommendli:[],
+      recommendli: [],
       describeList: [
         {
           name: "原价原价原价原价原价原价原价原价原价原价原价原价原价原价原价",
@@ -228,7 +238,7 @@ export default {
       ]
     };
   },
-  components:{
+  components: {
     footnav,
     search
   },
@@ -245,21 +255,21 @@ export default {
       //   // console.log(res.data);
       //   that.navli=res.data;
       // })
-      axios.get('/static/json/commodity.json').then(function(res){
+      axios.get("/static/json/commodity.json").then(function(res) {
         console.log(res.data.data);
-        that.navli=res.data.data;
-      })
+        that.navli = res.data.data;
+      });
     },
-    recommendData:function(){
-      let that=this;
+    recommendData: function() {
+      let that = this;
       // axios.get(this.GLOBAL.apiUrl+'firstList').then(function(res){
       //   // console.log(res.data);
       //   that.recommendli=res.data;
       // })
-      axios.get('/static/json/commodity.json').then(function(res){
+      axios.get("/static/json/commodity.json").then(function(res) {
         // console.log(res.data);
-        that.recommendli=res.data.data;
-      })
+        that.recommendli = res.data.data;
+      });
     }
   }
 };
