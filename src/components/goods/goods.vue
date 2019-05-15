@@ -11,7 +11,7 @@
     </div>
   </div>
 </template>
-<style>
+<style scoped>
 .describeList {
   width: 33.3%;
   padding: 10px 8px;
@@ -72,7 +72,9 @@
 </style>
 <script>
 export default {
-
+  props:{
+    "describe-list":Array
+  }
 }
 </script>
 

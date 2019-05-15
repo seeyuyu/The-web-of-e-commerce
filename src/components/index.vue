@@ -37,7 +37,7 @@
     </div>
     <div class="describeDiv">
       <div class="describeTitle">舌尖美味</div>\
-      <goods></goods>
+      <goods :describe-list="describeList"></goods>
       <!-- <div class="describeList fl" v-for="item in describeList">
         <div class="imgDiv">
           <img :src="item.image">
