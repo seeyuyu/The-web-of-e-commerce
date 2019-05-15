@@ -37,8 +37,8 @@
     </div>
     <div class="describeDiv">
       <div class="describeTitle">舌尖美味</div>\
-
-      <div class="describeList fl" v-for="item in describeList">
+      <goods></goods>
+      <!-- <div class="describeList fl" v-for="item in describeList">
         <div class="imgDiv">
           <img :src="item.image">
         </div>
@@ -48,7 +48,7 @@
           <span class="redColor txtPrice fl">¥{{item.newPrice}}</span>
           <div class="fr addCart">+</div>
         </div>
-      </div>
+      </div> -->
 
     </div>
     <footnav :idx="0"></footnav>
@@ -187,6 +187,7 @@ html {
 import axios from "axios";
 import footnav from "components/footnav/footnav";
 import search from "components/search/searchdiv";
+import goods from "components/goods/goods";
 export default {
   data() {
     return {
@@ -240,7 +241,8 @@ export default {
   },
   components: {
     footnav,
-    search
+    search,
+    goods
   },
   created: function() {
     this.navData();
