@@ -1,13 +1,15 @@
 <template>
-  <div class="describeList fl" v-for="item in describeList">
-    <div class="imgDiv">
-      <img :src="item.image">
-    </div>
-    <div class="describetxt text_ovh2">{{item.name}}</div>
-    <div class="yuanprice">¥{{item.originPrice}}</div>
-    <div class="describeBottom">
-      <span class="redColor txtPrice fl">¥{{item.newPrice}}</span>
-      <div class="fr addCart">+</div>
+  <div>
+    <div class="describeList fl" v-for="item in describelist">
+      <div class="imgDiv">
+        <img :src="item.image">
+      </div>
+      <div class="describetxt text_ovh2">{{item.name}}</div>
+      <div class="yuanprice">¥{{item.originPrice}}</div>
+      <div class="describeBottom">
+        <span class="redColor txtPrice fl">¥{{item.newPrice}}</span>
+        <div class="fr addCart">+</div>
+      </div>
     </div>
   </div>
 </template>
@@ -73,7 +75,7 @@
 <script>
 export default {
   props:{
-    "describe-list":Array
+    "describelist":Array
   }
 }
 </script>
