@@ -171,6 +171,11 @@ export default {
   components:{
     footnav
   },
+  mounted: function() {
+    if(!sessionStorage.getItem('userId')){
+      // 未登录
+    }
+  },
 };
 </script>
 
