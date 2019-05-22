@@ -1,6 +1,11 @@
 <template>
   <div>
     <search></search>
+    <mt-swipe :auto="4000" class="swiperDiv">
+      <mt-swipe-item>1</mt-swipe-item>
+      <mt-swipe-item>2</mt-swipe-item>
+      <mt-swipe-item>3</mt-swipe-item>
+    </mt-swipe>
     <div class="navDiv">
       <div class="navLi" v-for="(item,i) in navli">
         <img :src="item.image">
@@ -45,6 +50,9 @@
 <style scoped>
 html {
   background: #f6f6f6;
+}
+.swiperDiv{
+  height:160px;
 }
 .navDiv {
   display: -webkit-flex; /* Safari */
@@ -179,6 +187,7 @@ import axios from "axios";
 import footnav from "components/footnav/footnav";
 import search from "components/search/searchdiv";
 import goods from "components/goods/goods";
+
 export default {
   data() {
     return {

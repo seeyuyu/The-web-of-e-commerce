@@ -5,11 +5,21 @@ import App from './App'
 import router from './router'
 import 'static/css/main.css'
 import global_ from 'components/global'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-default/index.css'
+// import ElementUI from 'element-ui'
+// import 'element-ui/lib/theme-default/index.css'
+import Mint from 'mint-ui';
+import 'mint-ui/lib/style.css';
 
-Vue.use(ElementUI)
+Vue.use(Mint)
 
+import MtRadio from 'mint-ui/lib/radio';
+import 'mint-ui/lib/radio/style.css';
+
+Vue.component(MtRadio.name, MtRadio);
+import { Swipe, SwipeItem } from 'mint-ui';
+
+Vue.component(Swipe.name, Swipe);
+Vue.component(SwipeItem.name, SwipeItem);
 
 Vue.config.productionTip = false
 Vue.prototype.GLOBAL = global_ //挂载到Vue实例上面
