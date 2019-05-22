@@ -170,6 +170,9 @@ html {
   border-radius: 4px;
   text-align: left;
 }
+.recommendLi img{
+  width:100px;
+}
 </style>
 <script>
 import axios from "axios";
