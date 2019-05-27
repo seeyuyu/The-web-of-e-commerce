@@ -17,7 +17,7 @@ import 'mint-ui/lib/radio/style.css';
 
 Vue.component(MtRadio.name, MtRadio);
 import { Swipe, SwipeItem } from 'mint-ui';
-
+// 轮播图
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
 
