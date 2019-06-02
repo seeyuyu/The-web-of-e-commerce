@@ -1,10 +1,10 @@
 <template>
   <div>
     <search></search>
-    <mt-swipe :auto="4000" class="swiperDiv">
-      <mt-swipe-item>1</mt-swipe-item>
-      <mt-swipe-item>2</mt-swipe-item>
-      <mt-swipe-item>3</mt-swipe-item>
+    <mt-swipe :auto="400000" class="swiperDiv">
+      <mt-swipe-item><img class="bannerImg" src="https://img.alicdn.com/tfs/TB1p5V9a.CF3KVjSZJnXXbnHFXa-750-291.jpg_Q90.jpg" /></mt-swipe-item>
+      <mt-swipe-item><img class="bannerImg" src="https://img.alicdn.com/tfs/TB11NGma21G3KVjSZFkXXaK4XXa-750-291.png_Q90.jpg" /></mt-swipe-item>
+      <mt-swipe-item><img class="bannerImg" src="https://img.alicdn.com/tfs/TB1OkGxaHys3KVjSZFnXXXFzpXa-750-291.jpg_Q90.jpg" /></mt-swipe-item>
     </mt-swipe>
     <div class="navDiv">
       <div class="navLi" v-for="(item,i) in navli">
@@ -180,6 +180,10 @@ html {
 }
 .recommendLi img{
   width:100px;
+}
+.bannerImg{
+  width:100%;
+
 }
 </style>
 <script>
