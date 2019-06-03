@@ -273,7 +273,7 @@ export default {
       //   that.recommendli=res.data;
       // })
       axios.get("/static/json/commodity.json").then(function(res) {
-        // console.log(res.data);
+        console.log(res.data);
         that.recommendli = res.data.data;
       });
     }
