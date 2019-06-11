@@ -15,7 +15,12 @@
     </div>
     <div class="topNews">
       <div class="fl topTitle">多点头条</div>
-      <div>
+      <div class="textBox">
+      <!-- <transition name="slide"> -->
+        <p class="text" :key="text.id">{{text.val}}</p>
+      <!-- </transition> -->
+    </div>
+      <!-- <div>
         <ul>
           <li>
             <a href="###" class="fl topCon text_ovh">推荐！快来围观啊优惠好多啊来围观啊优惠好多啊来围观啊优惠好多啊啊啊啊啊啊啊！</a>
@@ -30,7 +35,7 @@
             <a href="###" class="fl topCon text_ovh">推荐！快来围观啊优惠好多啊来围观啊优惠好多啊来围观啊优惠好多啊啊啊啊啊啊啊！</a>
           </li>
         </ul>
-      </div>
+      </div> -->
     </div>
     <div class="recommend">
       <div class="recommend">超市优选</div>
@@ -241,8 +246,22 @@ export default {
           originPrice: "200.00",
           newPrice: "30.00"
         }
-      ]
+      ],
+      textArr: [
+        '1 第一条公告',
+        '2 第二条公告第二条公告',
+        '3 第三条公告第三条公告第三条公告'
+      ],
+      number: 0
     };
+  },
+  computed: {
+    text () {
+      return {
+        id: this.number,
+        val: this.textArr[this.number]
+      }
+    }
   },
   components: {
     footnav,
@@ -253,6 +272,7 @@ export default {
     this.navData();
     this.recommendData();
     // 页面显示
+    this.showMarquee()
   },
   methods: {
     navData: function() {
@@ -277,6 +297,18 @@ export default {
         console.log(res.data);
         that.recommendli = res.data.data;
       });
+    },
+    showMarquee: function() {
+      let timer = setTimeout(() => {
+        console.log("dsadasdas")
+        if (this.number === 2) {
+          this.number = 0;
+        } else {
+          this.number += 1;
+        }
+        this.showMarquee();
+      }, 2000); // 滚动不需要停顿则将2000改成动画持续时间
+
     }
   }
 };
