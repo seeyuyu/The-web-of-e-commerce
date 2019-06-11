@@ -104,7 +104,7 @@ html {
 }
 .topTitle {
   color: #f65;
-  font-size: 16px;
+  font-size: 14px;
   padding-right: 15px;
   margin-right: 10px;
   border-right: 1px solid #e5e5e5;
@@ -213,7 +213,7 @@ html {
   display: block;
   position: relative;
   /* width: 60%; */
-  height: 28px;
+  height: 24px;
   overflow: hidden;
 }
 
@@ -226,12 +226,12 @@ html {
 
 .marquee_top {
   transition: all 0.5s;
-  margin-top: -28px;
+  margin-top: -24px;
 }
 
 .marquee_list li {
-  height: 28px;
-  line-height: 28px;
+  height: 24px;
+  line-height: 24px;
   font-size: 14px;
   /* padding-left: 20px; */
 
