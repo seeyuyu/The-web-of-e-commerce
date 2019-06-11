@@ -2,9 +2,24 @@
   <div>
     <search></search>
     <mt-swipe :auto="400000" class="swiperDiv">
-      <mt-swipe-item><img class="bannerImg" src="https://img.alicdn.com/tfs/TB1p5V9a.CF3KVjSZJnXXbnHFXa-750-291.jpg_Q90.jpg" /></mt-swipe-item>
-      <mt-swipe-item><img class="bannerImg" src="https://img.alicdn.com/tfs/TB11NGma21G3KVjSZFkXXaK4XXa-750-291.png_Q90.jpg" /></mt-swipe-item>
-      <mt-swipe-item><img class="bannerImg" src="https://img.alicdn.com/tfs/TB1OkGxaHys3KVjSZFnXXXFzpXa-750-291.jpg_Q90.jpg" /></mt-swipe-item>
+      <mt-swipe-item>
+        <img
+          class="bannerImg"
+          src="https://img.alicdn.com/tfs/TB1p5V9a.CF3KVjSZJnXXbnHFXa-750-291.jpg_Q90.jpg"
+        >
+      </mt-swipe-item>
+      <mt-swipe-item>
+        <img
+          class="bannerImg"
+          src="https://img.alicdn.com/tfs/TB11NGma21G3KVjSZFkXXaK4XXa-750-291.png_Q90.jpg"
+        >
+      </mt-swipe-item>
+      <mt-swipe-item>
+        <img
+          class="bannerImg"
+          src="https://img.alicdn.com/tfs/TB1OkGxaHys3KVjSZFnXXXFzpXa-750-291.jpg_Q90.jpg"
+        >
+      </mt-swipe-item>
     </mt-swipe>
     <div class="navDiv">
       <div class="navLi" v-for="(item,i) in navli">
@@ -15,27 +30,11 @@
     </div>
     <div class="topNews">
       <div class="fl topTitle">多点头条</div>
-      <div class="textBox">
-      <!-- <transition name="slide"> -->
-        <p class="text" :key="text.id">{{text.val}}</p>
-      <!-- </transition> -->
-    </div>
-      <!-- <div>
-        <ul>
-          <li>
-            <a href="###" class="fl topCon text_ovh">推荐！快来围观啊优惠好多啊来围观啊优惠好多啊来围观啊优惠好多啊啊啊啊啊啊啊！</a>
-          </li>
-          <li>
-            <a href="###" class="fl topCon text_ovh">推荐！快来围观啊优惠好多啊来围观啊优惠好多啊来围观啊优惠好多啊啊啊啊啊啊啊！</a>
-          </li>
-          <li>
-            <a href="###" class="fl topCon text_ovh">推荐！快来围观啊优惠好多啊来围观啊优惠好多啊来围观啊优惠好多啊啊啊啊啊啊啊！</a>
-          </li>
-          <li>
-            <a href="###" class="fl topCon text_ovh">推荐！快来围观啊优惠好多啊来围观啊优惠好多啊来围观啊优惠好多啊啊啊啊啊啊啊！</a>
-          </li>
+      <div class="marquee_box">
+        <ul class="marquee_list" :class="{marquee_top:animate}">
+          <li v-for="(item,index) in marqueeList">{{item.name}}</li>
         </ul>
-      </div> -->
+      </div>
     </div>
     <div class="recommend">
       <div class="recommend">超市优选</div>
@@ -56,8 +55,8 @@
 html {
   background: #f6f6f6;
 }
-.swiperDiv{
-  height:160px;
+.swiperDiv {
+  height: 160px;
 }
 .navDiv {
   display: -webkit-flex; /* Safari */
@@ -107,7 +106,7 @@ html {
   color: #f65;
   font-size: 16px;
   padding-right: 15px;
-  margin-right: 15px;
+  margin-right: 10px;
   border-right: 1px solid #e5e5e5;
 }
 .topCon {
@@ -184,12 +183,67 @@ html {
   border-radius: 4px;
   text-align: left;
 }
-.recommendLi img{
-  width:100px;
+.recommendLi img {
+  width: 100px;
 }
-.bannerImg{
-  width:100%;
+.bannerImg {
+  width: 100%;
+}
+/* 文字竖向轮播图 */
+.marquee {
+  width: 100%;
+  height: 50px;
+  align-items: center;
+  color: #3a3a3a;
+  background-color: white;
+  display: flex;
+  box-sizing: border-box;
+  overflow: hidden;
+}
 
+.marquee_title {
+  padding: 0 20px;
+  height: 21px;
+  font-size: 14px;
+  border-right: 1px solid #d8d8d8;
+  align-items: center;
+}
+
+.marquee_box {
+  display: block;
+  position: relative;
+  /* width: 60%; */
+  height: 28px;
+  overflow: hidden;
+}
+
+.marquee_list {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.marquee_top {
+  transition: all 0.5s;
+  margin-top: -28px;
+}
+
+.marquee_list li {
+  height: 28px;
+  line-height: 28px;
+  font-size: 14px;
+  /* padding-left: 20px; */
+
+  width:200px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+.marquee_list li span {
+  padding: 0 2px;
 }
 </style>
 <script>
@@ -247,20 +301,30 @@ export default {
           newPrice: "30.00"
         }
       ],
-      textArr: [
-        '1 第一条公告',
-        '2 第二条公告第二条公告',
-        '3 第三条公告第三条公告第三条公告'
-      ],
-      number: 0
+      animate: false,
+
+      marqueeList: [
+        {
+          name:
+            "推荐！快来围观啊优惠好多啊来围观啊优惠好多啊来围观啊优惠好多啊啊啊啊啊啊啊！"
+        },
+
+        {
+          name: "特价"
+        },
+
+        {
+          name: "大甩卖"
+        }
+      ]
     };
   },
   computed: {
-    text () {
+    text() {
       return {
         id: this.number,
         val: this.textArr[this.number]
-      }
+      };
     }
   },
   components: {
@@ -272,7 +336,7 @@ export default {
     this.navData();
     this.recommendData();
     // 页面显示
-    this.showMarquee()
+    setInterval(this.showMarquee, 2000);
   },
   methods: {
     navData: function() {
@@ -299,16 +363,12 @@ export default {
       });
     },
     showMarquee: function() {
-      let timer = setTimeout(() => {
-        console.log("dsadasdas")
-        if (this.number === 2) {
-          this.number = 0;
-        } else {
-          this.number += 1;
-        }
-        this.showMarquee();
-      }, 2000); // 滚动不需要停顿则将2000改成动画持续时间
-
+      this.animate = true;
+      setTimeout(() => {
+        this.marqueeList.push(this.marqueeList[0]);
+        this.marqueeList.shift();
+        this.animate = false;
+      }, 5000);
     }
   }
 };
