@@ -251,7 +251,6 @@ import axios from "axios";
 import footnav from "components/footnav/footnav";
 import search from "components/search/searchdiv";
 import goods from "components/goods/goods";
-
 export default {
   data() {
     return {
