@@ -345,6 +345,7 @@ export default {
       //   // console.log(res.data);
       //   that.navli=res.data;
       // })
+
       axios.get("/static/json/commodity.json").then(function(res) {
         console.log(res.data.data);
         that.navli = res.data.data;
