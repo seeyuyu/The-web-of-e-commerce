@@ -251,6 +251,7 @@ import axios from "axios";
 import footnav from "components/footnav/footnav";
 import search from "components/search/searchdiv";
 import goods from "components/goods/goods";
+import { Indicator } from 'mint-ui'
 export default {
   data() {
     return {
@@ -332,6 +333,7 @@ export default {
     goods
   },
   created: function() {
+    Indicator.open();//加载框
     this.navData();
     this.recommendData();
     // 页面显示
@@ -360,6 +362,7 @@ export default {
       axios.get("/static/json/commodity.json").then(function(res) {
         console.log(res.data);
         that.recommendli = res.data.data;
+        Indicator.close();//关闭加载框
       });
     },
     showMarquee: function() {

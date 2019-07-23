@@ -24,6 +24,7 @@ import axios from "axios";
 import footnav from "components/footnav/footnav"
 import commoditylist from "components/car/commodity"
 import search from "components/search/searchdiv"
+// import { Indicator } from 'mint-ui'
 export default {
   data(){
     return{
@@ -41,11 +42,13 @@ export default {
       axios.get('/static/json/search.json').then(function(res){
         if(res.data.code==200){
             that.searchResule=res.data.data;
+            // Indicator.close();//关闭加载框
         }
       })
     }
   },
   created:function(){
+    // Indicator.open()//加载框
     this.carlist()
   }
 }
