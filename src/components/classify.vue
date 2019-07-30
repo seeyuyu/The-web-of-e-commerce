@@ -4,28 +4,16 @@
     <div class="">
       <div>
         <ul class="fl leftNav">
-          <li>这是三个字</li>
-          <li>这是三个字</li>
+          <li v-for = "(item, index) in classify.nav">{{item}}</li>
         </ul>
       </div>
       <div class="rightList">
-        <div class="rightLi">
-          <img src="https://gw.alicdn.com/bao/uploaded/i3/3644584684/TB21EZ2I21TBuNjy0FjXXajyXXa_!!3644584684.png_290x10000.jpg_.webp" class="fl">
+        <div class="rightLi" v-for = "item in classify.list">
+          <img :src="item.image" class="fl">
           <div class="rightLiTxt fl">
-            <p class="commodityTxt text_ovh2">这里是标题这里是标题这里是标题这里是标题</p>
+            <p class="commodityTxt text_ovh2">{{item.tips}}</p>
             <div class="rightBottom">
-              <div class="fl">¥9.00</div>
-              <div class="fr addCar">+</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="rightLi">
-          <img src="https://gw.alicdn.com/bao/uploaded/i3/3644584684/TB21EZ2I21TBuNjy0FjXXajyXXa_!!3644584684.png_290x10000.jpg_.webp" class="fl">
-          <div class="rightLiTxt fl">
-            <p class="commodityTxt text_ovh2">这里是标题这里是标题这里是标题这里是标题</p>
-            <div class="rightBottom">
-              <div class="fl">¥9.00</div>
+              <div class="fl">{{item.price!=''?'¥'+item.price:'免费'}}</div>
               <div class="fr addCar">+</div>
             </div>
           </div>
@@ -110,15 +98,29 @@ li{
 </style>
 <script>
 import footnav from "components/footnav/footnav"
+import axios from "axios"
 export default {
   data(){
     return{
-      navUrl:'http://h5.globalmxb.com/test/categoryLabel'
+      navUrl:'http://h5.globalmxb.com/test/categoryLabel',
+      classify:[]
     }
   },
   components:{
     footnav
   },
+  created: function() {
+    this.getData()
+  },
+  methods: {
+    getData: function(){
+      let that = this
+      axios.get("/static/json/classify.json").then(function(res){
+        console.log(res.data.data.nav);
+        that.classify = res.data.data;
+      })
+    }
+  }
 }
 </script>
 
