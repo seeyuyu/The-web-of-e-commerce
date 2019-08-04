@@ -9,7 +9,8 @@ import searchpage from '@/components/search/searchpage'
 import shopcar from '@/components/car/shopcar'
 import login from '@/components/login/login'
 import register from '@/components/login/register'
-
+import { Loadmore } from 'mint-ui'
+Vue.component(Loadmore.name, Loadmore);
 Vue.use(Router)
 
 export default new Router({

@@ -2,13 +2,18 @@
   <div class="allDiv">
     <!-- <div><input type="text"></div> -->
     <div class="">
-      <div>
+      <div class="leftNavDiv">
         <ul class="fl leftNav">
-          <li v-for = "(item, index) in classify.nav">{{item}}</li>
+          <li v-for = "(item, index) in classify.categoryList" @click="chooseNav">
+            <span><img v-if="item.categoryImgPathReal" class="navIcon" :src="item.categoryImgPathReal" />{{item.categoryName}}</span>
+            <ul v-if="item.childCategoryList">
+              <li style="color:red" v-for="items in item.childCategoryList">{{items.categoryName}}</li>
+            </ul>
+          </li>
         </ul>
       </div>
       <div class="rightList">
-        <div class="rightLi" v-for = "item in classify.list">
+        <div class="rightLi" v-for = "item in classifyList.list">
           <img :src="item.image" class="fl">
           <div class="rightLiTxt fl">
             <p class="commodityTxt text_ovh2">{{item.tips}}</p>
@@ -27,17 +32,17 @@
 html{
   background: #fff;
 }
-ul{
-  width:20%;
+.leftNavDiv{
+  width:24%;
   position: fixed;
     left: 0px;
     top: 0px;
 }
-li{
-  height: 40px;
+.leftNavDiv li{
+  /* height: 40px; */
   line-height: 40px;
-  border-bottom: 1px solid #e5e5e5;
-  border-right: 1px solid #e5e5e5;
+  /* border-bottom: 1px solid #e5e5e5; */
+  /* border-right: 1px solid #e5e5e5; */
 }
 .addCar{
     width: 20px;
@@ -57,7 +62,7 @@ li{
 }
 .rightList{
   /* width:100%; */
-  margin-left:20%;
+  margin-left:24%;
 }
 .rightList img{
   width: 27%;;
@@ -75,9 +80,13 @@ li{
   width:100%;
   overflow: hidden;
 }
-.leftNav{
+.leftNavDiv{
     overflow-y: scroll;
     height: 100%;
+}
+.leftNav{
+    background: #f6f6f6;
+    width:90%;
 }
 .commodityTxt{
   height: 40px;
@@ -87,6 +96,7 @@ li{
     margin-top: 20px;
     overflow: hidden;
 }
+
 .rightLiTxtc{
     border-bottom: 1px solid #f6f6f6;
 }
@@ -95,30 +105,65 @@ li{
   height: 2px;
   background: #f6f6f6;
 }
+.navIcon{
+  width:18px;
+  height:18px;
+  margin-right:2%;
+  display: inline-block;
+}
+.liAct{
+  box-shadow: 0 2px 10px 0 rgba(0,0,0,0.10);
+  /* width: 94%; */
+  width: 104%;
+  background: #fff;
+  border-radius: 5px;
+}
 </style>
 <script>
 import footnav from "components/footnav/footnav"
 import axios from "axios"
+
 export default {
   data(){
     return{
       navUrl:'http://h5.globalmxb.com/test/categoryLabel',
-      classify:[]
+      classify:[],
+      classifyList:[]
     }
   },
   components:{
     footnav
   },
   created: function() {
-    this.getData()
+    this.getData();
+    // console.log(document.querySelectorAll(".navIcon").dataset.url);
+    // console.log(document.querySelectorAll(".navIcon").dataset)
+    // console.log(document.querySelectorAll(".navIcon"))
   },
   methods: {
     getData: function(){
       let that = this
-      axios.get("/static/json/classify.json").then(function(res){
-        console.log(res.data.data.nav);
-        that.classify = res.data.data;
+      axios.get("/static/json/navList.json").then(function(res){
+        console.log(res);
+        if(res.status== 200 ){
+          let dataLocal= res.data.data.wareCategory;
+          for(let i=0;i<dataLocal.length;i++){
+            if(res.data.data.wareCategory[i].defaultChosed){
+              // 左侧导航
+              that.classify = res.data.data.wareCategory[i]
+            }
+          }
+        }
       })
+      axios.get("/static/json/classify.json").then(function(res){
+        console.log(res);
+        that.classifyList = res.data.data
+      })
+    },
+    chooseNav: function(e){
+      // liAct
+      e.target.classList.add('liAct')
+      e.target.classList.remove('className')
     }
   }
 }
