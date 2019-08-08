@@ -110,6 +110,7 @@ html{
   height:18px;
   margin-right:2%;
   display: inline-block;
+
 }
 .liAct{
   box-shadow: 0 2px 10px 0 rgba(0,0,0,0.10);
