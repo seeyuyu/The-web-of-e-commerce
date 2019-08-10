@@ -4,7 +4,7 @@
     <div class="">
       <div class="leftNavDiv">
         <ul class="fl leftNav">
-          <li v-for = "(item, index) in classify.categoryList" @click="chooseNav">
+          <li v-for = "(item, index) in classify.categoryList" @click.passive="chooseNav" class="addplace" >
             <span><img v-if="item.categoryImgPathReal" class="navIcon" :src="item.categoryImgPathReal" />{{item.categoryName}}</span>
             <ul v-if="item.childCategoryList">
               <li style="color:red" v-for="items in item.childCategoryList">{{items.categoryName}}</li>
@@ -41,6 +41,7 @@ html{
 .leftNavDiv li{
   /* height: 40px; */
   line-height: 40px;
+  display: block;
   /* border-bottom: 1px solid #e5e5e5; */
   /* border-right: 1px solid #e5e5e5; */
 }
@@ -163,8 +164,11 @@ export default {
     },
     chooseNav: function(e){
       // liAct
-      e.target.classList.add('liAct')
-      e.target.classList.remove('className')
+      console.log(e.target)
+      if(e.target.classList.value == 'addplace'){
+        e.target.classList.add('liAct')
+        e.target.classList.remove('className')
+      }
     }
   }
 }
