@@ -4,10 +4,10 @@
     <div class="">
       <div class="leftNavDiv">
         <ul class="fl leftNav">
-          <li v-for = "(item, index) in classify.categoryList" @click.passive="chooseNav" class="addplace" >
+          <li v-for = "(item, index) in classify.categoryList" :key="index" @click="chooseNav(index)" :class="{liAct:index===currentId}">
             <span><img v-if="item.categoryImgPathReal" class="navIcon" :src="item.categoryImgPathReal" />{{item.categoryName}}</span>
             <ul v-if="item.childCategoryList">
-              <li style="color:red" v-for="items in item.childCategoryList">{{items.categoryName}}</li>
+              <li class="text_ovh" v-for="items in item.childCategoryList"><i class="squareIcon"></i>{{items.categoryName}}</li>
             </ul>
           </li>
         </ul>
@@ -28,12 +28,61 @@
     <footnav :idx='1'></footnav>
   </div>
 </template>
+<script>
+import footnav from "components/footnav/footnav"
+import axios from "axios"
+
+export default {
+  data(){
+    return{
+      navUrl:'http://h5.globalmxb.com/test/categoryLabel',
+      classify:[],
+      classifyList:[],
+      currentId:2
+    }
+  },
+  components:{
+    footnav
+  },
+  created: function() {
+    this.getData();
+    // console.log(document.querySelectorAll(".navIcon").dataset.url);
+    // console.log(document.querySelectorAll(".navIcon").dataset)
+    // console.log(document.querySelectorAll(".navIcon"))
+  },
+  methods: {
+    getData: function(){
+      let that = this
+      axios.get("/static/json/navList.json").then(function(res){
+        console.log(res);
+        if(res.status== 200 ){
+          let dataLocal= res.data.data.wareCategory;
+          for(let i=0;i<dataLocal.length;i++){
+            if(res.data.data.wareCategory[i].defaultChosed){
+              // 左侧导航
+              that.classify = res.data.data.wareCategory[i]
+            }
+          }
+        }
+      })
+      axios.get("/static/json/classify.json").then(function(res){
+        console.log(res);
+        that.classifyList = res.data.data
+      })
+    },
+    chooseNav: function(e){
+      // liAct
+      this.currentId=e
+    }
+  }
+}
+</script>
 <style scoped>
 html{
   background: #fff;
 }
 .leftNavDiv{
-  width:24%;
+  width:27%;
   position: fixed;
     left: 0px;
     top: 0px;
@@ -41,7 +90,6 @@ html{
 .leftNavDiv li{
   /* height: 40px; */
   line-height: 40px;
-  display: block;
   /* border-bottom: 1px solid #e5e5e5; */
   /* border-right: 1px solid #e5e5e5; */
 }
@@ -63,7 +111,7 @@ html{
 }
 .rightList{
   /* width:100%; */
-  margin-left:24%;
+  margin-left:27%;
 }
 .rightList img{
   width: 27%;;
@@ -120,57 +168,39 @@ html{
   background: #fff;
   border-radius: 5px;
 }
-</style>
-<script>
-import footnav from "components/footnav/footnav"
-import axios from "axios"
-
-export default {
-  data(){
-    return{
-      navUrl:'http://h5.globalmxb.com/test/categoryLabel',
-      classify:[],
-      classifyList:[]
-    }
-  },
-  components:{
-    footnav
-  },
-  created: function() {
-    this.getData();
-    // console.log(document.querySelectorAll(".navIcon").dataset.url);
-    // console.log(document.querySelectorAll(".navIcon").dataset)
-    // console.log(document.querySelectorAll(".navIcon"))
-  },
-  methods: {
-    getData: function(){
-      let that = this
-      axios.get("/static/json/navList.json").then(function(res){
-        console.log(res);
-        if(res.status== 200 ){
-          let dataLocal= res.data.data.wareCategory;
-          for(let i=0;i<dataLocal.length;i++){
-            if(res.data.data.wareCategory[i].defaultChosed){
-              // 左侧导航
-              that.classify = res.data.data.wareCategory[i]
-            }
-          }
-        }
-      })
-      axios.get("/static/json/classify.json").then(function(res){
-        console.log(res);
-        that.classifyList = res.data.data
-      })
-    },
-    chooseNav: function(e){
-      // liAct
-      console.log(e.target)
-      if(e.target.classList.value == 'addplace'){
-        e.target.classList.add('liAct')
-        e.target.classList.remove('className')
-      }
-    }
-  }
+.leftNav ul{
+  display:none;
+  text-align:left;
+  list-style:disc;
+  margin-left:22px;
 }
-</script>
+.leftNav ul li:first-child{
+  color:#f65;
+}
+.leftNav ul li:after{
+  content: '';
+  width: 40px;
+  height: 1px;
+  border-bottom: 1px solid #ccc;
+  display: block;
+}
+.leftNav ul li:last-child:after{
+   border-bottom:none;
+}
+.liAct ul{
+  display:block;
+}
+.squareIcon{
+  width:5px;
+  height:5px;
+  background:#999;
+  display:inline-block;
+  border-radius:50%;
+  margin-right:5px;
+}
+.leftNav ul li:first-child .squareIcon{
+  background:#f65;
+}
+</style>
+
 
