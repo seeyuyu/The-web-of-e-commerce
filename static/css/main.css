@@ -83,9 +83,9 @@ h1,h2,h3,h4,h5,h6{
   display:none !important;
 }
 .text_ovh{
-  overflow: hidden !important;
-  white-space: nowrap !important;
-  text-overflow:ellipsis !important;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
 }
 .text_ovh2{
   overflow: hidden;

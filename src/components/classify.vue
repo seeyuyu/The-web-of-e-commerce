@@ -46,6 +46,7 @@ export default {
   },
   created: function() {
     this.getData();
+    this.getList();
     // console.log(document.querySelectorAll(".navIcon").dataset.url);
     // console.log(document.querySelectorAll(".navIcon").dataset)
     // console.log(document.querySelectorAll(".navIcon"))
@@ -73,6 +74,17 @@ export default {
     chooseNav: function(e){
       // liAct
       this.currentId=e
+    },
+    getList:function(){
+      const url = '/api/getDiscList'
+      // : 'http://ustbhuangyi.com/music/api/getDiscList'
+      const data = '{"venderId":1,"storeId":218,"businessCode":1,"from":1,"categoryType":1,"pageNum":1,"pageSize":20,"categoryId":"21382","categoryLevel":1}'
+
+      axios.post(url, {
+        params: data
+      }).then((res) => {
+        return Promise.resolve(res.data)
+      })
     }
   }
 }
@@ -179,7 +191,7 @@ html{
 }
 .leftNav ul li:after{
   content: '';
-  width: 40px;
+  width: 50px;
   height: 1px;
   border-bottom: 1px solid #ccc;
   display: block;

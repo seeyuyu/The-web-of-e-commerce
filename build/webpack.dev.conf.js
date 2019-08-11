@@ -22,6 +22,22 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
   // these devServer options should be customized in /config/index.js
   devServer: {
+    before(app) {
+      app.get('/api/getDiscList', function (req, res) {
+        const url = 'http://searchgw.dmall.com/mp/search/wareSearch'
+        axios.post(url, {
+          headers: {
+            referer: 'http://i.dmall.com'
+            // host: 'c.y.qq.com'
+          },
+          params: req.query
+        }).then((response) => {
+          res.json(response.data)
+        }).catch((e) => {
+          console.log(e)
+        })
+      })
+    },
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [
