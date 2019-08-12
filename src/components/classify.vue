@@ -4,7 +4,7 @@
     <div class="">
       <div class="leftNavDiv">
         <ul class="fl leftNav">
-          <li v-for = "(item, index) in classify.categoryList" :key="index" @click="chooseNav(index)" :class="{liAct:index===currentId}">
+          <li v-for="(item, index) in classify.categoryList" :key="index" @click="chooseNav(index)" :class="{liAct:index===currentId}">
             <span><img v-if="item.categoryImgPathReal" class="navIcon" :src="item.categoryImgPathReal" />{{item.categoryName}}</span>
             <ul v-if="item.childCategoryList">
               <li class="text_ovh" v-for="items in item.childCategoryList"><i class="squareIcon"></i>{{items.categoryName}}</li>
@@ -13,7 +13,7 @@
         </ul>
       </div>
       <div class="rightList">
-        <div class="rightLi" v-for = "item in classifyList.list">
+        <div class="rightLi" v-for="item in classifyList.list">
           <img :src="item.image" class="fl">
           <div class="rightLiTxt fl">
             <p class="commodityTxt text_ovh2">{{item.tips}}</p>
@@ -28,101 +28,109 @@
     <footnav :idx='1'></footnav>
   </div>
 </template>
-<script>
-import footnav from "components/footnav/footnav"
-import axios from "axios"
 
-export default {
-  data(){
-    return{
-      navUrl:'http://h5.globalmxb.com/test/categoryLabel',
-      classify:[],
-      classifyList:[],
-      currentId:2
+<script>
+  import footnav from "components/footnav/footnav"
+  import axios from "axios"
+  axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+  // axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
+  // 数据发送到服务器之前进行的操作
+  axios.defaults.transformRequest = [function(data) {
+    let ret = ''
+    for (let it in data) {
+      ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
     }
-  },
-  components:{
-    footnav
-  },
-  created: function() {
-    this.getData();
-    this.getList();
-    // console.log(document.querySelectorAll(".navIcon").dataset.url);
-    // console.log(document.querySelectorAll(".navIcon").dataset)
-    // console.log(document.querySelectorAll(".navIcon"))
-  },
-  methods: {
-    getData: function(){
-      let that = this
-      axios.get("/static/json/navList.json").then(function(res){
-        console.log(res);
-        if(res.status== 200 ){
-          let dataLocal= res.data.data.wareCategory;
-          for(let i=0;i<dataLocal.length;i++){
-            if(res.data.data.wareCategory[i].defaultChosed){
-              // 左侧导航
-              that.classify = res.data.data.wareCategory[i]
+    return ret
+  }]
+  export default {
+    data() {
+      return {
+        navUrl: 'http://h5.globalmxb.com/test/categoryLabel',
+        classify: [],
+        classifyList: [],
+        currentId: 2
+      }
+    },
+    components: {
+      footnav
+    },
+    created: function() {
+      this.getData();
+      this.getList();
+    },
+    methods: {
+      getData: function() {
+        let that = this
+        axios.get("/static/json/navList.json").then(function(res) {
+          console.log(res);
+          if (res.status == 200) {
+            let dataLocal = res.data.data.wareCategory;
+            for (let i = 0; i < dataLocal.length; i++) {
+              if (res.data.data.wareCategory[i].defaultChosed) {
+                // 左侧导航
+                that.classify = res.data.data.wareCategory[i]
+              }
             }
           }
-        }
-      })
-      axios.get("/static/json/classify.json").then(function(res){
-        console.log(res);
-        that.classifyList = res.data.data
-      })
-    },
-    chooseNav: function(e){
-      // liAct
-      this.currentId=e
-    },
-    getList:function(){
-      // const url = '/api/getDiscList'
-      // // : 'http://ustbhuangyi.com/music/api/getDiscList'
-      // const data = '{"venderId":1,"storeId":218,"businessCode":1,"from":1,"categoryType":1,"pageNum":1,"pageSize":20,"categoryId":"21382","categoryLevel":1}'
-
-      // axios.post(url, {
-      //   params: data
-      // }).then((res) => {
-      //   return Promise.resolve(res.data)
-      // })
-      let dataJson = {"venderId":1,"storeId":218,"businessCode":1,"from":1,"categoryType":1,"pageNum":1,"pageSize":20,"categoryId":"21382","categoryLevel":1}
-      axios
-        .post("/dmall/mp/search/wareSearch", {
-          param: JSON.stringify(dataJson)
-        },{
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }})
-        .then(function(res) {
+        })
+        axios.get("/static/json/classify.json").then(function(res) {
           console.log(res);
-          if(res.data.code==0){
-            sessionStorage.setItem('userId','123');
-            that.$router.go(-1);
-          }else{
-            alert(res.data.msg);
-          }
-        });
+          that.classifyList = res.data.data
+        })
+      },
+      chooseNav: function(e) {
+        // liAct
+        this.currentId = e
+      },
+      getList: function() {
+        let dataJson = {
+          "venderId": 1,
+          "storeId": 218,
+          "businessCode": 1,
+          "from": 1,
+          "categoryType": 1,
+          "pageNum": 1,
+          "pageSize": 20,
+          "categoryId": "21382",
+          "categoryLevel": 1
+        }
+        dataJson = JSON.stringify(dataJson)
+        axios
+          .post("/dmall/mp/search/wareSearch", {
+            param: dataJson
+          })
+          .then(function(res) {
+            if (res.data.code == '0000') {
+              console.log(res.data.data);
+            } else {
+              alert(res.data.msg);
+            }
+          });
+      }
     }
   }
-}
 </script>
+
 <style scoped>
-html{
-  background: #fff;
-}
-.leftNavDiv{
-  width:27%;
-  position: fixed;
+  html {
+    background: #fff;
+  }
+
+  .leftNavDiv {
+    width: 27%;
+    position: fixed;
     left: 0px;
     top: 0px;
-}
-.leftNavDiv li{
-  /* height: 40px; */
-  line-height: 40px;
-  /* border-bottom: 1px solid #e5e5e5; */
-  /* border-right: 1px solid #e5e5e5; */
-}
-.addCar{
+  }
+
+  .leftNavDiv li {
+    /* height: 40px; */
+    line-height: 40px;
+    /* border-bottom: 1px solid #e5e5e5; */
+    /* border-right: 1px solid #e5e5e5; */
+  }
+
+  .addCar {
     width: 20px;
     height: 20px;
     border-radius: 4px;
@@ -131,105 +139,124 @@ html{
     text-align: center;
     font-size: 18px;
     color: #f65;
-}
-.rightLi{
-  padding: 10px;
-  overflow: hidden;
-  position: relative;
-  padding-bottom:0px;
-}
-.rightList{
-  /* width:100%; */
-  margin-left:27%;
-}
-.rightList img{
-  width: 27%;;
-  height: 80px;
-  margin-right:3%;
-}
-.rightLiTxt{
-  height: 100%;
-  width:70%;
-  text-align: left;
-  border-bottom: 1px solid #e5e5e5;
-  padding-bottom:10px;
-}
-.allDiv{
-  width:100%;
-  overflow: hidden;
-}
-.leftNavDiv{
+  }
+
+  .rightLi {
+    padding: 10px;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 0px;
+  }
+
+  .rightList {
+    /* width:100%; */
+    margin-left: 27%;
+  }
+
+  .rightList img {
+    width: 27%;
+    ;
+    height: 80px;
+    margin-right: 3%;
+  }
+
+  .rightLiTxt {
+    height: 100%;
+    width: 70%;
+    text-align: left;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 10px;
+  }
+
+  .allDiv {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .leftNavDiv {
     overflow-y: scroll;
     height: 100%;
-}
-.leftNav{
+  }
+
+  .leftNav {
     background: #f6f6f6;
-    width:90%;
-}
-.commodityTxt{
-  height: 40px;
-  /* line-height: 40px; */
-}
-.rightBottom{
+    width: 90%;
+  }
+
+  .commodityTxt {
+    height: 40px;
+    /* line-height: 40px; */
+  }
+
+  .rightBottom {
     margin-top: 20px;
     overflow: hidden;
-}
+  }
 
-.rightLiTxtc{
+  .rightLiTxtc {
     border-bottom: 1px solid #f6f6f6;
-}
-.borderBootom{
-  width:100%;
-  height: 2px;
-  background: #f6f6f6;
-}
-.navIcon{
-  width:18px;
-  height:18px;
-  margin-right:2%;
-  display: inline-block;
+  }
 
-}
-.liAct{
-  box-shadow: 0 2px 10px 0 rgba(0,0,0,0.10);
-  /* width: 94%; */
-  width: 104%;
-  background: #fff;
-  border-radius: 5px;
-}
-.leftNav ul{
-  display:none;
-  text-align:left;
-  list-style:disc;
-  margin-left:22px;
-}
-.leftNav ul li:first-child{
-  color:#f65;
-}
-.leftNav ul li:after{
-  content: '';
-  width: 50px;
-  height: 1px;
-  border-bottom: 1px solid #ccc;
-  display: block;
-}
-.leftNav ul li:last-child:after{
-   border-bottom:none;
-}
-.liAct ul{
-  display:block;
-}
-.squareIcon{
-  width:5px;
-  height:5px;
-  background:#999;
-  display:inline-block;
-  border-radius:50%;
-  margin-right:5px;
-}
-.leftNav ul li:first-child .squareIcon{
-  background:#f65;
-}
+  .borderBootom {
+    width: 100%;
+    height: 2px;
+    background: #f6f6f6;
+  }
+
+  .navIcon {
+    width: 18px;
+    height: 18px;
+    margin-right: 2%;
+    display: inline-block;
+  }
+
+  .liAct {
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.10);
+    /* width: 94%; */
+    width: 104%;
+    background: #fff;
+    border-radius: 5px;
+  }
+
+  .leftNav ul {
+    display: none;
+    text-align: left;
+    list-style: disc;
+    margin-left: 22px;
+  }
+
+  .leftNav ul li:first-child {
+    color: #f65;
+  }
+
+  .leftNav ul li:after {
+    content: '';
+    width: 50px;
+    height: 1px;
+    border-bottom: 1px solid #ccc;
+    display: block;
+  }
+
+  .leftNav ul li:last-child:after {
+    border-bottom: none;
+  }
+
+  .liAct ul {
+    display: block;
+  }
+
+  .squareIcon {
+    width: 5px;
+    height: 5px;
+    background: #999;
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+
+  .leftNav ul li:first-child .squareIcon {
+    background: #f65;
+  }
 </style>
 
 
