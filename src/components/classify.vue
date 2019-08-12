@@ -76,15 +76,32 @@ export default {
       this.currentId=e
     },
     getList:function(){
-      const url = '/api/getDiscList'
-      // : 'http://ustbhuangyi.com/music/api/getDiscList'
-      const data = '{"venderId":1,"storeId":218,"businessCode":1,"from":1,"categoryType":1,"pageNum":1,"pageSize":20,"categoryId":"21382","categoryLevel":1}'
+      // const url = '/api/getDiscList'
+      // // : 'http://ustbhuangyi.com/music/api/getDiscList'
+      // const data = '{"venderId":1,"storeId":218,"businessCode":1,"from":1,"categoryType":1,"pageNum":1,"pageSize":20,"categoryId":"21382","categoryLevel":1}'
 
-      axios.post(url, {
-        params: data
-      }).then((res) => {
-        return Promise.resolve(res.data)
-      })
+      // axios.post(url, {
+      //   params: data
+      // }).then((res) => {
+      //   return Promise.resolve(res.data)
+      // })
+      let dataJson = {"venderId":1,"storeId":218,"businessCode":1,"from":1,"categoryType":1,"pageNum":1,"pageSize":20,"categoryId":"21382","categoryLevel":1}
+      axios
+        .post("/dmall/mp/search/wareSearch", {
+          param: JSON.stringify(dataJson)
+        },{
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }})
+        .then(function(res) {
+          console.log(res);
+          if(res.data.code==0){
+            sessionStorage.setItem('userId','123');
+            that.$router.go(-1);
+          }else{
+            alert(res.data.msg);
+          }
+        });
     }
   }
 }
