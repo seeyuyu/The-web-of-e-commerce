@@ -7,18 +7,18 @@
           <li v-for="(item, index) in classify.categoryList" :key="index" @click="chooseNav(index)" :class="{liAct:index===currentId}">
             <span><img v-if="item.categoryImgPathReal" class="navIcon" :src="item.categoryImgPathReal" />{{item.categoryName}}</span>
             <ul v-if="item.childCategoryList">
-              <li class="text_ovh" v-for="items in item.childCategoryList"><i class="squareIcon"></i>{{items.categoryName}}</li>
+              <li @click="checkList" class="text_ovh" v-for="items in item.childCategoryList"><i class="squareIcon"></i>{{items.categoryName}}</li>
             </ul>
           </li>
         </ul>
       </div>
       <div class="rightList">
-        <div class="rightLi" v-for="item in classifyList.list">
-          <img :src="item.image" class="fl">
+        <div class="rightLi" v-for="item in classifyList.wareList">
+          <img :src="item.wareImg" class="fl">
           <div class="rightLiTxt fl">
-            <p class="commodityTxt text_ovh2">{{item.tips}}</p>
+            <p class="commodityTxt text_ovh2">{{item.wareName}}</p>
             <div class="rightBottom">
-              <div class="fl">{{item.price!=''?'¥'+item.price:'免费'}}</div>
+              <div class="fl">{{item.warePrice!=''?'¥'+item.warePrice:'免费'}}</div>
               <div class="fr addCar">+</div>
             </div>
           </div>
@@ -73,16 +73,17 @@
             }
           }
         })
-        axios.get("/static/json/classify.json").then(function(res) {
-          console.log(res);
-          that.classifyList = res.data.data
-        })
+        // axios.get("/static/json/classify.json").then(function(res) {
+        //   console.log(res);
+        //   that.classifyList = res.data.data
+        // })
       },
       chooseNav: function(e) {
         // liAct
         this.currentId = e
       },
       getList: function() {
+        let that = this
         let dataJson = {
           "venderId": 1,
           "storeId": 218,
@@ -95,17 +96,20 @@
           "categoryLevel": 1
         }
         dataJson = JSON.stringify(dataJson)
-        axios
-          .post("/dmall/mp/search/wareSearch", {
+        axios.post("/dmall/mp/search/wareSearch", {
             param: dataJson
           })
           .then(function(res) {
             if (res.data.code == '0000') {
-              console.log(res.data.data);
+              console.log(res.data.data.wareList);
+              that.classifyList = res.data.data
             } else {
               alert(res.data.msg);
             }
           });
+      },
+      checkList:function(){
+
       }
     }
   }
