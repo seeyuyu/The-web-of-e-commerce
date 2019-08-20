@@ -3,8 +3,8 @@
     <!-- <div><input type="text"></div> -->
     <div class="">
       <div class="leftNavDiv">
-        <ul class="fl leftNav">
-          <li v-for="(item, index) in classify.categoryList" :key="index" @click="chooseNav(index)" :class="{liAct:index===currentId}">
+        <ul class="fl leftNav" v-if="classify.length>0">
+          <li v-for="(item, index) in classify[0].categoryList" :key="item.categoryId" @click="chooseNav(item.categoryId)" :class="{liAct:item.categoryId===currentId}">
             <span><img v-if="item.categoryImgPathReal" class="navIcon" :src="item.categoryImgPathReal" />{{item.categoryName}}</span>
             <ul v-if="item.childCategoryList">
               <li @click="checkList" class="text_ovh" v-for="items in item.childCategoryList"><i class="squareIcon"></i>{{items.categoryName}}</li>
@@ -32,16 +32,8 @@
 <script>
   import footnav from "components/footnav/footnav"
   import axios from "axios"
-  axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-  // axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
-  // 数据发送到服务器之前进行的操作
-  axios.defaults.transformRequest = [function(data) {
-    let ret = ''
-    for (let it in data) {
-      ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-    }
-    return ret
-  }]
+  import { getClassifyList, getClassifyNav } from "api/classify"
+
   export default {
     data() {
       return {
@@ -55,14 +47,14 @@
       footnav
     },
     created: function() {
-      this.getData();
-      this.getList();
+      // this.getData()
+      this._getList()
+      this._getNav()
     },
     methods: {
       getData: function() {
         let that = this
         axios.get("/static/json/navList.json").then(function(res) {
-          console.log(res);
           if (res.status == 200) {
             let dataLocal = res.data.data.wareCategory;
             for (let i = 0; i < dataLocal.length; i++) {
@@ -79,34 +71,46 @@
         // })
       },
       chooseNav: function(e) {
+        console.log(e)
         // liAct
         this.currentId = e
-      },
-      getList: function() {
-        let that = this
-        let dataJson = {
-          "venderId": 1,
-          "storeId": 218,
-          "businessCode": 1,
-          "from": 1,
-          "categoryType": 1,
-          "pageNum": 1,
-          "pageSize": 20,
-          "categoryId": "21382",
-          "categoryLevel": 1
+        let ClassifyParam = {
+          "categoryId": e,
         }
-        dataJson = JSON.stringify(dataJson)
-        axios.post("/dmall/mp/search/wareSearch", {
-            param: dataJson
-          })
-          .then(function(res) {
-            if (res.data.code == '0000') {
-              console.log(res.data.data.wareList);
-              that.classifyList = res.data.data
-            } else {
-              alert(res.data.msg);
-            }
-          });
+        getClassifyList(ClassifyParam).then((res) => {
+          if (res.code == '0000') {
+            this.classifyList = res.data
+          } else {
+            alert(res.msg);
+          }
+        })
+      },
+      // 商品列表
+      _getList: function() {
+        let ClassifyParam = {
+          // "pageNum": 1,
+          "categoryId": "11340",
+        }
+        getClassifyList(ClassifyParam).then((res) => {
+          if (res.code == '0000') {
+            this.classifyList = res.data
+          } else {
+            alert(res.msg);
+          }
+        })
+      },
+      _getNav: function() {
+        let ClassifyParam = {
+
+        }
+        getClassifyNav(ClassifyParam).then((res) => {
+          console.log(res.data.wareCategory)
+          if (res.code == '0000') {
+            this.classify = res.data.wareCategory
+          } else {
+            alert(res.msg);
+          }
+        })
       },
       checkList:function(){
 
@@ -227,6 +231,7 @@
     text-align: left;
     list-style: disc;
     margin-left: 22px;
+    font-size: 12px;
   }
 
   .leftNav ul li:first-child {
