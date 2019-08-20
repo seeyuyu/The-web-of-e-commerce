@@ -4,16 +4,16 @@
     <div class="">
       <div class="leftNavDiv">
         <ul class="fl leftNav" v-if="classify.length>0">
-          <li v-for="(item, index) in classify[0].categoryList" :key="item.categoryId" @click="chooseNav(item.categoryId)" :class="{liAct:item.categoryId===currentId}">
+          <li v-for="item in classify[0].categoryList" :key="item.categoryId" @click="chooseNav(item.categoryId)" :class="{liAct:item.categoryId===currentId}">
             <span><img v-if="item.categoryImgPathReal" class="navIcon" :src="item.categoryImgPathReal" />{{item.categoryName}}</span>
             <ul v-if="item.childCategoryList">
-              <li @click="checkList" class="text_ovh" v-for="items in item.childCategoryList"><i class="squareIcon"></i>{{items.categoryName}}</li>
+              <li @click="checkList" class="text_ovh" v-for="(items, index) in item.childCategoryList" :key="index"><i class="squareIcon"></i>{{items.categoryName}}</li>
             </ul>
           </li>
         </ul>
       </div>
       <div class="rightList">
-        <div class="rightLi" v-for="item in classifyList.wareList">
+        <div class="rightLi" v-for="(item, index) in classifyList.wareList" :key="index">
           <img :src="item.wareImg" class="fl">
           <div class="rightLiTxt fl">
             <p class="commodityTxt text_ovh2">{{item.wareName}}</p>
