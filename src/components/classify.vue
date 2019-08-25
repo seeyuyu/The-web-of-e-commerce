@@ -12,18 +12,20 @@
           </li>
         </ul>
       </div>
-      <div class="rightList">
-        <div class="rightLi" v-for="(item, index) in classifyList.wareList" :key="index">
-          <img :src="item.wareImg" class="fl">
-          <div class="rightLiTxt fl">
-            <p class="commodityTxt text_ovh2">{{item.wareName}}</p>
-            <div class="rightBottom">
-              <div class="fl">{{item.warePrice!=''?'¥'+item.warePrice:'免费'}}</div>
-              <div class="fr addCar">+</div>
+      <mt-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
+        <div class="rightList">
+          <div class="rightLi" v-for="(item, index) in classifyList.wareList" :key="index">
+            <img :src="item.wareImg" class="fl">
+            <div class="rightLiTxt fl">
+              <p class="commodityTxt text_ovh2">{{item.wareName}}</p>
+              <div class="rightBottom">
+                <div class="fl">{{item.warePrice!=''?'¥'+item.warePrice:'免费'}}</div>
+                <div class="fr addCar">+</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </mt-loadmore>
     </div>
     <footnav :idx='1'></footnav>
   </div>
@@ -112,9 +114,12 @@
           }
         })
       },
-      checkList:function(){
+      // checkList:function(){
 
-      }
+      // },
+      // loadBottom() {
+      //   alert("1222")
+      // }
     }
   }
 </script>
@@ -163,8 +168,7 @@
 
   .rightList img {
     width: 27%;
-    ;
-    height: 80px;
+    /* height: 80px; */
     margin-right: 3%;
   }
 
