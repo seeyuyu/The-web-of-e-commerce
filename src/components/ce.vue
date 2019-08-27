@@ -1,8 +1,5 @@
 <template>
   <div class="page-loadmore">
-    <h1 class="page-title">Pull up</h1>
-    <p class="page-loadmore-desc">在列表底部, 按住 - 上拉 - 释放可以获取更多数据</p>
-    <p class="page-loadmore-desc">此例请使用手机查看</p>
     <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
       <mt-loadmore :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
         <ul class="page-loadmore-list">
@@ -63,6 +60,10 @@
       }
     }
   }
+  li{
+  height:30px;
+
+  }
 </style>
 
 <script type="text/babel">
@@ -82,18 +83,18 @@
       },
 
       loadBottom() {
-      //   setTimeout(() => {
-      //     let lastValue = this.list[this.list.length - 1];
-      //     // if (lastValue < 40) {
-      //       for (let i = 1; i <= 10; i++) {
-      //         this.list.push(lastValue + i);
-      //       }
-      //     // } else {
-      //     //   this.allLoaded = true;
-      //     // }
-      //     this.$refs.loadmore.onBottomLoaded();
-      //   }, 1500);
-      // }
+        setTimeout(() => {
+          let lastValue = this.list[this.list.length - 1];
+          if (lastValue < 60) {
+            for (let i = 1; i <= 15; i++) {
+              this.list.push(lastValue + i);
+            }
+          } else {
+            this.allLoaded = true;
+          }
+          this.$refs.loadmore.onBottomLoaded();
+        }, 1500);
+      }
     },
 
     created() {
@@ -105,6 +106,5 @@
     mounted() {
       this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
     }
-}
-  }
+  };
 </script>
