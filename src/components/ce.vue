@@ -1,7 +1,7 @@
 <template>
   <div class="page-loadmore">
     <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
-      <mt-loadmore :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
+      <mt-loadmore :bottom-method="loadBottom" :auto-fill="false"  @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
         <ul class="page-loadmore-list">
           <li v-for="item in list" class="page-loadmore-listitem">{{ item }}</li>
         </ul>
@@ -19,18 +19,18 @@
 <style>
   @component-namespace page {
     @component loadmore {
-      @descendent desc {
+      /* @descendent desc {
         text-align: center;
         color: #666;
         padding-bottom: 5px;
         &:last-of-type {
           border-bottom: solid 1px #eee;
         }
-      }
+      } */
 
       @descendent listitem {
-        height: 50px;
-        line-height: 50px;
+        height: 100px;
+        line-height: 100px;
         border-bottom: solid 1px #eee;
         text-align: center;
         &:first-child {
@@ -60,10 +60,6 @@
       }
     }
   }
-  li{
-  height:30px;
-
-  }
 </style>
 
 <script type="text/babel">
@@ -83,17 +79,17 @@
       },
 
       loadBottom() {
-        setTimeout(() => {
+        // setTimeout(() => {
           let lastValue = this.list[this.list.length - 1];
-          if (lastValue < 60) {
-            for (let i = 1; i <= 15; i++) {
+          // if (lastValue < 100) {
+            for (let i = 1; i <= 8; i++) {
               this.list.push(lastValue + i);
             }
-          } else {
-            this.allLoaded = true;
-          }
+          // } else {
+          //   this.allLoaded = true;
+          // }
           this.$refs.loadmore.onBottomLoaded();
-        }, 1500);
+        // }, 1000);
       }
     },
 

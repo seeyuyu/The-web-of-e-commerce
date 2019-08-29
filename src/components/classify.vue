@@ -3,7 +3,7 @@
     <!-- <div><input type="text"></div> -->
     <!-- <div class=""> -->
       <div class="leftNavDiv">
-        <ul class="fl leftNav" v-if="classify.length>0">
+        <ul class="fl leftNav">
           <li v-for="item in classify[0].categoryList" :key="item.categoryId" @click="chooseNav(item.categoryId)" :class="{liAct:item.categoryId===currentId}">
             <span><img v-if="item.categoryImgPathReal" class="navIcon" :src="item.categoryImgPathReal" />{{item.categoryName}}</span>
             <ul v-if="item.childCategoryList">
@@ -13,11 +13,8 @@
         </ul>
       </div>
       <div class="page-loadmore rightList">
-        <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
+        <div class="page-loadmore-wrapper" v-if="classifyList" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
           <mt-loadmore :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
-            <ul class="page-loadmore-list">
-          <li v-for="item in list" class="page-loadmore-listitem">{{ item }}</li>
-        </ul>
             <div class="rightList">
               <div class="rightLi" v-for="(item, index) in classifyList.wareList" :key="index">
                 <img :src="item.wareImg" class="fl">
@@ -157,7 +154,7 @@
           if (res.code == '0000') {
             this.classifyList = res.data
             // if(this.classifyList.pageInfo.pageCount > 1){
-            //   this.canLoad = true
+              this.canLoad = true
             // }
           } else {
             alert(res.msg);
@@ -169,7 +166,7 @@
 
         }
         getClassifyNav(ClassifyParam).then((res) => {
-          console.log(res.data.wareCategory)
+          // console.log(res.data.wareCategory)
           if (res.code == '0000') {
             this.classify = res.data.wareCategory
           } else {
@@ -188,8 +185,10 @@
       },
 
       loadBottom() {
+        console.log("dasdasdasdsa")
           if (this.canLoad) {
-            if(this.nowait){
+            alert("da")
+            // if(this.nowait){
               this.nowait = false
               // this.pageNum++
               let ClassifyParam = {
@@ -207,7 +206,7 @@
                   alert(res.msg);
                 }
               })
-            }
+            // }
 
           } else {
             this.allLoaded = true;
@@ -257,7 +256,7 @@
 
   .rightList {
     /* width:100%; */
-    margin-left: 27%;
+    margin-left: 15%;
     margin-bottom: 70px;
   }
 
@@ -366,7 +365,7 @@
   .leftNav ul li:first-child .squareIcon {
     background: #f65;
   }
-  @component-namespace page {
+  /* @component-namespace page {
     @component loadmore {
       @descendent desc {
         text-align: center;
@@ -408,7 +407,7 @@
         transform: rotate(180deg);
       }
     }
-  }
+  } */
 </style>
 
 
