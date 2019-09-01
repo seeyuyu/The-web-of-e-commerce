@@ -87,8 +87,8 @@
         classifyList: [],
         currentId: 2,
         canLoad: false,
-        // nowait: true,
-        // pageNum: 1,
+        nowait: true,
+        pageNum: 1,
 
         list: [],
         allLoaded: false,
@@ -190,26 +190,25 @@
         console.log("dasdasdasdsa")
         setTimeout(() => {
           if (this.canLoad) {
-            alert("da")
-            // if(this.nowait){
-              // this.nowait = false
-              // this.pageNum++
+            if(this.nowait){
+              this.nowait = false
+              this.pageNum++
               let ClassifyParam = {
-                // "pageNum": this.pageNum,
+                "pageNum": this.pageNum,
                 "categoryId": "11340",
               }
               getClassifyList(ClassifyParam).then((res) => {
                 if (res.code == '0000') {
                   this.classifyList.wareList=this.classifyList.wareList.concat(res.data.wareList)
-                  // if(res.data.pageInfo.pageCount > res.data.pageInfo.pageNum){
-                  //   this.canLoad = true
-                  // }
-                  // this.nowait = true
+                  if(res.data.pageInfo.pageCount > res.data.pageInfo.pageNum){
+                    this.canLoad = true
+                  }
+                  this.nowait = true
                 } else {
                   alert(res.msg);
                 }
               })
-            // }
+            }
 
           } else {
             this.allLoaded = true;
@@ -368,6 +367,10 @@
 
   .leftNav ul li:first-child .squareIcon {
     background: #f65;
+  }
+  page-loadmore-wrapper{
+    overflow:auto;
+    -webkit-overflow-scrolling: touch;
   }
   /* @component-namespace page {
     @component loadmore {
