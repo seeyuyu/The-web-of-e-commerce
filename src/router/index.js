@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/components/index'
 import ce from '@/components/ce'
+import pullload from '@/components/pullload'
 import classify from '@/components/classify'
 import mine from '@/components/mine'
 import commodity from '@/components/detail/commodity'
@@ -20,11 +21,11 @@ export default new Router({
       name: 'index',
       component: index
     },
-    // {
-    //   path: '/',
-    //   name: 'ce',
-    //   component: ce
-    // },
+    {
+      path: '/pullload',
+      name: 'pullload',
+      component: pullload
+    },
     {
       path:'/classify',
       name:'classify',

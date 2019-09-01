@@ -12,8 +12,8 @@
           </li>
         </ul>
       </div>
-      <div class="page-loadmore rightList">
-        <div class="page-loadmore-wrapper" v-if="classifyList" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
+      <div class="page-loadmore rightList" v-if="classifyList">
+        <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
           <mt-loadmore :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
             <div class="rightList">
               <div class="rightLi" v-for="(item, index) in classifyList.wareList" :key="index">
@@ -108,6 +108,8 @@
       }
     },
     mounted() {
+      console.log(document.documentElement.clientHeight)
+      console.log(this.$refs)
       this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
     },
     methods: {
@@ -186,10 +188,11 @@
 
       loadBottom() {
         console.log("dasdasdasdsa")
+        setTimeout(() => {
           if (this.canLoad) {
             alert("da")
             // if(this.nowait){
-              this.nowait = false
+              // this.nowait = false
               // this.pageNum++
               let ClassifyParam = {
                 // "pageNum": this.pageNum,
@@ -212,6 +215,7 @@
             this.allLoaded = true;
           }
           this.$refs.loadmore.onBottomLoaded();
+          }, 1500);
 
       }
     }
