@@ -55,6 +55,7 @@
         nowait: true,
         pageNum: 1,
         chooseId: 0,
+        controlId: 0,//逻辑用全局商品id
 
         list: [],
         allLoaded: false,
@@ -67,7 +68,8 @@
     },
     created: function() {
       // this.getData()
-      this._getList(this.currentId, this.pageNum)
+      this.controlId = this.currentId
+      this._getList(this.controlId, this.pageNum)
       this._getNav()
       for (let i = 1; i <= 20; i++) {
         this.list.push(i);
@@ -97,21 +99,24 @@
         //   that.classifyList = res.data.data
         // })
       },
+      // 点击一级菜单
       chooseNav: function(e) {
         console.log(e)
         // liAct
         this.chooseId = 0
-        this.currentId = e
-        let ClassifyParam = {
-          "categoryId": e,
-        }
-        getClassifyList(ClassifyParam).then((res) => {
-          if (res.code == '0000') {
-            this.classifyList = res.data
-          } else {
-            alert(res.msg);
-          }
-        })
+        this.controlId = this.currentId = e
+        this.pageNum = 1
+        // let ClassifyParam = {
+        //   "categoryId": this.controlId,
+        // }
+        // getClassifyList(ClassifyParam).then((res) => {
+        //   if (res.code == '0000') {
+        //     this.classifyList = res.data
+        //   } else {
+        //     alert(res.msg);
+        //   }
+        // })
+        this._getList(this.controlId, this.pageNum)
       },
       // 商品列表
       _getList: function(id, pageNum) {
@@ -130,6 +135,7 @@
           }
         })
       },
+      // 获取商品分类
       _getNav: function() {
         let ClassifyParam = {
 
@@ -146,9 +152,9 @@
       // 二级菜单点击事件
       checkList:function(e){
         console.log(e)
-        this.chooseId = e
+        this.controlId = this.chooseId = e
         this.pageNum = 1
-        this._getList(e,this.pageNum)
+        this._getList(this.controlId, this.pageNum)
       },
       // loadBottom() {
       //   // alert("1222")
@@ -156,7 +162,7 @@
       handleBottomChange(status) {
         this.bottomStatus = status;
       },
-
+      // 上滑加载事件
       loadBottom() {
         console.log("loadBottom")
         setTimeout(() => {
@@ -166,13 +172,15 @@
               this.pageNum++
               let ClassifyParam = {
                 "pageNum": this.pageNum,
-                "categoryId": "11340",
+                "categoryId": this.controlId,
               }
               getClassifyList(ClassifyParam).then((res) => {
                 if (res.code == '0000') {
                   this.classifyList.wareList=this.classifyList.wareList.concat(res.data.wareList)
                   if(res.data.pageInfo.pageCount > res.data.pageInfo.pageNum){
                     this.canLoad = true
+                  } else {
+                    this.canLoad = false
                   }
                   this.nowait = true
                 } else {
