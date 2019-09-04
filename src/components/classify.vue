@@ -151,7 +151,7 @@
       },
       // 二级菜单点击事件
       checkList:function(e){
-        console.log(e)
+        // console.log(e)
         this.controlId = this.chooseId = e
         this.pageNum = 1
         this._getList(this.controlId, this.pageNum)
