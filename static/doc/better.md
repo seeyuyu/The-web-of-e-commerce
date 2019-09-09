@@ -9,7 +9,7 @@
 ##遇到的问题和解决思路
 ==========================
 ####1.运行项目后白屏，不显示页面内容
-package.json中找到 scripts.dev，在后面加上host参数 --host 0.0.0.0
+package.json中找到 scripts.dev，在后面加上host参数 --host 0.0.0.09
 ```
 "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 0.0.0.0"
 ```

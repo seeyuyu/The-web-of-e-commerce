@@ -21,7 +21,9 @@
                   <p class="commodityTxt text_ovh2">{{item.wareName}}</p>
                   <div class="rightBottom">
                     <div class="fl">{{item.warePrice!=''?'¥'+item.warePrice:'免费'}}</div>
-                    <div class="fr addCar">+</div>
+                    <div class="fr addCarDiv" @click.stop="addCar(item.sku)">
+                      <div class="addCar">+</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -162,6 +164,10 @@
       handleBottomChange(status) {
         this.bottomStatus = status;
       },
+      // 添加购物车
+      addCar(id) {
+        console.log(id)
+      },
       // 上滑加载事件
       loadBottom() {
         console.log("loadBottom")
@@ -218,7 +224,9 @@
     /* border-bottom: 1px solid #e5e5e5; */
     /* border-right: 1px solid #e5e5e5; */
   }
-
+  .addCarDiv{
+    padding:20px 0 0 20px;
+  }
   .addCar {
     width: 20px;
     height: 20px;

@@ -43,8 +43,10 @@
 </style>
 <script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.min.js"></script>
 <script>
-import axios from "axios";
-import crypto from "crypto";
+import axios from "axios"
+import crypto from "crypto"
+import classifyParams from "api/config"
+import gologins from "api/login"
 export default {
   data() {
 return {
@@ -62,20 +64,32 @@ return {
       let md5 = crypto.createHash("md5");
       md5.update(that.password); //需要加密的密码
       let password = md5.digest("hex"); //password 加密完的密码
-      axios
-        .post("/api/employee/login", {
-          username: that.username,
-          password: password
+      console.log(classifyParams)
+      // axios
+      //   .post(apiurl+"/users/login", {
+      //     name: that.username,
+      //     password: password
+      //   })
+      //   .then(function(res) {
+      //     console.log(res);
+      //     if(res.data.code==0){
+      //       sessionStorage.setItem('userId','123');
+      //       that.$router.go(-1);
+      //     }else{
+      //       alert(res.data.msg);
+      //     }
+      //   });
+      gologins(that.username, password).then((res) => {
+        console.log("Ddsdsdsdsd")
+          // if (res.code == '0000') {
+          //   this.classifyList = res.data
+          //   // if(this.classifyList.pageInfo.pageCount > 1){
+          //     this.canLoad = true
+          //   // }
+          // } else {
+          //   alert(res.msg);
+          // }
         })
-        .then(function(res) {
-          console.log(res);
-          if(res.data.code==0){
-            sessionStorage.setItem('userId','123');
-            that.$router.go(-1);
-          }else{
-            alert(res.data.msg);
-          }
-        });
     }
   }
 };
