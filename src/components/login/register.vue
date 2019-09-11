@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="ovh login-div">
-      <div class="ovh login-Inputdiv">
+      <!-- <div class="ovh login-Inputdiv">
         <span class="fl">用&nbsp;户&nbsp;名：</span>
         <input class="fl" type="text" v-model="username" placeholder="请输入用户名">
       </div>
@@ -16,19 +16,94 @@
       <div class="ovh login-Inputdiv">
         <span class="fl">验&nbsp;&nbsp;证&nbsp;&nbsp;码：</span>
         <input class="fl" type="text" v-model="verify" placeholder="请输入验证码">
+      </div> -->
+      <div class="ovh login-Inputdiv">
+        <span class="fl">昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：</span>
+        <input class="fl" type="text" v-model="username" placeholder="请输入昵称">
       </div>
       <div class="ovh login-Inputdiv">
         <span class="fl">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</span>
-        <input class="fl" type="text" v-model="password" placeholder="请输入密码">
+        <input class="fl" type="password" v-model="password" placeholder="请输入密码">
       </div>
       <div class="ovh login-Inputdiv">
         <span class="fl">确认密码：</span>
-        <input class="fl" type="text" v-model="password1" placeholder="确认密码">
+        <input class="fl" type="password" v-model="password1" placeholder="确认密码">
       </div>
     </div>
-    <div class="login-btn" @click="gologin">注册</div>
+    <div class="login-btn" @click="goregister">注册</div>
   </div>
 </template>
+<script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.min.js"></script>
+<script>
+import axios from "axios"
+import crypto from "crypto"
+import { _goregister } from "api/login"
+
+const params = {}
+
+export default {
+  data() {
+    return {
+      username: "",
+      email: "",
+      password: "",
+      password1: "",
+      verify: ""
+    };
+  },
+  created: function() {
+    let that = this;
+  },
+  methods: {
+    // getcode: function() {
+    // 获取验证码
+    //   let that = this;
+    //   axios
+    //     .post("/api/employee/verify", {
+    //       username: this.username,
+    //       email: this.email
+    //     })
+    //     .then(function(res) {
+    //       console.log(res);
+    //     });
+    // },
+    goregister: function() {
+      let that = this
+      if (this.password == this.password1) {
+        let md5 = crypto.createHash("md5");
+        md5.update(this.password); //需要加密的密码
+        let password = md5.digest("hex"); //password 加密完的密码
+        params.name = this.username
+        params.password = password
+        _goregister(params).then((res) => {
+          console.log(res);
+          if(res.data.code==0){
+            sessionStorage.setItem('userId','123');
+            that.$router.go(-1);
+          }else{
+            alert(res.data.msg);
+          }
+        })
+        // axios
+        //   .post("/api/employee/register", {
+        //     username: this.username,
+        //     password: password,
+        //     email: this.email,
+        //     code: this.verify
+        //   })
+        //   .then(function(res) {
+        //     console.log(res);
+        //     if(res.code==200){
+        //       that.$router.push({path: '/login'});
+        //     }
+        //   });
+      }else{
+        console.log("密码输入不一致");
+      }
+    }
+  }
+};
+</script>
 <style>
 .login-div {
   margin-top: 35%;
@@ -65,58 +140,3 @@
   margin: 0 auto;
 }
 </style>
-<script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.min.js"></script>
-<script>
-import axios from "axios";
-import crypto from "crypto";
-export default {
-  data() {
-    return {
-      username: "",
-      email: "",
-      password: "",
-      password1: "",
-      verify: ""
-    };
-  },
-  created: function() {
-    let that = this;
-  },
-  methods: {
-    getcode: function() {
-      let that = this;
-      axios
-        .post("/api/employee/verify", {
-          username: this.username,
-          email: this.email
-        })
-        .then(function(res) {
-          console.log(res);
-        });
-    },
-    gologin: function() {
-      let that = this;
-      if (this.password == this.password1) {
-        let md5 = crypto.createHash("md5");
-        md5.update(this.password); //需要加密的密码
-        let password = md5.digest("hex"); //password 加密完的密码
-        axios
-          .post("/api/employee/register", {
-            username: this.username,
-            password: password,
-            email: this.email,
-            code: this.verify
-          })
-          .then(function(res) {
-            console.log(res);
-            if(res.code==200){
-              that.$router.push({path: '/login'});
-            }
-          });
-      }else{
-        console.log("密码输入不一致");
-      }
-    }
-  }
-};
-</script>

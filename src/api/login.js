@@ -1,4 +1,4 @@
-import apiurl from './config'
+import { apiurl } from './config'
 import axios from 'axios'
 
 
@@ -21,5 +21,19 @@ export function gologins (username, password) {
     }else{
       alert(res.data.msg);
     }
+  });
+}
+/*
+  【注册】
+  parameter: object
+  cteated by yyt 2019/08/20
+*/
+export function _goregister (params) {
+  return axios.post(apiurl+"/users", {
+    name: params.name,
+    password: params.password
+  })
+  .then(function(res) {
+    return Promise.resolve(res.data)
   });
 }
