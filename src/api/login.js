@@ -1,4 +1,4 @@
-import apiurl from './config'
+import { apiurl } from './config'
 import axios from 'axios'
 
 

@@ -45,8 +45,7 @@
 <script>
 import axios from "axios"
 import crypto from "crypto"
-import classifyParams from "api/config"
-import gologins from "api/login"
+import { gologins } from "api/login"
 export default {
   data() {
 return {
@@ -64,7 +63,6 @@ return {
       let md5 = crypto.createHash("md5");
       md5.update(that.password); //需要加密的密码
       let password = md5.digest("hex"); //password 加密完的密码
-      console.log(classifyParams)
       // axios
       //   .post(apiurl+"/users/login", {
       //     name: that.username,
