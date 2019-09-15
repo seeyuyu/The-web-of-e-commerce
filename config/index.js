@@ -13,8 +13,8 @@ module.exports = {
     proxyTable: {},
 
     // Various Dev Server settings
-    host: '172.16.1.247', // can be overwritten by process.env.HOST
-    port: 9099, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    host: '192.168.99.242', // can be overwritten by process.env.HOST
+    port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,// 是否自定代开浏览器
     errorOverlay: true,
     notifyOnErrors: true,
@@ -35,8 +35,15 @@ module.exports = {
 
     cssSourceMap: true,
     proxyTable: {
+      // '/api': {
+      //   target: 'http://39.107.68.213:8081', // 你要代理的域名和端口号，要加上http
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     '^/api': '' // 这里用‘/api’代替target里面的地址，组件中调用接口时直接用api代替 比如我要调用'http://xxx.com:8080/api/NEWS/getNews.json?page=1&pageSize=10
+      //   }
+      // },
       '/api': {
-        target: 'http://39.107.68.213:8081', // 你要代理的域名和端口号，要加上http
+        target: 'http://127.0.0.1:8081', // 你要代理的域名和端口号，要加上http
         changeOrigin: true,
         pathRewrite: {
           '^/api': '' // 这里用‘/api’代替target里面的地址，组件中调用接口时直接用api代替 比如我要调用'http://xxx.com:8080/api/NEWS/getNews.json?page=1&pageSize=10
@@ -47,13 +54,6 @@ module.exports = {
         changeOrigin: true,
         pathRewrite: {
           '^/dmall': '' // 这里用‘/api’代替target里面的地址，组件中调用接口时直接用api代替 比如我要调用'http://xxx.com:8080/api/NEWS/getNews.json?page=1&pageSize=10
-        }
-      },
-      '/apis': {
-        target: 'http://localhost:8081', // 你要代理的域名和端口号，要加上http
-        changeOrigin: true,
-        pathRewrite: {
-          '^/apis': '' // 这里用‘/api’代替target里面的地址，组件中调用接口时直接用api代替 比如我要调用'http://xxx.com:8080/api/NEWS/getNews.json?page=1&pageSize=10
         }
       }
     }

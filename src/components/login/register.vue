@@ -38,6 +38,8 @@
 import axios from "axios"
 import crypto from "crypto"
 import { _goregister } from "api/login"
+import { setTost } from "api/config"
+import { popToast } from "common/js/common"
 
 const params = {}
 
@@ -67,7 +69,8 @@ export default {
     //       console.log(res);
     //     });
     // },
-    goregister: function() {
+    // 注册
+    goregister() {
       let that = this
       if (this.password == this.password1) {
         let md5 = crypto.createHash("md5");
@@ -78,27 +81,27 @@ export default {
         _goregister(params).then((res) => {
           console.log(res);
           if(res.data.code==0){
-            sessionStorage.setItem('userId','123');
+            // sessionStorage.setItem('userId','123');
             that.$router.go(-1);
           }else{
-            alert(res.data.msg);
+            // that.$toast({
+            //   message: error,
+            //   position: 'bottom',
+            //   duration: 2000
+            // });
+            popToast({ that, msg:error })
           }
-        })
-        // axios
-        //   .post("/api/employee/register", {
-        //     username: this.username,
-        //     password: password,
-        //     email: this.email,
-        //     code: this.verify
-        //   })
-        //   .then(function(res) {
-        //     console.log(res);
-        //     if(res.code==200){
-        //       that.$router.push({path: '/login'});
-        //     }
-        //   });
+        }).catch(error => {
+          // this.$toast({
+          //   message: error,
+          //   position: 'bottom',
+          //   duration: 2000
+          // });
+          popToast({ that, msg:error })
+        });
       }else{
-        console.log("密码输入不一致");
+        popToast({ that, msg:"密码输入不一致" })
+
       }
     }
   }

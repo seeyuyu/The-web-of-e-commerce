@@ -172,7 +172,7 @@ export default {
     footnav
   },
   mounted: function() {
-    if(!sessionStorage.getItem('userId')){
+    if(!sessionStorage.getItem('token')){
       // 未登录
     }
   },

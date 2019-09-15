@@ -1,4 +1,3 @@
-import { apiurl } from './config'
 import axios from 'axios'
 
 
@@ -7,17 +6,17 @@ import axios from 'axios'
   parameter: object
   cteated by yyt 2019/08/20
 */
-export function gologins (username, password) {
-
-  return axios.post(apiurl+"/users/login", {
+export const _gologins = (username, password) => {
+  return axios.post("/api/users/login", {
     name: username,
     password: password
   })
-  .then(function(res) {
+  .then((res) => {
     console.log(res);
-    if(res.data.code==0){
-      sessionStorage.setItem('userId','123');
-      that.$router.go(-1);
+    if(res.status==200){
+      // sessionStorage.setItem('userId','123');
+      sessionStorage.setItem('token',res.data.token);
+      this.$router.go(-1);
     }else{
       alert(res.data.msg);
     }
@@ -28,12 +27,15 @@ export function gologins (username, password) {
   parameter: object
   cteated by yyt 2019/08/20
 */
-export function _goregister (params) {
-  return axios.post(apiurl+"/users", {
+export const _goregister = (params) =>{
+  return axios.post("/api/users", {
     name: params.name,
     password: params.password
   })
-  .then(function(res) {
+  .then((res) => {
     return Promise.resolve(res.data)
+  }).catch((error)=>{
+    return Promise.reject(error.response.data)
+    // console.log(error.response.data)
   });
 }

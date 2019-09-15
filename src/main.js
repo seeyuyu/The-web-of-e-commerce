@@ -16,10 +16,12 @@ import MtRadio from 'mint-ui/lib/radio';
 import 'mint-ui/lib/radio/style.css';
 
 Vue.component(MtRadio.name, MtRadio);
-import { Swipe, SwipeItem } from 'mint-ui';
+import { Swipe, SwipeItem, Toast } from 'mint-ui';
 // 轮播图
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
+
+Vue.prototype.$toast = Toast
 
 Vue.config.productionTip = false
 Vue.prototype.GLOBAL = global_ //挂载到Vue实例上面
@@ -38,7 +40,7 @@ new Vue({
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requireAuth)) { // 判断该路由是否需要登录权限
     console.log('需要登录');
-    if (sessionStorage.getItem('userId')) { // 判断当前的token是否存在 ； 登录存入的token
+    if (sessionStorage.getItem('token')) { // 判断当前的token是否存在 ； 登录存入的token
       next();
     } else {
       next({

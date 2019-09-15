@@ -45,7 +45,7 @@
 <script>
 import axios from "axios"
 import crypto from "crypto"
-import { gologins } from "api/login"
+import { _gologins } from "api/login"
 export default {
   data() {
 return {
@@ -77,7 +77,7 @@ return {
       //       alert(res.data.msg);
       //     }
       //   });
-      gologins(that.username, password).then((res) => {
+      _gologins(that.username, password).then((res) => {
         console.log("Ddsdsdsdsd")
           // if (res.code == '0000') {
           //   this.classifyList = res.data
