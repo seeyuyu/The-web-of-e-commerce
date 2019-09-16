@@ -77,17 +77,11 @@ return {
       //       alert(res.data.msg);
       //     }
       //   });
-      _gologins(that.username, password).then((res) => {
-        console.log("Ddsdsdsdsd")
-          // if (res.code == '0000') {
-          //   this.classifyList = res.data
-          //   // if(this.classifyList.pageInfo.pageCount > 1){
-          //     this.canLoad = true
-          //   // }
-          // } else {
-          //   alert(res.msg);
-          // }
-        })
+      // const redirect = that.$route.query.redirect
+      // 登录
+      _gologins(that.username, password,that).then((res) => {
+
+      })
     }
   }
 };

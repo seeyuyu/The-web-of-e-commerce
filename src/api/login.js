@@ -6,20 +6,29 @@ import axios from 'axios'
   parameter: object
   cteated by yyt 2019/08/20
 */
-export const _gologins = (username, password) => {
+export const _gologins = (username, password,that) => {
+  const redirect = that.$route.query.redirect
   return axios.post("/api/users/login", {
     name: username,
     password: password
   })
   .then((res) => {
-    console.log(res);
     if(res.status==200){
-      // sessionStorage.setItem('userId','123');
       sessionStorage.setItem('token',res.data.token);
-      this.$router.go(-1);
+      if(redirect){
+        //存在回跳地址就回跳
+        that.$router.push(redirect)
+      }else{
+          //否则就跳到默认的首页
+          that.$router.push({
+            name: 'index'
+          })
+      }
     }else{
-      alert(res.data.msg);
+      return Promise.resolve(res.data)
     }
+  }).catch((error)=>{
+    return Promise.reject(error.response.data)
   });
 }
 /*
@@ -33,6 +42,7 @@ export const _goregister = (params) =>{
     password: params.password
   })
   .then((res) => {
+    console.log(res)
     return Promise.resolve(res.data)
   }).catch((error)=>{
     return Promise.reject(error.response.data)

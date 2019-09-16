@@ -81,7 +81,6 @@ export default {
         _goregister(params).then((res) => {
           console.log(res);
           if(res.data.code==0){
-            // sessionStorage.setItem('userId','123');
             that.$router.go(-1);
           }else{
             // that.$toast({
@@ -101,7 +100,6 @@ export default {
         });
       }else{
         popToast({ that, msg:"密码输入不一致" })
-
       }
     }
   }
