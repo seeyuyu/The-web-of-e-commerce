@@ -80,16 +80,15 @@ export default {
         params.password = password
         _goregister(params).then((res) => {
           console.log(res);
-          if(res.data.code==0){
-            that.$router.go(-1);
-          }else{
-            // that.$toast({
-            //   message: error,
-            //   position: 'bottom',
-            //   duration: 2000
-            // });
-            popToast({ that, msg:error })
-          }
+          // if(res.data.code==0){
+            // that.$router.go(-1);
+            popToast({ that, msg:'注册成功，请登录' })
+            setTimeout(function(){
+              that.$router.push({ path:'/login'})
+            },1500)
+          // }else{
+          //   popToast({ that, msg:error })
+          // }
         }).catch(error => {
           // this.$toast({
           //   message: error,

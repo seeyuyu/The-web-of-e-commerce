@@ -44,7 +44,7 @@ export const _goregister = (params) =>{
   .then((res) => {
     console.log(res)
     return Promise.resolve(res.data)
-  }).catch((error)=>{
+  }).catch((error) => {
     return Promise.reject(error.response.data)
     // console.log(error.response.data)
   });

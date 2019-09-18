@@ -45,6 +45,7 @@
   import footnav from "components/footnav/footnav"
   import axios from "axios"
   import { getClassifyList, getClassifyNav } from "api/classify"
+  import { _addCar } from "api/car"
 
   export default {
     data() {
@@ -166,7 +167,11 @@
       },
       // 添加购物车
       addCar(id) {
+        let carInfo = {};
+        carInfo.id = id;
+        carInfo.num = '1';
         console.log(id)
+        _addCar(carInfo)
       },
       // 上滑加载事件
       loadBottom() {
