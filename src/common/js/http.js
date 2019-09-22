@@ -19,7 +19,7 @@ service.interceptors.request.use(config => {
   let token = window.sessionStorage.getItem("token")
   if (token) {
       //将token放到请求头发送给服务器,将tokenkey放在请求头中
-      config.headers.token = token;
+      config.headers.authorization = 'Bearer '+token;
       //也可以这种写法
       // config.headers['accessToken'] = Token;
        return config;

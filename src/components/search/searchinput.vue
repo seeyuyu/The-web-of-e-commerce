@@ -5,7 +5,7 @@
     <div class="fl gosearch" @click="gosearch">搜索</div>
   </div>
 </template>
-<style>
+<style scoped>
 .searchDiv1 {
   width: 100%;
   padding: 10px;

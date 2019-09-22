@@ -69,10 +69,7 @@
       <footnav :idx='3'></footnav>
   </div>
 </template>
-<style >
-html{
-  background: #f6f6f6;
-}
+<style scoped>
 .mineHead{
   /* padding: 40px 0; */
 }
@@ -168,6 +165,13 @@ export default {
       ]
     };
   },
+  beforeCreate () {
+      document.querySelector('body').setAttribute('style', 'background-color:#f6f6f6;')
+    },
+
+    beforeDestroy () {
+      document.querySelector('body').removeAttribute('style')
+    },
   components:{
     footnav
   },

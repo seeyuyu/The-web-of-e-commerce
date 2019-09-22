@@ -22,3 +22,7 @@ export const _addCar = (parameter) => {
     _id: parameter.id
   })
 }
+
+export const _carlist = () =>{
+  return get("/api/shopping-cart", {})
+}
