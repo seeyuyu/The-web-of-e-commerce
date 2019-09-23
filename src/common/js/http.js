@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import axios from 'axios'
+import router from '../../router'
 // import router from '@/router'
+
 
 // 创建axios实例
 const service = axios.create({
@@ -23,6 +25,12 @@ service.interceptors.request.use(config => {
       //也可以这种写法
       // config.headers['accessToken'] = Token;
        return config;
+  }else{
+          //将token放到请求头发送给服务器,将tokenkey放在请求头中
+          config.headers.authorization = 'Bearer ';
+          //也可以这种写法
+          // config.headers['accessToken'] = Token;
+           return config;
   }
 }, function (error) {
   // Do something with request error
@@ -31,9 +39,14 @@ service.interceptors.request.use(config => {
 
 // response拦截器
 service.interceptors.response.use(response => {
-  console.log(response)
-  if (response.data && response.data.code === 401) { // 401, token失效
-    Vue.cookie.delete('token')
+  return response
+}, error => {
+  if (error.response.status && error.response.status === 401) { // 401, token失效
+    let token = window.sessionStorage.getItem("token")
+    if(token){
+        Vue.cookie.delete('token')
+    }
+
     // router.push({name: 'login'})
     router.push({
       name:'login',//从哪个页面跳转
@@ -43,24 +56,22 @@ service.interceptors.response.use(response => {
       }
     })
   }
-  return response
-}, error => {
-  return Promise.reject(error)
+  return Promise.reject(error.response)
 })
 
 // export default service
 // 封装get
-export const get = (url, params) => {
-  params = params || {};
-  return new Promise((resolve, reject) => {
-    service.get(url, {
-          params,
-      }).then((res) => {
+export const get = (url) => {
+  // params = params || {};
+  // return new Promise((resolve, reject) => {
+    service.get(url, {}).then((res) => {
+
+      console.log(res.data)
         return Promise.resolve(res.data)
       }).catch((error) => {
         return Promise.reject(error)
       })
-  })
+  // })
 }
 //封装post
 export const post = (url, params) => {

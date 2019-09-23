@@ -50,8 +50,9 @@ export default {
   },
   created:function(){
     // Indicator.open()//加载框
-    this.carlist()
+    // this.carlist()
     _carlist()
   }
+
 }
 </script>
