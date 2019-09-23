@@ -49,7 +49,7 @@ export default {
     }
   },
   created:function(){
-    // Indicator.open()//加载框
+    // Indicator.open()//加载 kuang
     // this.carlist()
     _carlist()
   }
