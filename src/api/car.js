@@ -24,7 +24,6 @@ export const _addCar = (parameter) => {
 }
 
 export const _carlist = (res) =>{
-  get("/api/shopping-cart", {}).then(resolve =>{
-    console.log("1111111")
-  })
+  // 这里也是装饰者模式，返回一个函数，此处没有任何装饰
+  return get("/api/shopping-cart", {})
 }

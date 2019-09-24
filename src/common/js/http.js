@@ -64,13 +64,9 @@ service.interceptors.response.use(response => {
 export const get = (url) => {
   // params = params || {};
   // return new Promise((resolve, reject) => {
-    service.get(url, {}).then((res) => {
-
-      console.log(res.data)
-        return Promise.resolve(res.data)
-      }).catch((error) => {
-        return Promise.reject(error)
-      })
+    // 这里需要返回，service  ,此处用了装饰者模式，返回的一个函数 ，这样子使用，和没使用差不多发现了吗？
+    // post自己改 
+    return service.get(url, {})
   // })
 }
 //封装post

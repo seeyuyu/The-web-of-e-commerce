@@ -51,7 +51,15 @@ export default {
   created:function(){
     // Indicator.open()//加载 kuang
     // this.carlist()
-    _carlist()
+    
+    // then 写在这里代表着同步调用
+
+    _carlist().then(res =>{
+      console.log(res)
+      console.log('yyt是臭屎蛋')
+    },err =>{
+      console.log(err)
+    })
   }
 
 }
