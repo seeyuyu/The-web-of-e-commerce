@@ -24,13 +24,13 @@ service.interceptors.request.use(config => {
       config.headers.authorization = 'Bearer '+token;
       //也可以这种写法
       // config.headers['accessToken'] = Token;
-       return config;
+      return config;
   }else{
           //将token放到请求头发送给服务器,将tokenkey放在请求头中
-          config.headers.authorization = 'Bearer ';
-          //也可以这种写法
-          // config.headers['accessToken'] = Token;
-           return config;
+      config.headers.authorization = 'Bearer ';
+      //也可以这种写法
+      // config.headers['accessToken'] = Token;
+      return config;
   }
 }, function (error) {
   // Do something with request error
@@ -46,7 +46,6 @@ service.interceptors.response.use(response => {
     if(token){
         Vue.cookie.delete('token')
     }
-
     // router.push({name: 'login'})
     router.push({
       name:'login',//从哪个页面跳转
@@ -63,22 +62,18 @@ service.interceptors.response.use(response => {
 // 封装get
 export const get = (url) => {
   // params = params || {};
-  // return new Promise((resolve, reject) => {
     // 这里需要返回，service  ,此处用了装饰者模式，返回的一个函数 ，这样子使用，和没使用差不多发现了吗？
-    // post自己改 
-    return service.get(url, {})
-  // })
+    // post自己改
+  return service.get(url, {})
 }
 //封装post
 export const post = (url, params) => {
   params = params || {};
-  return new Promise((resolve, reject) => {
-    service.post(url,
-          params
-      ).then((res) => {
-        return Promise.resolve(res.data)
-      }).catch((error) => {
-        return Promise.reject(error)
-      })
+  return service.post(url,
+    params
+  ).then((res) => {
+    return Promise.resolve(res.data)
+  }).catch((error) => {
+    return Promise.reject(error)
   })
 }

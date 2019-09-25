@@ -2,13 +2,13 @@
   <div>
     <div class="rightList" v-for="item in dataList">
       <div class="rightLi">
-          <img :src="item.image" class="fl">
+          <img :src="item.wareImg" class="fl">
           <div class="rightLiTxt fl">
-            <p class="commodityTxt text_ovh2">{{item.name}}</p>
+            <p class="commodityTxt text_ovh2">{{item.wareName}}</p>
             <div class="rightBottom">
-              <div class="fl">{{Number(item.price)>0?'¥'+item.price:''}}</div>
+              <div class="fl">{{Number(item.warePrice)>0?'¥'+item.warePrice:''}}</div>
               <div v-if="car>0">
-                <div class="fr countnum">-</div>
+                <div class="fr countnum" @click="reduceNum" :data-id="item._id" data-num="">-</div>
                 <div class="fr counttxt">{{item.num}}</div>
                 <div class="fr countnum">+</div>
               </div>
@@ -49,19 +49,19 @@
   overflow: hidden;
 }
 .leftNav{
-    overflow-y: scroll;
-    height: 100%;
+  overflow-y: scroll;
+  height: 100%;
 }
 .commodityTxt{
   height: 40px;
   /* line-height: 40px; */
 }
 .rightBottom{
-    margin-top: 20px;
-    overflow: hidden;
+  margin-top: 20px;
+  overflow: hidden;
 }
 .rightLiTxtc{
-      border-bottom: 1px solid #f6f6f6;
+  border-bottom: 1px solid #f6f6f6;
 }
 .borderBootom{
   width:100%;
@@ -87,6 +87,11 @@ export default {
   props:{
     "car":Number,
     "data-list":Array
+  },
+  methods: {
+    reduceNum: function(){
+      console.log("减少数量")
+    }
   }
 }
 </script>

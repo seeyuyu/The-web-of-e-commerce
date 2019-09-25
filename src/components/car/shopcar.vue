@@ -5,20 +5,6 @@
     <footnav :idx='2'></footnav>
   </div>
 </template>
-<style scoped>
-html{
-  background: #f6f6f6;
-}
-.searchout{
-  background: #fff;
-  overflow: hidden;
-}
-.searchout .searchDiv {
-    border-radius: 100px;
-    margin: 5px 10px;
-    background: #f6f6f6;
-}
-</style>
 <script>
 import axios from "axios";
 import footnav from "components/footnav/footnav"
@@ -38,29 +24,43 @@ export default {
     commoditylist
   },
   methods:{
-    carlist(){
-      var that=this;
-      axios.get('/static/json/search.json').then(function(res){
-        if(res.data.code==200){
-            that.searchResule=res.data.data;
-            // Indicator.close();//关闭加载框
-        }
-      })
-    }
+    // carlist(){
+    //   var that=this;
+    //   axios.get('/static/json/search.json').then(function(res){
+    //     if(res.data.code==200){
+    //         that.searchResule=res.data.data;
+    //         // Indicator.close();//关闭加载框
+    //     }
+    //   })
+    // }
   },
   created:function(){
-    // Indicator.open()//加载 kuang
+    // Indicator.open()//加载框
     // this.carlist()
-    
-    // then 写在这里代表着同步调用
 
+    // then 写在这里代表着同步调用
     _carlist().then(res =>{
-      console.log(res)
-      console.log('yyt是臭屎蛋')
-    },err =>{
-      console.log(err)
+        if(res.data.code == 0){
+          this.searchResule=res.data.data;
+          // Indicator.close();//关闭加载框
+        }
+      }, err =>{
+        console.log(err)
     })
   }
-
 }
 </script>
+<style scoped>
+html{
+  background: #f6f6f6;
+}
+.searchout{
+  background: #fff;
+  overflow: hidden;
+}
+.searchout .searchDiv {
+    border-radius: 100px;
+    margin: 5px 10px;
+    background: #f6f6f6;
+}
+</style>
