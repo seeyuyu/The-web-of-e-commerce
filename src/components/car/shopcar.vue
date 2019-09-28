@@ -10,7 +10,7 @@ import axios from "axios";
 import footnav from "components/footnav/footnav"
 import commoditylist from "components/car/commodity"
 import search from "components/search/searchdiv"
-import { _carlist } from "api/car"
+import { $carlist } from "api/car"
 // import { Indicator } from 'mint-ui'
 export default {
   data(){
@@ -28,6 +28,7 @@ export default {
     //   var that=this;
     //   axios.get('/static/json/search.json').then(function(res){
     //     if(res.data.code==200){
+    //       console.log(res.data.data)
     //         that.searchResule=res.data.data;
     //         // Indicator.close();//关闭加载框
     //     }
@@ -39,9 +40,10 @@ export default {
     // this.carlist()
 
     // then 写在这里代表着同步调用
-    _carlist().then(res =>{
-        if(res.data.code == 0){
-          this.searchResule=res.data.data;
+    $carlist().then(res =>{
+        if(res.status == 200){
+          console.log(res)
+          this.searchResule=res.data;
           // Indicator.close();//关闭加载框
         }
       }, err =>{

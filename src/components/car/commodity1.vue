@@ -9,7 +9,7 @@
               <div class="fl">{{Number(item.warePrice)>0?'¥'+item.warePrice:''}}</div>
               <div v-if="car>0">
                 <div class="fr countnum" @click="reduceNum" :data-id="item._id" data-num="">-</div>
-                <div class="fr counttxt">{{item.amount}}</div>
+                <div class="fr counttxt">{{item.num}}</div>
                 <div class="fr countnum">+</div>
               </div>
             </div>
@@ -83,7 +83,6 @@
 }
 </style>
 <script>
-import { $addCar } from "api/car"
 export default {
   props:{
     "car":Number,
@@ -92,12 +91,6 @@ export default {
   methods: {
     reduceNum: function(){
       console.log("减少数量")
-    },
-    addNum: function(){
-        let carInfo = {}
-        carInfo.id = id
-        carInfo.num = 1
-        $addCar(carInfo)
     }
   }
 }

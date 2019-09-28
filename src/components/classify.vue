@@ -15,13 +15,13 @@
         <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
           <mt-loadmore :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
             <div class="rightList">
-              <div class="rightLi" v-for="(item, index) in classifyList.wareList" :key="index">
+              <div class="rightLi" v-for="(item, index) in classifyList" :key="index">
                 <img :src="item.wareImg" class="fl">
                 <div class="rightLiTxt fl">
                   <p class="commodityTxt text_ovh2">{{item.wareName}}</p>
                   <div class="rightBottom">
                     <div class="fl">{{item.warePrice!=''?'¥'+item.warePrice:'免费'}}</div>
-                    <div class="fr addCarDiv" @click.stop="addCar(item.sku)">
+                    <div class="fr addCarDiv" @click.stop="addCar(item._id)">
                       <div class="addCar">+</div>
                     </div>
                   </div>
@@ -45,7 +45,7 @@
   import footnav from "components/footnav/footnav"
   import axios from "axios"
   import { getClassifyList, getClassifyNav } from "api/classify"
-  import { _addCar } from "api/car"
+  import { $addCar } from "api/car"
 
   export default {
     data() {
@@ -109,40 +109,39 @@
         this.chooseId = 0
         this.controlId = this.currentId = e
         this.pageNum = 1
+        // this._getList(this.controlId, this.pageNum)
+      },
+      // 商品列表
+      _getList: function(id, pageNum) {
         // let ClassifyParam = {
-        //   "categoryId": this.controlId,
+        //   "pageNum": pageNum,
+        //   "categoryId": id,
         // }
         // getClassifyList(ClassifyParam).then((res) => {
         //   if (res.code == '0000') {
         //     this.classifyList = res.data
+        //     // if(this.classifyList.pageInfo.pageCount > 1){
+        //       this.canLoad = true
+        //     // }
         //   } else {
         //     alert(res.msg);
         //   }
         // })
-        this._getList(this.controlId, this.pageNum)
-      },
-      // 商品列表
-      _getList: function(id, pageNum) {
-        let ClassifyParam = {
-          "pageNum": pageNum,
-          "categoryId": id,
-        }
+
+        let ClassifyParam = {}
+        ClassifyParam.pageNum = pageNum
+        ClassifyParam.categoryId = id
         getClassifyList(ClassifyParam).then((res) => {
-          if (res.code == '0000') {
+          console.log(res.data)
             this.classifyList = res.data
             // if(this.classifyList.pageInfo.pageCount > 1){
               this.canLoad = true
             // }
-          } else {
-            alert(res.msg);
-          }
         })
       },
       // 获取商品分类
       _getNav: function() {
-        let ClassifyParam = {
-
-        }
+        let ClassifyParam = {}
         getClassifyNav(ClassifyParam).then((res) => {
           // console.log(res.data.wareCategory)
           if (res.code == '0000') {
@@ -171,7 +170,7 @@
         carInfo.id = id;
         carInfo.num = '1';
         console.log(id)
-        _addCar(carInfo)
+        $addCar(carInfo)
       },
       // 上滑加载事件
       loadBottom() {
@@ -183,20 +182,20 @@
               this.pageNum++
               let ClassifyParam = {
                 "pageNum": this.pageNum,
-                "categoryId": this.controlId,
+                "categoryId": 11266,//this.controlId
               }
               getClassifyList(ClassifyParam).then((res) => {
-                if (res.code == '0000') {
-                  this.classifyList.wareList=this.classifyList.wareList.concat(res.data.wareList)
-                  if(res.data.pageInfo.pageCount > res.data.pageInfo.pageNum){
-                    this.canLoad = true
-                  } else {
-                    this.canLoad = false
-                  }
+                // if (res.code == '0000') {
+                  this.classifyList=this.classifyList.concat(res.data)
+                  // if(res.data.pageInfo.pageCount > res.data.pageInfo.pageNum){
+                  //   this.canLoad = true
+                  // } else {
+                  //   this.canLoad = false
+                  // }
                   this.nowait = true
-                } else {
-                  alert(res.msg);
-                }
+                // } else {
+                //   alert(res.msg);
+                // }
               })
             }
 
