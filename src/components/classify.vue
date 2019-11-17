@@ -16,7 +16,7 @@
           <mt-loadmore :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
             <div class="rightList">
               <div class="rightLi" v-for="(item, index) in classifyList" :key="index">
-                <img :src="item.wareImg" class="fl">
+                <img :src="item.wareImg" class="fl rightListImg" onerror='../../static/images/404.jpg'>
                 <div class="rightLiTxt fl">
                   <p class="commodityTxt text_ovh2">{{item.wareName}}</p>
                   <div class="rightBottom">
@@ -255,9 +255,9 @@
     margin-bottom: 70px;
   }
 
-  .rightList img {
+  .rightList .rightListImg {
     width: 27%;
-    /* height: 80px; */
+    height: 80px;
     margin-right: 3%;
   }
 
