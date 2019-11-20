@@ -1,5 +1,6 @@
 <template>
 <div class="allDiv">
+      <!-- 左侧导航 -->
       <div class="leftNavDiv">
         <ul class="fl leftNav" v-if="classify[0]">
           <li v-for="item in classify[0].categoryList" :key="item.categoryId" @click="chooseNav(item.categoryId)" :class="{liAct:item.categoryId === currentId}">
@@ -11,9 +12,11 @@
           </li>
         </ul>
       </div>
-      <div class="page-loadmore rightList" v-if="classifyList">
+      <!-- 右侧商品列表 -->
+      <div class="page-loadmore" v-if="classifyList">
         <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
           <mt-loadmore :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
+            <ul class="page-loadmore-list">
             <div class="rightList">
               <div class="rightLi" v-for="(item, index) in classifyList" :key="index">
                 <img :src="item.wareImg" class="fl rightListImg" onerror='../../static/images/404.jpg'>
@@ -28,6 +31,7 @@
                 </div>
               </div>
             </div>
+            </ul>
             <div slot="bottom" class="mint-loadmore-bottom">
               <span v-show="bottomStatus !== 'loading'" :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span>
               <span v-show="bottomStatus === 'loading'">
@@ -127,16 +131,18 @@
         //     alert(res.msg);
         //   }
         // })
-
+        console.log(this)
         let ClassifyParam = {}
         ClassifyParam.pageNum = pageNum
         ClassifyParam.categoryId = id
         getClassifyList(ClassifyParam).then((res) => {
           console.log(res.data)
             this.classifyList = res.data
+            //判断是否有下一页
             // if(this.classifyList.pageInfo.pageCount > 1){
+            if(res.data.length >= 20){
               this.canLoad = true
-            // }
+            }
         })
       },
       // 获取商品分类
@@ -174,15 +180,22 @@
       },
       // 上滑加载事件
       loadBottom() {
+        this.$nextTick(() => {
+          console.log('$nextTick')
+        })
         console.log("loadBottom")
+        alert("loadBottom0")
+
         setTimeout(() => {
-          if (this.canLoad) {
+          if (this.canLoad) {  //页面首次加载完成
+          alert("loadBottom")
             if(this.nowait){
+              alert("loadBottom2")
               this.nowait = false
               this.pageNum++
               let ClassifyParam = {
                 "pageNum": this.pageNum,
-                "categoryId": 11266,//this.controlId
+                "categoryId": this.controlId,//this.controlId
               }
               getClassifyList(ClassifyParam).then((res) => {
                 // if (res.code == '0000') {
