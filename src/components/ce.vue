@@ -16,20 +16,25 @@
       <mt-loadmore :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
         <ul class="page-loadmore-list">
           <li v-for="item in list" class="page-loadmore-listitem">{{ item }}</li>
-          <div class="rightList">
+          <div class="rightListDiv">
+            <div class="rightList">
               <div class="rightLi" v-for="(item, index) in classifyList" :key="index">
                 <img :src="item.wareImg" class="fl rightListImg" onerror='../../static/images/404.jpg'>
-                <div class="rightLiTxt fl">
+                <div class="rightLiTxt">
                   <p class="commodityTxt text_ovh2">{{item.wareName}}</p>
                   <div class="rightBottom">
-                    <div class="fl">{{item.warePrice!=''?'¥'+item.warePrice:'免费'}}</div>
+                    <div class="fl moneyTxt">{{item.warePrice!=''?'¥'+item.warePrice:'免费'}}</div>
                     <div class="fr addCarDiv" @click.stop="addCar(item._id)">
-                      <div class="addCar">+</div>
+                      <!-- <i class="addCar"></i> -->
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+          </div>
+          <div class="bottomDiv" v-show="bottomTip">滑到底了~</div>
+          </div>
+
+
         </ul>
         <!-- <div slot="bottom" class="mint-loadmore-bottom">
           <span v-show="bottomStatus !== 'loading'" :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span>
@@ -109,9 +114,9 @@
         controlId: 0,//逻辑用全局商品id
 
         list: [],
-        allLoaded: false,
         bottomStatus: '',
-        wrapperHeight: 0
+        wrapperHeight: 0,
+        bottomTip:false
       };
     },
     components: {
@@ -137,7 +142,7 @@
         this.pageNum = 1
         this._getList(this.controlId, this.pageNum)
       },
-
+      // 回去列表数据
       _getList: function(id, pageNum) {
         // let ClassifyParam = {
         //   "pageNum": pageNum,
@@ -159,11 +164,17 @@
         ClassifyParam.categoryId = id
         getClassifyList(ClassifyParam).then((res) => {
           console.log(res.data)
-            this.classifyList = res.data
+            this.classifyList = res.data.lists
             //判断是否有下一页
-            // if(this.classifyList.pageInfo.pageCount > 1){
+            // 页数 * 条数 < 总条数
+            if(res.data.currentIndex * 20 < res.data.total){
+              // alert(this.canLoad)
+              this.canLoad = true
+              // alert(this.canLoad)
+            }
         })
       },
+      // 获取导航栏数据
       _getNav: function() {
         let ClassifyParam = {}
         getClassifyNav(ClassifyParam).then((res) => {
@@ -173,20 +184,77 @@
           } else {
             alert(res.msg);
           }
+
         })
       },
+      // 添加购物车
+      addCar(id) {
+        let carInfo = {};
+        carInfo.id = id;
+        carInfo.num = '1';
+        console.log(id)
+        $addCar(carInfo)
+      },
+      // 上滑加载
       loadBottom() {
+        // setTimeout(() => {
+        //   console.log(this.list)
+        //   let lastValue = this.list[this.list.length - 1];
+        //   // if (lastValue < 100) {
+        //     for (let i = 1; i <= 15; i++) {
+        //       this.classifyList.push(lastValue + i);
+        //     }
+        //   // } else {
+        //   //   this.allLoaded = true;
+        //   // }
+        //   this.$refs.loadmore.onBottomLoaded();
+        // }, 1500);
+
         setTimeout(() => {
-          let lastValue = this.list[this.list.length - 1];
-          // if (lastValue < 100) {
-            for (let i = 1; i <= 15; i++) {
-              this.classifyList.push(lastValue + i);
-            }
+          // if (this.canLoad) {  //页面首次加载完成
+          // alert("loadBottom")
+            // if(this.nowait){
+              // alert("loadBottom2")
+              this.nowait = false
+              this.pageNum++
+              let ClassifyParam = {
+                "pageNum": this.pageNum,
+                "categoryId": this.controlId,//this.controlId
+              }
+              getClassifyList(ClassifyParam).then((res) => {
+                // if (res.code == '0000') {
+                this.classifyList=this.classifyList.concat(res.data.lists)
+                // 页数 * 条数 < 总条数
+                alert("sa")
+                if(res.data.currentIndex * 20 < res.data.total){
+                  this.nowait = true
+                  alert("sa1")
+                }else{
+                  alert(res.data.currentIndex * 20)
+                  alert(res.data.total)
+                  this.nowait = false
+                  this.bottomTip = true
+                  // this.canLoad = false
+                }
+                  // if(res.data.pageInfo.pageCount > res.data.pageInfo.pageNum){
+                  //   this.canLoad = true
+                  // } else {
+                  //   this.canLoad = false
+                  // }
+                  // this.nowait = true
+                // } else {
+                //   alert(res.msg);
+                // }
+              })
+            // }
+
           // } else {
-          //   this.allLoaded = true;
+            // this.allLoaded = true;
+            this.$refs.loadmore.onBottomLoaded();
           // }
-          this.$refs.loadmore.onBottomLoaded();
-        }, 1500);
+
+          }, 1500);
+
       }
     },
     created() {
@@ -223,8 +291,11 @@
   }
   .addCarDiv{
     padding:20px 0 0 20px;
+    background:url("../../static/images/car.png") no-repeat;
+    background-size:20px 20px;
   }
   .addCar {
+    display: inline-block;
     width: 20px;
     height: 20px;
     border-radius: 4px;
@@ -242,24 +313,25 @@
     padding-bottom: 0px;
   }
 
-  .rightList {
+  .rightListDiv {
     /* width:100%; */
-    margin-left: 15%;
+    margin-left: 27%;
     margin-bottom: 70px;
   }
 
   .rightList .rightListImg {
-    width: 27%;
+    width: 80px;
     height: 80px;
     margin-right: 3%;
   }
 
   .rightLiTxt {
     height: 100%;
-    width: 70%;
+    min-height:90px;
+    width: 100%;
     text-align: left;
     border-bottom: 1px solid #e5e5e5;
-    padding-bottom: 10px;
+    padding: 0px 0px 10px 90px;
   }
 
   /* .allDiv {
@@ -359,6 +431,13 @@
   page-loadmore-wrapper{
     overflow:auto;
     -webkit-overflow-scrolling: touch;
+  }
+  .moneyTxt{
+    color:#f65
+  }
+  .bottomDiv{
+    padding: 20px 0;
+    color: #999;
   }
 </style>
 
