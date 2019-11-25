@@ -222,16 +222,16 @@
                 "categoryId": this.controlId,//this.controlId
               }
               getClassifyList(ClassifyParam).then((res) => {
-                // if (res.code == '0000') {
+                // if (res.data.lists > 0) {
                 this.classifyList=this.classifyList.concat(res.data.lists)
                 // 页数 * 条数 < 总条数
-                alert("sa")
+                // alert("sa")
                 if(res.data.currentIndex * 20 < res.data.total){
                   this.nowait = true
-                  alert("sa1")
+                  // alert("sa1")
                 }else{
-                  alert(res.data.currentIndex * 20)
-                  alert(res.data.total)
+                  // alert(res.data.currentIndex * 20)
+                  // alert(res.data.total)
                   this.nowait = false
                   this.bottomTip = true
                   // this.canLoad = false
