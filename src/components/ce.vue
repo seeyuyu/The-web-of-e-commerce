@@ -197,6 +197,7 @@
       },
       // 上滑加载
       loadBottom() {
+        console.log('loadBottom')
         // setTimeout(() => {
         //   console.log(this.list)
         //   let lastValue = this.list[this.list.length - 1];
