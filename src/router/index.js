@@ -11,6 +11,7 @@ import shopcar from '@/components/car/shopcar'
 import login from '@/components/login/login'
 import register from '@/components/login/register'
 import { Loadmore } from 'mint-ui'
+import classifyTesting from '@/pages/classifyTesting'
 Vue.component(Loadmore.name, Loadmore);
 Vue.use(Router)
 
@@ -68,6 +69,11 @@ export default new Router({
       path:'/ce',
       name:'ce',
       component:ce
+    },
+    {
+      path:'/classifyTesting',
+      name:'classifyTesting',
+      component:classifyTesting
     }
   ]
 })
