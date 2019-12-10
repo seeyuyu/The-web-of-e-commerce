@@ -13,7 +13,7 @@ package.json中找到 scripts.dev，在后面加上host参数 --host 0.0.0.0
 ```
 "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 0.0.0.0"
 ```
-####1.设置多个代理
+####2.设置多个代理
 config index.js中设置
 ```
  proxyTable: {
@@ -33,3 +33,6 @@ config index.js中设置
       }
     }
 ```
+####3. run build打包页面空白
+在config/index.js文件中：把 build 的 assetsPublicPath: '/'改为assetsPublicPath: './'
+

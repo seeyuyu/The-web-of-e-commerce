@@ -14,7 +14,7 @@ module.exports = {
 
     // Various Dev Server settings
     // host: 'http://192.168.99.242', // can be overwritten by process.env.HOST //localhost
-    host: '0.0.0.0', // can be overwritten by process.env.HOST //localhost
+    host: '127.0.0.1', // can be overwritten by process.env.HOST //localhost
 
     port: '8080', // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,// 是否自定代开浏览器
@@ -68,7 +68,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
 
     /**
      * Source Maps
