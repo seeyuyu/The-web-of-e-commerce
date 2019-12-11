@@ -1,27 +1,11 @@
 <template>
   <div class="allDiv">
     <div class="leftNavDiv">
-<<<<<<< HEAD
-      <ul
-        class="fl leftNav"
-        v-if="classify[0]"
-      >
-=======
       <ul class="fl leftNav" v-if="classify[0]">
->>>>>>> e6d639b758caf9283a2bec637e89ed6d166b98a3
         <li
           v-for="item in classify[0].categoryList"
           :key="item.categoryId"
           @click="chooseNav(item.categoryId)"
-<<<<<<< HEAD
-          :class="{liAct:item.categoryId === currentId}"
-        >
-          <span><img
-              v-if="item.categoryImgPathReal"
-              class="navIcon"
-              :src="item.categoryImgPathReal"
-            />{{item.categoryName}}</span>
-=======
           :class="{ liAct: item.categoryId === currentId }"
         >
           <span
@@ -31,7 +15,6 @@
               :src="item.categoryImgPathReal"
             />{{ item.categoryName }}</span
           >
->>>>>>> e6d639b758caf9283a2bec637e89ed6d166b98a3
           <ul v-if="item.childCategoryList">
             <!-- .stop阻止事件冒泡 -->
             <li
@@ -39,15 +22,10 @@
               :key="items.categoryId"
               @click.stop="checkList(items.categoryId)"
               class="text_ovh"
-<<<<<<< HEAD
-              :class="{categoryAct:items.categoryId === chooseId}"
-            ><i class="squareIcon"></i>{{items.categoryName}}</li>
-=======
               :class="{ categoryAct: items.categoryId === chooseId }"
             >
               <i class="squareIcon"></i>{{ items.categoryName }}
             </li>
->>>>>>> e6d639b758caf9283a2bec637e89ed6d166b98a3
           </ul>
         </li>
       </ul>
@@ -65,16 +43,9 @@
           ref="loadmore"
         >
           <ul class="page-loadmore-list">
-<<<<<<< HEAD
-            <li
-              v-for="item in list"
-              class="page-loadmore-listitem"
-            >{{ item }}</li>
-=======
             <li v-for="item in list" class="page-loadmore-listitem">
               {{ item }}
             </li>
->>>>>>> e6d639b758caf9283a2bec637e89ed6d166b98a3
             <div class="rightListDiv">
               <div class="rightList">
                 <div
@@ -85,18 +56,6 @@
                   <img
                     :src="item.wareImg"
                     class="fl rightListImg"
-<<<<<<< HEAD
-                    onerror='../../static/images/404.jpg'
-                  >
-                  <div class="rightLiTxt">
-                    <p class="commodityTxt text_ovh2">{{item.wareName}}</p>
-                    <div class="rightBottom">
-                      <div class="fl moneyTxt">{{item.warePrice!=''?'¥'+item.warePrice:'免费'}}</div>
-                      <div
-                        class="fr addCarDiv"
-                        @click.stop="addCar(item._id)"
-                      >
-=======
                     onerror="../../static/images/404.jpg"
                   />
                   <div class="rightLiTxt">
@@ -108,7 +67,6 @@
                         }}
                       </div>
                       <div class="fr addCarDiv" @click.stop="addCar(item._id)">
->>>>>>> e6d639b758caf9283a2bec637e89ed6d166b98a3
                         <!-- <i class="addCar"></i> -->
                       </div>
                     </div>
