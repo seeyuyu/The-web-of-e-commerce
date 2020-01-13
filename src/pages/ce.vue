@@ -101,7 +101,7 @@ export default {
       // navUrl: "http://h5.globalmxb.com/test/categoryLabel",
       classify: [],
       classifyList: [],
-      currentId: "21382", //品牌直发
+      currentId: "2", //品牌直发
       canLoad: false,
       // nowait: true,
       pageNum: 1,
@@ -167,6 +167,7 @@ export default {
         // console.log(res.data.wareCategory)
         if (res.code == "0000") {
           this.classify = res.data.wareCategory;
+          this.controlId = this.currentId = this.classify[0].categoryList[0].categoryId
         } else {
           alert(res.msg);
         }
@@ -193,9 +194,11 @@ export default {
           this.classifyList = this.classifyList.concat(res.data.lists);
           // 页数 * 条数 < 总条数   判断是否有下一页
           if (res.data.currentIndex * 20 < res.data.total) {
+            // 有下一页
           } else {
-            this.allLoaded = true;
-            this.bottomTip = true;
+            // 没有下一页
+            this.allLoaded = true
+            this.bottomTip = true
           }
         });
         this.$refs.loadmore.onBottomLoaded();
@@ -203,7 +206,6 @@ export default {
     }
   },
   created() {
-    this.controlId = this.currentId;
     this._getNav();
   },
   mounted() {

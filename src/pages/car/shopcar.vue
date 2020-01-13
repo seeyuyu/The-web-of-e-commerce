@@ -40,10 +40,14 @@ export default {
     // this.carlist()
 
     // then 写在这里代表着同步调用
-    $carlist().then(res =>{
+    $carlist().then(res => {
         if(res.status == 200){
-          console.log(res)
-          this.searchResule=res.data;
+          console.log(res.data)
+          if(res.data.length == 0){
+            // 没有数据
+          }else{
+            this.searchResule=res.data;
+          }
           // Indicator.close();//关闭加载框
         }
       }, err =>{
