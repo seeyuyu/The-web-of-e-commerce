@@ -16,7 +16,7 @@ export const $addCar = (parameter) => {
   // }).catch((error) => {
   //   return Promise.reject(error)
   // })
-
+  console.log(parameter)
   return post("/api/shopping-cart", {
     count: parameter.num,
     _id: parameter.id

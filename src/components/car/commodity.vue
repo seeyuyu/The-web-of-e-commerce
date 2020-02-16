@@ -2,8 +2,9 @@
   <div>
     <div class="rightList" v-for="item in dataList">
       <div class="rightLi">
+        <a>
           <img :src="item.wareImg" class="fl">
-          <div class="rightLiTxt fl">
+          <div class="rightLiTxt">
             <p class="commodityTxt text_ovh2">{{item.wareName}}</p>
             <div class="rightBottom">
               <div class="fl">{{Number(item.warePrice)>0?'¥'+item.warePrice:''}}</div>
@@ -14,8 +15,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </a>
       </div>
+    </div>
   </div>
 </template>
 <style scoped>
@@ -39,7 +41,7 @@
 }
 .rightLiTxt{
   height: 100%;
-  width:70%;
+  width:100%;
   text-align: left;
   /* border-bottom: 1px solid #e5e5e5; */
   padding-bottom:10px;

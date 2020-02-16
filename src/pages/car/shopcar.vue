@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="searchout"><search></search></div>
+    <!-- <div class="searchout"><search></search></div> -->
+
     <commoditylist :car="1" :data-list="searchResule"></commoditylist>
     <footnav :idx='2'></footnav>
   </div>

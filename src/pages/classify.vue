@@ -178,7 +178,8 @@ export default {
       let carInfo = {};
       carInfo.id = id;
       carInfo.num = "1";
-      console.log(id);
+      console.log(carInfo);
+
       $addCar(carInfo);
     },
     // 上滑加载
@@ -270,7 +271,8 @@ export default {
   width: 100%;
   text-align: left;
   border-bottom: 1px solid #e5e5e5;
-  padding: 0px 0px 10px 90px;
+  /* padding: 0px 0px 10px 90px; */
+  padding: 0px 0px 10px 0px;
 }
 
 /* .allDiv {

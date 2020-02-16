@@ -9,9 +9,9 @@ const service = axios.create({
   timeout: 1000 * 30,
   // 允许跨域带token
   withCredentials: true,
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded'
-  }
+  // headers: {
+  //   'Content-Type': 'application/x-www-form-urlencoded'
+  // }
 })
 
 // request拦截器
