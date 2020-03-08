@@ -90,7 +90,8 @@
 import footnav from "components/footnav/footnav";
 import axios from "axios";
 import { getClassifyList, getClassifyNav } from "api/classify";
-import { $addCar } from "api/car";
+import { $addCar } from "api/car"
+import { popToast } from "common/js/common"
 
 export default {
   data() {
@@ -130,6 +131,7 @@ export default {
       this.chooseId = 0;
       this.controlId = this.currentId = e;
       this.pageNum = 1;
+       this._getList(this.controlId, this.pageNum);
     },
     // 二级菜单点击事件
     checkList: function(e) {
@@ -167,7 +169,8 @@ export default {
         // console.log(res.data.wareCategory)
         if (res.code == "0000") {
           this.classify = res.data.wareCategory;
-          this.controlId = this.currentId = this.classify[0].categoryList[0].categoryId
+          this.currentId = this.classify[0].categoryList[0].categoryId
+          this.controlId = this.chooseId = this.classify[0].categoryList[0].childCategoryList[0].categoryId
         } else {
           alert(res.msg);
         }
@@ -178,9 +181,10 @@ export default {
       let carInfo = {};
       carInfo.id = id;
       carInfo.num = "1";
-      console.log(carInfo);
-
-      $addCar(carInfo);
+      var that = this
+      $addCar(carInfo).then((res) => {
+        popToast({ that, msg:'添加成功' })
+      })
     },
     // 上滑加载
     loadBottom() {

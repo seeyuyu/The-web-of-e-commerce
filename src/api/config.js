@@ -6,7 +6,7 @@ export const classifyParams = {
     "categoryType": 1,
     "pageNum": 2,//页码
     "pageSize": 20,
-    "categoryId": "21382",//一级分类id
+    "categoryId": "31054",//一级分类id
     "categoryLevel": 1
 }
 export const navParams = {

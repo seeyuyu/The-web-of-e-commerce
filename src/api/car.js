@@ -20,7 +20,9 @@ export const $addCar = (parameter) => {
   return post("/api/shopping-cart", {
     count: parameter.num,
     _id: parameter.id
-  })
+  }).then(function(res) {
+    return Promise.resolve(res.data)
+  });
 }
 
 export const $carlist = (res) =>{
