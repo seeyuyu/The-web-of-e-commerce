@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { get, post} from 'common/js/http'
+import { get, post, delreq} from 'common/js/http'
 
 
 /*
@@ -24,7 +24,17 @@ export const $addCar = (parameter) => {
     return Promise.resolve(res.data)
   });
 }
-
+/*
+  【加入购物车】
+  parameter: String
+  cteated by yyt 2019/09/18
+*/
+export const $deleteCar = (parameter) => {
+  console.log(parameter)
+  return delreq("/api/shopping-cart/"+parameter).then(function(res) {
+    return Promise.resolve(res.data)
+  });
+}
 export const $carlist = (res) =>{
   // 这里也是装饰者模式，返回一个函数，此处没有任何装饰
   return get("/api/shopping-cart", {})

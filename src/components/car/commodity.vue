@@ -9,9 +9,9 @@
             <div class="rightBottom">
               <div class="fl">{{Number(item.warePrice)>0?'¥'+item.warePrice:''}}</div>
               <div v-if="car>0">
-                <div class="fr countnum" @click="reduceNum" :data-id="item._id" data-num="">-</div>
+                <div class="fr countnum" @click="addNum(item._id)">+</div>
                 <div class="fr counttxt">{{item.amount}}</div>
-                <div class="fr countnum">+</div>
+                <div class="fr countnum" @click="reduceNum(item.amount, item._id)" :data-id="item._id" data-num="">-</div>
               </div>
             </div>
           </div>
@@ -86,20 +86,36 @@
 </style>
 <script>
 import { $addCar } from "api/car"
+import { $deleteCar } from "api/car"
 export default {
   props:{
     "car":Number,
     "data-list":Array
   },
   methods: {
-    reduceNum: function(){
-      console.log("减少数量")
+    deleteGoods: function () {
+      let target ='5d5cfaace6a8bf3f94fc8486'
+      $deleteCar(target)
     },
-    addNum: function(){
+    reduceNum: function (amount, id) { // 减少商品数量
+      console.log("减少数量")
+      console.log(amount)
+      if(amount<2){
+        // 删除商品
+        this.deleteGoods()
+      }else{
+        // 减少商品数量
         let carInfo = {}
         carInfo.id = id
-        carInfo.num = 1
+        carInfo.num = amount - 1
         $addCar(carInfo)
+      }
+    },
+    addNum: function (id) { // 增加商品数量
+      let carInfo = {}
+      carInfo.id = id
+      carInfo.num = 1
+      $addCar(carInfo)
     }
   }
 }

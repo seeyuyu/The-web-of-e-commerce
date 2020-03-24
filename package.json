@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 0.0.0.0",
     "start": "npm run dev",
+    "yyt": "cross-env NODE_ENV=development1 webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 0.0.0.0",
     "build": "node build/build.js"
   },
   "dependencies": {

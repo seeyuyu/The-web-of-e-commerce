@@ -47,3 +47,13 @@ export function getClassifyNav (parameter) {
 
   // return get()
 }
+
+// export function getClassifyNav (parameter) {
+//   const dataJson = Object.assign({}, navParams, parameter)
+
+//   return axios.get("/commoditys")
+//   .then(function(res) {
+//     return Promise.resolve(res.data)
+//   });
+//   // return get()
+// }

@@ -3,7 +3,8 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-
+const  commonUrl = require('../src/config.js')
+console.log('url', commonUrl)
 module.exports = {
   dev: {
 
@@ -14,7 +15,7 @@ module.exports = {
 
     // Various Dev Server settings
     // host: 'http://192.168.99.242', // can be overwritten by process.env.HOST //localhost
-    host: '127.0.0.1', // can be overwritten by process.env.HOST //localhost
+    host: '192.168.99.242', // can be overwritten by process.env.HOST //localhost
 
     port: '8080', // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,// 是否自定代开浏览器

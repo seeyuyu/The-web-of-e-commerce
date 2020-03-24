@@ -77,3 +77,14 @@ export const post = (url, params) => {
     return Promise.reject(error)
   })
 }
+//封装delete
+export const delreq = (url, params) => {
+  params = params || {};
+  return service.delete(url,
+    params
+  ).then((res) => {
+    return Promise.resolve(res.data)
+  }).catch((error) => {
+    return Promise.reject(error)
+  })
+}
