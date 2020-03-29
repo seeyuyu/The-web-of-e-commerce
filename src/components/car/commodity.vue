@@ -10,7 +10,7 @@
               <div class="fl">{{Number(item.warePrice)>0?'¥'+item.warePrice:''}}</div>
               <div v-if="car>0">
                 <div class="fr countnum" @click="addNum(item._id)">+</div>
-                <div class="fr counttxt">{{item.amount}}</div>
+                <input class="fr counttxt" :value="item.amount" />
                 <div class="fr countnum" @click="reduceNum(item.amount, item._id)" :data-id="item._id" data-num="">-</div>
               </div>
             </div>
@@ -75,13 +75,13 @@
   border:1px solid #f6f6f6;
 }
 .counttxt{
-  width: 30px;
+  width: 50px;
   height: 25px;
   line-height: 25px;
   text-align: center;
   border:1px solid #f6f6f6;
   margin:0 5px;
-  padding: 0 10px;
+  padding: 0 5px;
 }
 </style>
 <script>

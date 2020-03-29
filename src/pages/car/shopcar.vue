@@ -2,7 +2,11 @@
   <div>
     <!-- <div class="searchout"><search></search></div> -->
 
-    <commoditylist :car="1" :data-list="searchResule"></commoditylist>
+    <commoditylist :car="1" :data-list="searchResule" class="shopContent"></commoditylist>
+    <div class="TotalDiv">
+      <div>合计：</div>
+      <div class="submitOrder">选好了</div>
+    </div>
     <footnav :idx='2'></footnav>
   </div>
 </template>
@@ -69,5 +73,26 @@ html{
     border-radius: 100px;
     margin: 5px 10px;
     background: #f6f6f6;
+}
+.TotalDiv{
+  position:fixed;
+  bottom:52px;
+  left:0px;
+  width:100%;
+}
+.shopContent{
+  margin-bottom:200px;
+}
+.TotalDiv{
+  background: #fff;
+}
+.submitOrder{
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    border-radius: 3px;
+    background: #ff7b38;
+    line-height: 40px;
+    color: #fff;
 }
 </style>
