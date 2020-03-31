@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import index from '@/pages/index'
+import home from '@/pages/home/home'
 import ce from '@/pages/ce'
 import pullload from '@/pages/pullload'
 import classify from '@/pages/classify'
@@ -19,8 +19,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'index',
-      component: index
+      name: 'home',
+      component: home
     },
     {
       path: '/pullload',

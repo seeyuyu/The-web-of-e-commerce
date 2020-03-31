@@ -251,7 +251,7 @@ import axios from "axios";
 import footnav from "components/footnav/footnav";
 import search from "components/search/searchdiv";
 import goods from "components/goods/goods";
-import getHomeDetail from "api/home"
+import { getHomeDetail } from "api/home"
 import { Indicator } from 'mint-ui'
 export default {
   data() {
@@ -345,7 +345,10 @@ export default {
     getDetail:function() {
       console.log(1)
       let parameter = 'param=%7B%22index%22%3A0%2C%22currentPage%22%3A1%2C%22reqUrl%22%3A%22https%3A%2F%2Fcmsapi.dmall.com%2Fapp%2Fweb%2Fjson%2F1%2F142%22%2C%22pairs%22%3A%221-0-142%22%2C%22code%22%3A%221%22%2C%22networkType%22%3A2%7D&source=2&tempid=C89E5CB6724000021B1C1ED510A0112A'
-      getHomeDetail(parameter)
+      // getHomeDetail(parameter)
+      getHomeDetail(parameter).then(res => {
+          console.log(4)
+        });
       console.log(2)
     },
     navData: function() {
