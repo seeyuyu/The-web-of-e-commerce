@@ -1,26 +1,20 @@
 <template>
-  <div>
+  <div v-if="dataArr[0]">
     <search></search>
     <mt-swipe :auto="400000" class="swiperDiv">
-      <mt-swipe-item>
+      <mt-swipe-item v-for="(item,i) in dataArr[0].dataList">
         <img
           class="bannerImg"
-          src="https://img.alicdn.com/tfs/TB1p5V9a.CF3KVjSZJnXXbnHFXa-750-291.jpg_Q90.jpg"
-        >
-      </mt-swipe-item>
-      <mt-swipe-item>
-        <img
-          class="bannerImg"
-          src="https://img.alicdn.com/tfs/TB11NGma21G3KVjSZFkXXaK4XXa-750-291.png_Q90.jpg"
-        >
-      </mt-swipe-item>
-      <mt-swipe-item>
-        <img
-          class="bannerImg"
-          src="https://img.alicdn.com/tfs/TB1OkGxaHys3KVjSZFnXXXFzpXa-750-291.jpg_Q90.jpg"
+          :src="item.imageUrl"
         >
       </mt-swipe-item>
     </mt-swipe>
+    <div>
+      <img class="advImg" :src="dataArr[2].dataList[0].imageUrl">
+    </div>
+    <div class="imgDiv_2">
+      <img class="advImg" v-for="(item,i) in dataArr[3].dataList" :src="item.imageUrl">
+    </div>
     <div class="navDiv">
       <div class="navLi" v-for="(item,i) in navli">
         <img :src="item.image">
@@ -56,7 +50,7 @@ html {
   background: #f6f6f6;
 }
 .swiperDiv {
-  height: 160px;
+  height: 116px;
 }
 .navDiv {
   display: -webkit-flex; /* Safari */
@@ -245,12 +239,18 @@ html {
 .marquee_list li span {
   padding: 0 2px;
 }
+.advImg{
+  width:100%;
+}
+.imgDiv_2 .advImg{
+  width:50%;
+}
 </style>
 <script>
-import axios from "axios";
-import footnav from "components/footnav/footnav";
-import search from "components/search/searchdiv";
-import goods from "components/goods/goods";
+import axios from "axios"
+import footnav from "components/footnav/footnav"
+import search from "components/search/searchdiv"
+import goods from "components/goods/goods"
 import { getHomeDetail } from "api/home"
 import { Indicator } from 'mint-ui'
 export default {
@@ -261,6 +261,7 @@ export default {
       describeUrl: "",
       navli: [],
       recommendli: [],
+      dataArr:[],
       describeList: [
         {
           name: "原价原价原价原价原价原价原价原价原价原价原价原价原价原价原价",
@@ -303,7 +304,6 @@ export default {
         }
       ],
       animate: false,
-
       marqueeList: [
         {
           name:
@@ -343,13 +343,14 @@ export default {
   },
   methods: {
     getDetail:function() {
-      console.log(1)
       let parameter = 'param=%7B%22index%22%3A0%2C%22currentPage%22%3A1%2C%22reqUrl%22%3A%22https%3A%2F%2Fcmsapi.dmall.com%2Fapp%2Fweb%2Fjson%2F1%2F142%22%2C%22pairs%22%3A%221-0-142%22%2C%22code%22%3A%221%22%2C%22networkType%22%3A2%7D&source=2&tempid=C89E5CB6724000021B1C1ED510A0112A'
       // getHomeDetail(parameter)
       getHomeDetail(parameter).then(res => {
-          console.log(4)
-        });
-      console.log(2)
+          console.log(res.data.data)
+          this.dataArr=res.data.data.pageModules
+
+          Indicator.close();//关闭加载框
+      });
     },
     navData: function() {
       let that = this;
