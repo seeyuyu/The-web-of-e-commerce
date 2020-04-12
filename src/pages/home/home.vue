@@ -9,11 +9,46 @@
         >
       </mt-swipe-item>
     </mt-swipe>
+
+    <!-- displayType: 146、119 - 一张图100%布局 -->
+    <!-- displayType: 135 - 一堆图100%布局 -->
+    <!-- displayType: 134 - 一拖二    未完成-->
+    <!-- displayType: 130 - 50% -->
+    <div v-for="(item,i) in dataArr">
+      <div v-if="item.displayType === 146 || item.displayType === 119">
+        <img class="advImg" :src="item.dataList[0].imageUrl">
+      </div>
+      <div class="imgDiv_2" v-if="item.displayType === 130">
+        <img class="advImg" v-for="(itemImg,indexs) in item.dataList" :src="itemImg.imageUrl">
+      </div>
+      <div class="imgDiv_2" v-if="item.displayType === 135">
+        <div class="imgDiv_2">
+          <img class="advImg" v-for="(itemarr,index) in item.dataList"  v-if="index < 2" :key="index" :src="itemarr.imageUrl">
+        </div>
+        <div class="imgDiv_4">
+          <img class="advImg" v-for="(itemarr,i) in item.dataList.slice(2)" :src="itemarr.imageUrl">
+        </div>
+      </div>
+    </div>
+
     <div>
       <img class="advImg" :src="dataArr[2].dataList[0].imageUrl">
     </div>
+    <div>
+      <img class="advImg" :src="dataArr[4].dataList[0].imageUrl">
+    </div>
     <div class="imgDiv_2">
-      <img class="advImg" v-for="(item,i) in dataArr[3].dataList" :src="item.imageUrl">
+      <img class="advImg" v-for="(item,index) in dataArr[5].dataList"  v-if="index < 2" :key="index" :src="item.imageUrl">
+    </div>
+    <div class="imgDiv_4">
+      <img class="advImg" v-for="(item,i) in dataArr[5].dataList.slice(2)" :src="item.imageUrl">
+    </div>
+
+    <div>
+      <img class="advImg" :src="dataArr[6].dataList[0].imageUrl">
+    </div>
+    <div>
+      <img class="advImg" :src="dataArr[7].dataList[0].imageUrl">
     </div>
     <div class="navDiv">
       <div class="navLi" v-for="(item,i) in navli">
@@ -244,6 +279,10 @@ html {
 }
 .imgDiv_2 .advImg{
   width:50%;
+}
+.imgDiv_4 .advImg{
+  width:25%;
+  margin-top: -2px;
 }
 </style>
 <script>
