@@ -14,6 +14,7 @@
     <!-- displayType: 135 - 一堆图100%布局 -->
     <!-- displayType: 134 - 一拖二    未完成-->
     <!-- displayType: 130 - 50% -->
+    <!-- displayType: 130 - 50% -->
     <div v-for="(item,i) in dataArr">
       <div v-if="item.displayType === 146 || item.displayType === 119">
         <img class="advImg" :src="item.dataList[0].imageUrl">
