@@ -2,7 +2,7 @@
   <div v-if="dataArr[0]">
     <search></search>
     <mt-swipe :auto="400000" class="swiperDiv">
-      <mt-swipe-item v-for="(item,i) in dataArr[0].dataList">
+      <mt-swipe-item v-for="(item,i) in dataArr[0].dataList" :key="i">
         <img
           class="bannerImg"
           :src="item.imageUrl"
@@ -31,12 +31,12 @@
       </div>
     </div>
 
-    <div>
+    <!-- <div>
       <img class="advImg" :src="dataArr[2].dataList[0].imageUrl">
     </div>
     <div>
       <img class="advImg" :src="dataArr[4].dataList[0].imageUrl">
-    </div>
+    </div> -->
     <div class="imgDiv_2">
       <img class="advImg" v-for="(item,index) in dataArr[5].dataList"  v-if="index < 2" :key="index" :src="item.imageUrl">
     </div>
@@ -381,6 +381,7 @@ export default {
     setInterval(this.showMarquee, 2000);
   },
   methods: {
+
     getDetail:function() {
       let parameter = 'param=%7B%22index%22%3A0%2C%22currentPage%22%3A1%2C%22reqUrl%22%3A%22https%3A%2F%2Fcmsapi.dmall.com%2Fapp%2Fweb%2Fjson%2F1%2F142%22%2C%22pairs%22%3A%221-0-142%22%2C%22code%22%3A%221%22%2C%22networkType%22%3A2%7D&source=2&tempid=C89E5CB6724000021B1C1ED510A0112A'
       // getHomeDetail(parameter)

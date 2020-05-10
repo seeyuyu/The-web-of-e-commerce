@@ -7,7 +7,11 @@ import { get, post} from 'common/js/http'
   parameter: string
   cteated by yyt 2020/03/31
 */
-export function getHomeDetail (parameter) {
+// export function getHomeDetail (parameter) {
+//   console.log(3)
+//   return get("/wxdmall/weixin/home/businessIndex?" + parameter, {})
+// }
+export function getHomeDetail () {
   console.log(3)
-  return get("/wxdmall/weixin/home/businessIndex?" + parameter, {})
+  return get("../../static/json/index.json", {})
 }
