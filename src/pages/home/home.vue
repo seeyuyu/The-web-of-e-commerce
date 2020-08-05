@@ -12,12 +12,14 @@
 
     <!-- displayType: 146、119 - 一张图100%布局 -->
     <!-- displayType: 135 - 一堆图100%布局 -->
+
     <!-- displayType: 134 - 一拖二    未完成-->
     <!-- displayType: 130 - 50% -->
     <div v-for="(item,i) in dataArr">
       <div v-if="item.displayType === 146 || item.displayType === 119">
         <img class="advImg" :src="item.dataList[0].imageUrl">
       </div>
+
       <div class="imgDiv_2" v-if="item.displayType === 130">
         <img class="advImg" v-for="(itemImg,indexs) in item.dataList" :src="itemImg.imageUrl">
       </div>
@@ -85,7 +87,7 @@ html {
   background: #f6f6f6;
 }
 .swiperDiv {
-  height: 116px;
+  height: 128px;
 }
 .navDiv {
   display: -webkit-flex; /* Safari */
@@ -290,7 +292,7 @@ import axios from "axios"
 import footnav from "components/footnav/footnav"
 import search from "components/search/searchdiv"
 import goods from "components/goods/goods"
-import { getHomeDetail } from "api/home"
+import { $getHomeDetail, $getHomeSeckill } from "api/home"
 import { Indicator } from 'mint-ui'
 export default {
   data() {
@@ -381,24 +383,19 @@ export default {
     setInterval(this.showMarquee, 2000);
   },
   methods: {
-
     getDetail:function() {
       let parameter = 'param=%7B%22index%22%3A0%2C%22currentPage%22%3A1%2C%22reqUrl%22%3A%22https%3A%2F%2Fcmsapi.dmall.com%2Fapp%2Fweb%2Fjson%2F1%2F142%22%2C%22pairs%22%3A%221-0-142%22%2C%22code%22%3A%221%22%2C%22networkType%22%3A2%7D&source=2&tempid=C89E5CB6724000021B1C1ED510A0112A'
-      // getHomeDetail(parameter)
-      getHomeDetail(parameter).then(res => {
+      $getHomeDetail(parameter).then(res => {
           console.log(res.data.data)
           this.dataArr=res.data.data.pageModules
+
+
 
           Indicator.close();//关闭加载框
       });
     },
     navData: function() {
       let that = this;
-      // console.log(this.GLOBAL.apiUrl)
-      // axios.get(this.GLOBAL.apiUrl+'categoryLabel').then(function(res){
-      //   // console.log(res.data);
-      //   that.navli=res.data;
-      // })
       axios.get("/static/json/commodity.json").then(function(res) {
         console.log(res.data.data);
         that.navli = res.data.data;
@@ -406,10 +403,6 @@ export default {
     },
     recommendData: function() {
       let that = this;
-      // axios.get(this.GLOBAL.apiUrl+'firstList').then(function(res){
-      //   // console.log(res.data);
-      //   that.recommendli=res.data;
-      // })
       axios.get("/static/json/commodity.json").then(function(res) {
         console.log(res.data);
         that.recommendli = res.data.data;

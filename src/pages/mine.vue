@@ -96,7 +96,7 @@
   flex:1;
 }
 .mineNav{
-  background: url("https://static1.xlzhao.com/frontend/images/icon_index2_active.png") center top no-repeat;
+  background: url("http://static1.xlzhao.com/frontend/images/icon_index2_active.png") center top no-repeat;
   background-size: 30px 30px;
   padding-top:30px;
   padding-bottom:10px;
@@ -138,29 +138,29 @@ export default {
           cls:'home',
           name:'首页',
           path:'/',
-          icon:'https://static1.xlzhao.com/frontend/images/icon_index1.png',
-          iconSelect:'https://static1.xlzhao.com/frontend/images/icon_index1_active.png',
+          icon:'http://static1.xlzhao.com/frontend/images/icon_index1.png',
+          iconSelect:'http://static1.xlzhao.com/frontend/images/icon_index1_active.png',
         },
         {
           cls:'cle',
           name:'分类',
           path:'/classify',
-          icon:'https://static1.xlzhao.com/frontend/images/icon_index2.png',
-          iconSelect:'https://static1.xlzhao.com/frontend/images/icon_index2_active.png',
+          icon:'http://static1.xlzhao.com/frontend/images/icon_index2.png',
+          iconSelect:'http://static1.xlzhao.com/frontend/images/icon_index2_active.png',
         },
         {
           cls:'car',
           name:'购物车',
           path:'/car',
-          icon:'https://static1.xlzhao.com/frontend/images/icon_index4.png',
-          iconSelect:'https://static1.xlzhao.com/frontend/images/icon_index4_active.png',
+          icon:'http://static1.xlzhao.com/frontend/images/icon_index4.png',
+          iconSelect:'http://static1.xlzhao.com/frontend/images/icon_index4_active.png',
         },
         {
           cls:'mine',
           name:'我的',
           path:'/mine',
-          icon:'https://static1.xlzhao.com/frontend/images/icon_index4.png',
-          iconSelect:'https://static1.xlzhao.com/frontend/images/icon_index4_active.png',
+          icon:'http://static1.xlzhao.com/frontend/images/icon_index4.png',
+          iconSelect:'http://static1.xlzhao.com/frontend/images/icon_index4_active.png',
         },
       ]
     };
